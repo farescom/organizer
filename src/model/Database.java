@@ -45,6 +45,7 @@ public class Database
     public int kolor_1;
     public int kolor_2;
     public int kolor_3;
+    public int nextID;
 	 
 	 /**
 	 * Kontruktor domyœlny tworzy obiekt klasy Database z domyœlnymi ustawieniami
@@ -105,16 +106,16 @@ public class Database
 		 		Statement statement = connection.createStatement();
 	            ResultSet result = statement.executeQuery(zapytanie);
 	           
-	            Date data_zakonczenia;
+	            String data_zakonczenia;
 	            //zdarzenia = new ArrayList<Zdarzenie>();
 	           
 	           while (result.next())
 	           {
-	              if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getDate("data_zakonczenia");
+	              if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
 	              else data_zakonczenia = null;
 	              
 	              zdarzenia.add(new Zdarzenie(result.getInt("id"), result.getString("opis"), 
-	            		  		result.getInt("czy_okres"), result.getDate("data_rozpoczecia"), 
+	            		  		result.getInt("czy_okres"), result.getString("data_rozpoczecia"), 
 	            		  		data_zakonczenia, result.getString("miejsce"), result.getInt("waznosc"),
 	            		  		result.getInt("rodzaj")));
 	           }
@@ -143,15 +144,15 @@ public class Database
 			   
 			   Statement statement = connection.createStatement();
 	           ResultSet result = statement.executeQuery(zapytanie);
-	           Date data_zakonczenia;
+	           String data_zakonczenia;
 	           
 	           while (result.next())
 	           {
-	               if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getDate("data_zakonczenia");
+	               if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
 	               else data_zakonczenia = null;
 	               
 	               zdarzenia.add(new Zdarzenie(result.getInt("id"), result.getString("opis"), 
-	               result.getInt("czy_okres"), result.getDate("data_rozpoczecia"), 
+	               result.getInt("czy_okres"), result.getString("data_rozpoczecia"), 
 	               data_zakonczenia, result.getString("miejsce"), result.getInt("waznosc"),
 	               result.getInt("rodzaj")));
 	           }
@@ -167,7 +168,7 @@ public class Database
 	 * Metoda do aktualizacji krotek w bazie danych
 	 * null, -1 oznaczaj¹ nie zmieniania danej pozycji
 	 */ 
-	 public int update(int id, String opis, int czy_okres, Date data_rozpoczecia, Date data_zakonczenia,
+	 public int update(int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
 	   String miejsce, int waznosc, int rodzaj)
 	{
 		try
@@ -180,8 +181,8 @@ public class Database
 	         result.absolute(1);
 	         if (opis != null) result.updateString("opis", opis);
 	         if (czy_okres != -1) result.updateInt("czy_okres", czy_okres);
-	         if (data_rozpoczecia != null) result.updateDate("data_rozpoczecia", data_rozpoczecia);
-	         if (data_zakonczenia != null) result.updateDate("data_zakonczenia", data_zakonczenia);
+	         if (data_rozpoczecia != null) result.updateString("data_rozpoczecia", data_rozpoczecia);
+	         if (data_zakonczenia != null) result.updateString("data_zakonczenia", data_zakonczenia);
 	         if (miejsce != null) result.updateString("miejsce", miejsce);
 	         if (waznosc != -1) result.updateInt("waznosc", waznosc);
 	         if (rodzaj != -1) result.updateInt("rodzaj", rodzaj);
@@ -211,8 +212,8 @@ public class Database
 	         result.absolute(1);
 	         if (zdarzenie.opis != null) result.updateString("opis", zdarzenie.opis);
 	         if (zdarzenie.czy_okres != -1) result.updateInt("czy_okres", zdarzenie.czy_okres);
-	         if (zdarzenie.data_rozpoczecia != null) result.updateDate("data_rozpoczecia", zdarzenie.data_rozpoczecia);
-	         if (zdarzenie.data_zakonczenia != null) result.updateDate("data_zakonczenia", zdarzenie.data_zakonczenia);
+	         if (zdarzenie.data_rozpoczecia != null) result.updateString("data_rozpoczecia", zdarzenie.data_rozpoczecia);
+	         if (zdarzenie.data_zakonczenia != null) result.updateString("data_zakonczenia", zdarzenie.data_zakonczenia);
 	         if (zdarzenie.miejsce != null) result.updateString("miejsce", zdarzenie.miejsce);
 	         if (zdarzenie.waznosc != -1) result.updateInt("waznosc", zdarzenie.waznosc);
 	         if (zdarzenie.rodzaj != -1) result.updateInt("rodzaj", zdarzenie.rodzaj);
@@ -236,26 +237,16 @@ public class Database
 		{
 			Statement statement = connection.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);
 	
-		    int result = statement.executeUpdate("INSERT INTO "+table+" VALUES(NULL, '"+opis+"', "
+		    int result = statement.executeUpdate("INSERT INTO "+table+" VALUES("+nextID+", '"+opis+"', "
 		               +czy_okres+", '"+data_rozpoczecia.toString()+"', '"+data_zakonczenia.toString()+"', '"+miejsce+"', "+
 		               +waznosc+", "+rodzaj+")");
-		           
-		           /*result.moveToInsertRow();
-		           
-		           if (opis != null) result.updateString("opis", opis);
-		           if (czy_okres != -1) result.updateInt("czy_okres", czy_okres);
-		           if (data_rozpoczecia != null) result.updateDate("data_rozpoczecia", data_rozpoczecia);
-		           if (data_zakonczenia != null) result.updateDate("data_zakonczenia", data_zakonczenia);
-		           if (miejsce != null) result.updateString("miejsce", miejsce);
-		           if (waznosc != -1) result.updateInt("waznosc", waznosc);
-		           if (rodzaj != -1) result.updateInt("rodzaj", rodzaj);
-		           
-		           result.insertRow();
-		           result.moveToCurrentRow();*/
+		    
+		     nextID++;
 		     return 1;
 		}
 		catch(Exception wyjatek)
 		{
+			System.out.println(wyjatek.getMessage());
 			return 0;
 		}
 	 }

@@ -30,16 +30,29 @@ public class MainFrame extends JFrame
 	//public CalendarProgram calendarProgram = new CalendarProgram(this);
 	public static JPanel calendar, statistics, tasks, main, tab, addEvent, flowPanel;
 	public static JScrollPane nextEvent, currentEvent;
-	public JSplitPane splitPane;
+	public JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	public JButton delete, edit, buttonAddEvent;
 	public JComboBox przypomnienie;
 	public JTextArea opis;
 	public JTextField miejsce, godzina, minuta;
 	public String data_rozpoczecia, data_zakonczenia;
 	public static JTabbedPane tabbedPane;
+	public static ImagePanel data_roz = new ImagePanel(0, 16, 16, "data.png");
+	public static ImagePanel data_zak = new ImagePanel(0, 16, 16, "data.png");
+	public Object source;
+	GridBagConstraints c = new GridBagConstraints();
 	
 	public int location_x;
 	public int location_y;
+	
+	public class Adapter extends MouseAdapter implements MouseListener{
+		public void mouseClicked(MouseEvent e) {
+			source = e.getSource();
+			if(source == data_roz || source == data_zak){
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+		}
+	}
 	
 	public static Model model;
 	
@@ -57,7 +70,6 @@ public class MainFrame extends JFrame
         
         main = new JPanel(new GridBagLayout());
         
-        GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.HORIZONTAL;
 		c.insets = new Insets(1, 1, 1, 1);
 		
@@ -114,15 +126,12 @@ public class MainFrame extends JFrame
 		statistics.setPreferredSize(new Dimension(320, 100));
 		statistics.setBorder(BorderFactory.createTitledBorder("Statistics"));
 		
-		model.baza.get("SELECT * FROM "+model.baza.table, model.zdarzenia);
+		model.baza.get("SELECT * FROM "+model.baza.table+" ORDER BY ID ASC", model.zdarzenia);
+		model.baza.nextID = model.zdarzenia.get( model.zdarzenia.size()-1).id+1;
 		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth());
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
-
-		nextEvent.add(new JButton("fr"));
-		
-		splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 		
 		splitPane.setLeftComponent(statistics);
 		splitPane.setRightComponent(nextEvent);
@@ -146,24 +155,32 @@ public class MainFrame extends JFrame
           menu.add(settings);
           menu.add(exit);
         menuBar.add(menu);
-        this.setJMenuBar(menuBar); 
+        this.setJMenuBar(menuBar);
+        
+        //refreshTableMonth();
     }
  
  
  	public void addEvent(GridBagConstraints c)
  	{
- 		addEvent = new JPanel(new GridLayout(4, 1));
+ 		GridLayout layout = new GridLayout(4, 1);
+ 		layout.setVgap(1);
+ 		addEvent = new JPanel(layout);
+ 		
  		
 		addEvent.setBorder(BorderFactory.createTitledBorder("Add Event"));
-		addEvent.setPreferredSize(new Dimension(370, 200));
+		addEvent.setPreferredSize(new Dimension(370, 250));
 		addEvent.setVisible(false);
 		
+		Adapter mouseAdapter = new Adapter();
 		opis = new JTextArea(4, 25);
 		opis.setLineWrap(true);
+		opis.setTabSize(200);
 		miejsce = new JTextField(10);
 		data_rozpoczecia = new String();
 		data_zakonczenia = new String();
-		przypomnienie = new JComboBox();
+		String[] czas = {"15 minutes", "30 minutes", "45 minutes", "1 hour", "2 hours", "4 hours", "8 hours", "16 hours", "24 hours", "32 hours"};
+		przypomnienie = new JComboBox(czas);
 		godzina = new JTextField(2);
 		minuta = new JTextField(2);
 		buttonAddEvent = new JButton("Add Event");
@@ -182,8 +199,11 @@ public class MainFrame extends JFrame
 		
 		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		flowPanel.add(new JLabel("Select date of start: "));
-		flowPanel.add(new JLabel());
+		flowPanel.add(data_roz);
+		data_roz.addMouseListener(mouseAdapter);
 		flowPanel.add(new JLabel("Select date of end: "));
+		flowPanel.add(data_zak);
+		data_zak.addMouseListener(mouseAdapter);
 		flowPanel.add(new JLabel());
 		addEvent.add(flowPanel);
 		
@@ -199,6 +219,26 @@ public class MainFrame extends JFrame
 		addEvent.add(flowPanel);
  	}
  
+ 	public void refreshTableMonth()
+ 	{
+		main.remove(splitPane);
+ 		
+ 		nextEvent = new JScrollPane(model.mainFrame.tableMonth());
+		nextEvent.setPreferredSize(new Dimension(320, 240));
+		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
+		
+		splitPane.setLeftComponent(statistics);
+		splitPane.setRightComponent(nextEvent);
+		
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridheight = 3;
+		main.add(splitPane, c);
+		
+		super.add(main);
+		System.out.println("Powinno odswiezyc");
+ 	}
+ 	
  	private JComponent makeTextPanel(String string) {
 		// TODO Auto-generated method stub
 		return null;

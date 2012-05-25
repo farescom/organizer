@@ -12,6 +12,8 @@ import controller.Controller;
 
 public class MainFrameModel {
 
+	public static int startDay = 0, startMonth = 0, startYear = 0, finishDay = 0, finishMonth = 0, finishYear = 0;
+	
 	public JTable tableDay()
 	{
 		
@@ -32,7 +34,7 @@ public class MainFrameModel {
 	        	  return true;
 	          }
 	          public Object getValueAt(int row, int col) {
-	        	  if(Model.zdarzenia.get(row).data_rozpoczecia == new Date(Model.checkedYear, Model.checkedMonth, Model.checkedDay)){
+	        	  if(Model.zdarzenia.get(row).data_rozpoczecia == new String(Model.checkedYear+"-"+Model.checkedMonth+"-"+Model.checkedDay)){
 	        		  rozmiar++;
 	        		  return Model.zdarzenia.get(row).toString();
 	        	  }

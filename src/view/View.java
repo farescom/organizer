@@ -15,13 +15,14 @@ public class View {
  public static String[] months =  {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	
  public ImagePanel imagePanel;
- public MainFrame mainFrame;
+ public static MainFrame mainFrame;
  public WelcomeFrame welcomeFrame;
  public ProgressFrame progressFrame;
  public AboutUsFrame aboutUsFrame;
  public SettingsFrame settingsFrame;
  public ColorFrame colorFrame;
  public static CalendarProgram calendarProgram;
+ public static CalendarFrame calendarFrame;
  
  public Model model;
  
@@ -37,6 +38,7 @@ public class View {
   SettingsFrame.model = _model;
   ColorFrame.model = _model;
   CalendarProgram.model = _model;
+  CalendarFrame.model = _model;
   
   // WELCOME FRAME
   EventQueue.invokeLater( new Runnable()

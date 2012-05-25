@@ -1,9 +1,12 @@
 package controller;
 
 import java.awt.event.*;
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.sql.Date;
 
+import javax.swing.BorderFactory;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ChangeEvent;
@@ -59,6 +62,37 @@ public class MainFrameEvent implements ActionListener, ChangeListener{
 			{
 				if(table.isRowSelected(i) && view.mainFrame.opis.getText() != null ) System.out.println("zedytowano: "
 						+ model.baza.update(model.zdarzenia.get(i).id, view.mainFrame.opis.getText(), 1, model.zdarzenia.get(i).data_rozpoczecia, model.zdarzenia.get(i).data_zakonczenia, null, 61, -1));
+			}
+      }
+	  else if (source == view.mainFrame.buttonAddEvent)  
+      {
+		    String opis = new String(view.mainFrame.opis.getText());
+		    String miejsce = new String(view.mainFrame.miejsce.getText());
+			String hour = new String(view.mainFrame.godzina.getText());
+			String minute = new String(view.mainFrame.minuta.getText());
+			Integer startDay = new Integer(model.mainFrame.startDay);
+			Integer startMonth = new Integer(model.mainFrame.startMonth);
+			Integer startYear = new Integer(model.mainFrame.startYear);
+			Integer finishDay = new Integer(model.mainFrame.finishDay);
+			Integer finishMonth = new Integer(model.mainFrame.finishMonth);
+			Integer finishYear = new Integer(model.mainFrame.finishYear);
+			String startDate = new String(startYear.toString()+"-"+startMonth.toString()+"-"+startDay.toString()+" "+hour+":"+minute+":00");
+			String finishDate = new String(finishYear.toString()+"-"+finishMonth.toString()+"-"+finishDay.toString());
+		  
+		  	if(opis != "" && miejsce != "" && startDay != 0 && startMonth != 0 && startYear != 0  && finishDay != 0
+		  			&& finishMonth != 0 && finishYear != 0 && hour != "" && minute != ""){
+				
+				if(model.baza.insert(opis, 1, startDate, finishDate, miejsce, 1, 1) == 1){
+					System.out.println("Rekord zostal dodany");
+					model.zdarzenia.add(new Zdarzenie(model.baza.nextID-1, opis, 1, startDate, finishDate, miejsce, 1, 1));
+					System.out.println(model.zdarzenia.get(model.zdarzenia.size()-1).toString());
+					view.mainFrame.refreshTableMonth();
+				}
+				else System.out.println("Rekord nie zostal dodany");
+			}
+			else
+			{
+				System.out.println("Nie mozna dodawac");
 			}
       }
 	  

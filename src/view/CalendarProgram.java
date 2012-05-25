@@ -28,19 +28,13 @@ public class CalendarProgram{
 	public static JScrollPane stableCalendar; //The scrollpane
 	public static JPanel panelCalendar, panelTop, panelBottom, panelMonth;
 
-	MainFrame mainFrame;
+	static MainFrame mainFrame;
 	
 	public CalendarProgram(MainFrame _mainFrame){
 		this.mainFrame = _mainFrame;
 	}
 	
 	public JPanel createProgram(){
-		//Look and feel
-		/*try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
-		catch (ClassNotFoundException e) {}
-		catch (InstantiationException e) {}
-		catch (IllegalAccessException e) {}
-		catch (UnsupportedLookAndFeelException e) {}*/
 		
 		panelCalendar = new JPanel(new BorderLayout());
 		panelTop = new JPanel(new BorderLayout());
@@ -83,9 +77,11 @@ public class CalendarProgram{
 		panelCalendar.setPreferredSize(new Dimension(370, 216));
 		
 		//Get real month/year
-		model.checkedMonth = model.currentMonth; //Match month and year
-		model.checkedYear = model.currentYear;
-		model.checkedDay = model.currentDay;
+		if(mainFrame != null){
+			model.checkedMonth = model.currentMonth; //Match month and year
+			model.checkedYear = model.currentYear;
+			model.checkedDay = model.currentDay;
+		}
 		
 		//Add headers
 		String[] headers = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}; //All headers
@@ -110,7 +106,7 @@ public class CalendarProgram{
 		mtableCalendar.setRowCount(6);
 		
 		//Populate table
-		for (int i=model.checkedYear-100; i<=model.checkedYear+100; i++){
+		for (int i=model.currentYear-100; i<=model.currentYear+100; i++){
 			comboYear.addItem(String.valueOf(i));
 		}
 		
@@ -169,17 +165,32 @@ public class CalendarProgram{
 				setBackground(new Color(255, 255, 255));
 			}
 			if (value != null){
-				if (Integer.parseInt(value.toString()) == model.checkedDay && model.currentMonth == model.checkedMonth && model.currentYear == model.checkedYear){ //Today
+				if (Integer.parseInt(value.toString()) == model.currentDay && model.currentMonth == model.checkedMonth && model.currentYear == model.checkedYear){ //Today
 					setBackground(View.kolorDnia);
 				}
 			}
 			if(focused == true)
 			{
-				model.checkedDay = Integer.parseInt(value.toString());
-				MainFrame.calendar.setVisible(false);
-				MainFrame.currentEvent.setVisible(true);
-				MainFrame.tabbedPane.setSelectedIndex(1);
-				//System.out.println(Controller.checkedDay + " / " + Controller.checkedMonth + " / " + Controller.checkedYear);
+				if(mainFrame.source == mainFrame.data_roz){
+					model.mainFrame.startDay = Integer.parseInt(value.toString());
+					if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;
+					if(model.mainFrame.startYear == 0) model.mainFrame.startYear = model.currentYear;
+					View.calendarFrame.dispose();
+					System.out.println("Data rozpoczecia: " + model.mainFrame.startDay + " / " + model.mainFrame.startMonth + " / " + model.mainFrame.startYear);
+				}
+				else if(mainFrame.source == mainFrame.data_zak){
+					model.mainFrame.finishDay = Integer.parseInt(value.toString());
+					if(model.mainFrame.finishMonth == 0) model.mainFrame.finishMonth = model.currentMonth;
+					if(model.mainFrame.finishYear == 0) model.mainFrame.finishYear = model.currentYear;
+					View.calendarFrame.dispose();
+					System.out.println("Data zakonczenia: " + model.mainFrame.finishDay + " / " + model.mainFrame.finishMonth + " / " + model.mainFrame.finishYear);
+				}
+				else{
+					model.checkedDay = Integer.parseInt(value.toString());
+					MainFrame.calendar.setVisible(false);
+					MainFrame.currentEvent.setVisible(true);
+					MainFrame.tabbedPane.setSelectedIndex(1);
+				}
 			}
 			if(selected == true)
 			{
@@ -193,35 +204,87 @@ public class CalendarProgram{
 
 	static class buttonPrev_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
-			if (model.checkedMonth == 0){ //Back one year
-				model.checkedMonth = 11;
-				model.checkedYear -= 1;
+			if(mainFrame.source == mainFrame.data_roz){
+				if (model.mainFrame.startMonth == 0){ //Back one year
+					model.mainFrame.startMonth = 11;
+					model.mainFrame.startYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.startMonth -= 1;
+				}
 			}
-			else{ //Back one month
-				model.checkedMonth -= 1;
+			else if(mainFrame.source == mainFrame.data_zak){
+				if (model.mainFrame.finishMonth == 0){ //Back one year
+					model.mainFrame.finishMonth = 11;
+					model.mainFrame.finishYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.finishMonth -= 1;
+				}
+			}
+			else{
+				if (model.checkedMonth == 0){ //Back one year
+					model.checkedMonth = 11;
+					model.checkedYear -= 1;
+				}
+				else{ //Back one month
+					model.checkedMonth -= 1;
+				}
 			}
 			refreshCalendar(model.currentMonth, model.currentYear);
 		}
 	}
 	static class buttonNext_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
-			if (model.checkedMonth == 11){ //Foward one year
-				model.checkedMonth = 0;
-				model.checkedYear += 1;
+			
+			if(mainFrame.source == mainFrame.data_roz){
+				if (model.mainFrame.startMonth == 11){ //Foward one year
+					model.mainFrame.startMonth = 0;
+					model.mainFrame.startYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.startMonth += 1;
+				}
 			}
-			else{ //Foward one month
-				model.checkedMonth += 1;
+			else if(mainFrame.source == mainFrame.data_zak){
+				if (model.mainFrame.finishMonth == 11){ //Foward one year
+					model.mainFrame.finishMonth = 0;
+					model.mainFrame.finishYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.finishMonth += 1;
+				}
 			}
+			else{
+				if (model.checkedMonth == 11){ //Foward one year
+					model.checkedMonth = 0;
+					model.checkedYear += 1;
+				}
+				else{ //Foward one month
+					model.checkedMonth += 1;
+				}
+			}
+			
 			refreshCalendar(model.currentMonth, model.currentYear);
 		}
 	}
 	static class comboYear_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
+			
+			if(mainFrame.source == mainFrame.data_roz){
+				String b = comboYear.getSelectedItem().toString();
+				model.mainFrame.startYear = Integer.parseInt(b);
+			}
+			else if(mainFrame.source == mainFrame.data_zak){
+				String b = comboYear.getSelectedItem().toString();
+				model.mainFrame.finishYear = Integer.parseInt(b);
+			}
 			if (comboYear.getSelectedItem() != null){
 				String b = comboYear.getSelectedItem().toString();
 				model.checkedYear = Integer.parseInt(b);
-				refreshCalendar(model.currentMonth, model.currentYear);
 			}
+			
+			refreshCalendar(model.currentMonth, model.currentYear);
 		}
 	}
 }

@@ -1,9 +1,13 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.*;
 
 import model.Model;
+
 
 public class ImagePanel extends JPanel
 {

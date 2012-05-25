@@ -11,14 +11,14 @@ public class Zdarzenie
     public int id;
     public String opis;
     public int czy_okres;
-    public Date data_rozpoczecia;
-    public Date data_zakonczenia;
+    public String data_rozpoczecia;
+    public String data_zakonczenia;
     public String miejsce;
     public int waznosc;
     public int rodzaj;
     
 	/** Kontruktor klasy Zdarzenie */
-    public Zdarzenie( int id, String opis, int czy_okres, Date data_rozpoczecia, Date data_zakonczenia, String miejsce, int waznosc, int rodzaj)
+    public Zdarzenie( int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia, String miejsce, int waznosc, int rodzaj)
     {
     	this.id = id;
     	this.opis = opis;
