@@ -1,0 +1,10 @@
+<model.Zdarzenie>
+  <id>1</id>
+  <opis>Pi³ka Nozna</opis>
+  <czy__okres>0</czy__okres>
+  <data__rozpoczecia>3912-06-23</data__rozpoczecia>
+  <data__zakonczenia>3912-06-23</data__zakonczenia>
+  <miejsce>£upkowa</miejsce>
+  <waznosc>1</waznosc>
+  <rodzaj>1</rodzaj>
+</model.Zdarzenie>
