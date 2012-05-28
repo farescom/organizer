@@ -388,6 +388,7 @@ public class Database
 		}
 	    catch (Exception wyjatek)
 	    {
+	    	System.out.println(wyjatek.getMessage());
 	    	return 0;
 	    }
 	}

@@ -11,7 +11,7 @@ public class Model {
 	// Wybrany dzien na kalendarzu
 	private static GregorianCalendar cal = new GregorianCalendar(); //Create calendar
 	public static int currentDay = cal.get(GregorianCalendar.DAY_OF_MONTH);
-	public static int currentMonth = cal.get(GregorianCalendar.MONTH);
+	public static int currentMonth = cal.get(GregorianCalendar.MONTH)+1;
 	public static int currentYear = cal.get(GregorianCalendar.YEAR);
 	
 	// Wybrany dzien na kalendarzu

@@ -12,7 +12,7 @@ public class View {
  public static Color kolorWeekendu = Color.LIGHT_GRAY;
  public static Color kolorDnia = new Color(100, 250, 100);
  public static Color kolorWybranegoDnia = new Color(250, 100, 100);
- public static String[] months =  {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+ public static String[] months =  {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 	
  public ImagePanel imagePanel;
  public static MainFrame mainFrame;
