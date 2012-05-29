@@ -15,9 +15,9 @@ public class Model {
 	public static int currentYear = cal.get(GregorianCalendar.YEAR);
 	
 	// Wybrany dzien na kalendarzu
-	public static int checkedDay;
-	public static int checkedMonth;
-	public static int checkedYear;
+	public static int checkedDay = currentDay;
+	public static int checkedMonth = currentMonth;
+	public static int checkedYear = currentYear;
 	
 	
 	public Database baza;
@@ -29,10 +29,13 @@ public class Model {
 	{	
 		baza = new Database();
 		baza.czy_polaczono = baza.connection();
-		mainFrame = new MainFrameModel();
 		
 		if(baza.czy_polaczono == true)
 		{
+			baza.get("SELECT * FROM "+baza.table+" ORDER BY ID ASC", zdarzenia);
+			if(zdarzenia.size()-1 > 0) baza.nextID = zdarzenia.get(zdarzenia.size()-1).id+1;
+			
+			mainFrame = new MainFrameModel();
 		}
 	}
 	

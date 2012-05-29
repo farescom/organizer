@@ -16,6 +16,8 @@ public class Zdarzenie
     public String miejsce;
     public int waznosc;
     public int rodzaj;
+    public String godzina;
+    public String dzien;
     
 	/** Kontruktor klasy Zdarzenie */
     public Zdarzenie( int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia, String miejsce, int waznosc, int rodzaj)
@@ -28,6 +30,9 @@ public class Zdarzenie
     	this.miejsce = miejsce;
     	this.waznosc = waznosc;
     	this.rodzaj = rodzaj;
+    	
+    	this.godzina = new String(this.data_rozpoczecia.substring(11, 16));
+    	this.dzien = new String(this.data_rozpoczecia.substring(8, 10));
     }
     
     public String toString()
