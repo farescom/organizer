@@ -40,7 +40,7 @@ public class Database
 	public String password;
 	public Connection connection;
 	public boolean czy_polaczono;
-	public String table = "zdarzenia";
+	public String table = "zdarzenia_23";
     public int dni_waznosci;
     public int kolor_1;
     public int kolor_2;

@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import controller.PanWatek;
+
 /**
 * Glowna klasa modelu, ktora bedzie jako skladowe zawierac w sobie wszystkie klasy modelu
 */ 
@@ -35,8 +37,17 @@ public class Model {
 			baza.get("SELECT * FROM "+baza.table+" ORDER BY ID ASC", zdarzenia);
 			if(zdarzenia.size()-1 > 0) baza.nextID = zdarzenia.get(zdarzenia.size()-1).id+1;
 			
+			//baza.insert("5", 1, "2012-10-05 11:15:00", "2012-10-05", "polska", 11, 111);
+			//baza.insert("6", 1, "2012-10-05 11:30:00", "2012-10-05", "polska", 11, 111);
+			
 			mainFrame = new MainFrameModel();
+			// Trzeba to przeniesc tam, gdzie jest logowanie
+			PanWatek panWatek = new PanWatek("Alarmy", 1, zdarzenia);
+			panWatek.start();
+		}
+		else
+		{
+			// dzialamy w trybie bez netu
 		}
 	}
-	
 }
