@@ -15,7 +15,7 @@ import java.util.*;
 import view.*;
 import controller.Controller;
 
-public class CalendarProgram{
+public class Calendar{
 	
 	public static Model model;
 	
@@ -27,12 +27,6 @@ public class CalendarProgram{
 	public static DefaultTableModel mtableCalendar; //Table model
 	public static JScrollPane stableCalendar; //The scrollpane
 	public static JPanel panelCalendar, panelTop, panelBottom, panelMonth;
-
-	static MainFrame mainFrame;
-	
-	public CalendarProgram(MainFrame _mainFrame){
-		this.mainFrame = _mainFrame;
-	}
 	
 	public JPanel createProgram(){
 		
@@ -67,8 +61,6 @@ public class CalendarProgram{
 		panelCalendar.add(panelTop, BorderLayout.NORTH);
 		panelCalendar.add(stableCalendar, BorderLayout.CENTER);
 		panelCalendar.add(panelBottom, BorderLayout.SOUTH);
-		
-		
 		
 		//Set border
 		panelCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
@@ -162,22 +154,7 @@ public class CalendarProgram{
 					setBackground(View.kolorDnia);
 				}
 			}
-			if(focused == true && mainFrame.source != null)
-			{
-				if(mainFrame.source == mainFrame.data_roz){
-					model.mainFrame.startDay = Integer.parseInt(value.toString());
-					View.calendarFrame.dispose();
-					System.out.println("Data rozpoczecia: " + model.mainFrame.startDay + " / " + model.mainFrame.startMonth + " / " + model.mainFrame.startYear);
-					mainFrame.source = null;
-				}
-				else if(mainFrame.source == mainFrame.data_zak){
-					model.mainFrame.finishDay = Integer.parseInt(value.toString());
-					View.calendarFrame.dispose();
-					System.out.println("Data zakonczenia: " + model.mainFrame.finishDay + " / " + model.mainFrame.finishMonth + " / " + model.mainFrame.finishYear);
-					mainFrame.source = null;
-				}
-			}
-			else if(focused == true && mainFrame.tabbedPane.getSelectedIndex() == 0)
+			if(focused == true)
 			{
 				model.checkedDay = Integer.parseInt(value.toString());
 				model.mainFrame.tableDay();
@@ -198,30 +175,7 @@ public class CalendarProgram{
 
 	static class buttonPrev_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
-			if(mainFrame.source == mainFrame.data_roz){
-				if (model.mainFrame.startMonth == 1){ //Back one year
-					model.mainFrame.startMonth = 12;
-					model.mainFrame.startYear -= 1;
-				}
-				else{ //Back one month
-					model.mainFrame.startMonth -= 1;
-				}
-				System.out.println(model.mainFrame.startMonth);
-				
-				refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-			}
-			else if(mainFrame.source == mainFrame.data_zak){
-				if (model.mainFrame.finishMonth == 1){ //Back one year
-					model.mainFrame.finishMonth = 12;
-					model.mainFrame.finishYear -= 1;
-				}
-				else{ //Back one month
-					model.mainFrame.finishMonth -= 1;
-				}
-				
-				refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
-			}
-			else if(mainFrame.tabbedPane.getSelectedIndex() == 0){
+
 				if (model.checkedMonth == 1){ //Back one year
 					model.checkedMonth = 12;
 					model.checkedYear -= 1;
@@ -234,37 +188,12 @@ public class CalendarProgram{
 				View.mainFrame.refreshTableMonth();
 				
 				refreshCalendar(model.checkedMonth, model.checkedYear);
-			}
 			
 		}
 	}
 	static class buttonNext_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
 			
-			if(mainFrame.source == mainFrame.data_roz){
-				if (model.mainFrame.startMonth == 12){ //Foward one year
-					model.mainFrame.startMonth = 1;
-					model.mainFrame.startYear += 1;
-				}
-				else{ //Foward one month
-					model.mainFrame.startMonth += 1;
-				}
-				System.out.println(model.mainFrame.startMonth);
-				
-				refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-			}
-			else if(mainFrame.source == mainFrame.data_zak){
-				if (model.mainFrame.finishMonth == 12){ //Foward one year
-					model.mainFrame.finishMonth = 1;
-					model.mainFrame.finishYear += 1;
-				}
-				else{ //Foward one month
-					model.mainFrame.finishMonth += 1;
-				}
-				
-				refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
-			}
-			else if(mainFrame.tabbedPane.getSelectedIndex() == 0){
 				if (model.checkedMonth == 12){ //Foward one year
 					model.checkedMonth = 1;
 					model.checkedYear += 1;
@@ -276,8 +205,6 @@ public class CalendarProgram{
 				model.mainFrame.tableMonth();
 				View.mainFrame.refreshTableMonth();
 				refreshCalendar(model.checkedMonth, model.checkedYear);
-			}
-			
 			
 		}
 	}
@@ -285,27 +212,11 @@ public class CalendarProgram{
 		public void actionPerformed (ActionEvent e){
 			JComboBox cb = (JComboBox)e.getSource();
 			String year = (String)cb.getSelectedItem();
-			
-			if(mainFrame.source == mainFrame.data_roz){
-				Integer yearInt = new Integer(model.mainFrame.startYear);
-				if (!year.equals(yearInt.toString())){
-					model.checkedYear = Integer.parseInt(year);
-					refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-				}
-			}
-			else if(mainFrame.source == mainFrame.data_zak){
-				Integer yearInt = new Integer(model.mainFrame.finishYear);
-				if (!year.equals(yearInt.toString())){
-					model.checkedYear = Integer.parseInt(year);
-					refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-				}
-			}
-			else{
-				Integer yearInt = new Integer(model.checkedYear);
-				if (!year.equals(yearInt.toString())){
-					model.checkedYear = Integer.parseInt(year);
-					refreshCalendar(model.checkedMonth, model.checkedYear);
-				}
+			 
+			Integer yearInt = new Integer(model.checkedYear);
+			if (!year.equals(yearInt.toString())){
+				model.checkedYear = Integer.parseInt(year);
+				refreshCalendar(model.checkedMonth, model.checkedYear);
 			}
 		}
 	}

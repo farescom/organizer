@@ -28,7 +28,7 @@ public class MainFrame extends JFrame
 	public JMenuItem importOption, exportOption, exit, settings;
 	
 	//public CalendarProgram calendarProgram = new CalendarProgram(this);
-	public static JPanel calendar, statistics, tasks, main, tab, addEvent, flowPanel;
+	public static JPanel calendar, statistics, tasks, main, tab, addEvent, flowPanel, options;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	public JButton delete, edit, buttonAddEvent;
@@ -45,15 +45,6 @@ public class MainFrame extends JFrame
 	public int location_x;
 	public int location_y;
 	
-	public class Adapter extends MouseAdapter implements MouseListener{
-		public void mouseClicked(MouseEvent e) {
-			source = e.getSource();
-			if(source == data_roz || source == data_zak){
-				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
-			}
-		}
-	}
-	
 	public static Model model;
 	
  
@@ -67,9 +58,6 @@ public class MainFrame extends JFrame
         setLocation(locationX,locationY);
         setVisible(true); 
         setLayout(new FlowLayout(FlowLayout.LEFT));
-        
-        model.baza.get("SELECT * FROM "+model.baza.table+" ORDER BY ID ASC", model.zdarzenia);
-		if(model.zdarzenia.size()-1 > 0) model.baza.nextID = model.zdarzenia.get( model.zdarzenia.size()-1).id+1;
         
         main = new JPanel(new GridBagLayout());
         
@@ -94,17 +82,21 @@ public class MainFrame extends JFrame
 		
 		c.gridx = 0;
 		c.gridy = 1;
-		View.calendarProgram = new CalendarProgram(this);
-		calendar = View.calendarProgram.createProgram();
-		currentEvent = new JScrollPane(model.mainFrame.tableDay());
+		View.calendar = new Calendar();
+		calendar = View.calendar.createProgram();
+		options = new JPanel();
+		
+		currentEvent = new JScrollPane(model.mainFrame.tableDay);
 		currentEvent.setBorder(BorderFactory.createTitledBorder("Current Event"));
 		currentEvent.setPreferredSize(new Dimension(370, 160));
-		currentEvent.setVisible(true);
+		currentEvent.setVisible(false);
 		addEvent(c);
 		
-		main.add(currentEvent, c);
-		main.add(calendar, c);
-		main.add(addEvent, c);
+		options.add(currentEvent);
+		options.add(calendar);
+		options.add(addEvent);
+		
+		main.add(options, c);
 		
 		c.gridx = 0;
 		c.gridy = 2;
@@ -129,7 +121,7 @@ public class MainFrame extends JFrame
 		statistics.setPreferredSize(new Dimension(320, 100));
 		statistics.setBorder(BorderFactory.createTitledBorder("Statistics"));
 		
-		nextEvent = new JScrollPane(model.mainFrame.tableMonth());
+		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
 		
@@ -156,8 +148,6 @@ public class MainFrame extends JFrame
           menu.add(exit);
         menuBar.add(menu);
         this.setJMenuBar(menuBar);
-        
-        //refreshTableMonth();
     }
  
  
@@ -172,7 +162,6 @@ public class MainFrame extends JFrame
 		addEvent.setPreferredSize(new Dimension(370, 250));
 		addEvent.setVisible(false);
 		
-		Adapter mouseAdapter = new Adapter();
 		opis = new JTextArea(4, 25);
 		opis.setLineWrap(true);
 		opis.setTabSize(200);
@@ -200,10 +189,10 @@ public class MainFrame extends JFrame
 		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		flowPanel.add(new JLabel("Select date of start: "));
 		flowPanel.add(data_roz);
-		data_roz.addMouseListener(mouseAdapter);
+		data_roz.addMouseListener(Controller.mainFrameEvent);
 		flowPanel.add(new JLabel("Select date of end: "));
 		flowPanel.add(data_zak);
-		data_zak.addMouseListener(mouseAdapter);
+		data_zak.addMouseListener(Controller.mainFrameEvent);
 		flowPanel.add(new JLabel());
 		addEvent.add(flowPanel);
 		
@@ -219,14 +208,28 @@ public class MainFrame extends JFrame
 		addEvent.add(flowPanel);
  	}
  
- 	public void refreshTableMonth()
+ 	public void refreshTableDay()
  	{
-		nextEvent = new JScrollPane(model.mainFrame.tableMonth());
-		model.mainFrame.dataModelMonth.setValueAt(model.zdarzenia.get(model.zdarzenia.size()-1).toString(), model.zdarzenia.size()-1, 1);
+		//main.remove(currentEvent);
+ 		
+ 		currentEvent = new JScrollPane(model.mainFrame.tableDay);
+		currentEvent.setBorder(BorderFactory.createTitledBorder("Current Event"));
+		currentEvent.setPreferredSize(new Dimension(370, 160));
+		currentEvent.setVisible(true);
+
+		options.add(currentEvent);
+		
+		this.invalidate();
+		this.validate();
+ 	}
+ 	
+ 	public void refreshTableMonth()
+ 	{	
+ 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
 
-		splitPane.setRightComponent(nextEvent);
+		splitPane.setRightComponent(nextEvent); 
 
 		this.invalidate();
 		this.validate();

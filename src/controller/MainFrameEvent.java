@@ -25,13 +25,10 @@ import javax.swing.event.ListSelectionListener;
 import view.*;
 import model.*;
 
-public class MainFrameEvent implements ActionListener, ChangeListener{
+public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener{
 
 	 public static View view;
 	 public static Model model;
-	 
-	 public JTable tableDay;
-	 public JTable tableMonth;
 	 
 	 public MainFrameEvent(){}
 	
@@ -59,7 +56,7 @@ public class MainFrameEvent implements ActionListener, ChangeListener{
 		    int delete = 0;
 			for(int i=0; i<model.zdarzenia.size(); i++)
 			{
-				if(tableMonth.isRowSelected(i)){
+				if(model.mainFrame.tableMonth.isRowSelected(i)){
 					if(model.baza.delete(model.zdarzenia.get(i).id) == 1){
 						    toDelete.add(model.zdarzenia.get(i));
 							ile++;
@@ -72,14 +69,18 @@ public class MainFrameEvent implements ActionListener, ChangeListener{
 			for(int i=0; i<ile; i++){
 				model.zdarzenia.remove(toDelete.get(i));
 			}
+			
+			//System.out.println(model.zdarzenia);
+			
 			JOptionPane.showMessageDialog(null, ile+" event was deleted");
+			model.mainFrame.tableMonth();
 			view.mainFrame.refreshTableMonth();
       }
 	  else if (source == view.mainFrame.edit)  
       {
 			for(int i=0; i<model.zdarzenia.size(); i++)
 			{
-				if(tableMonth.isRowSelected(i) && view.mainFrame.opis.getText() != null ) System.out.println("zedytowano: "
+				if(model.mainFrame.tableMonth.isRowSelected(i) && view.mainFrame.opis.getText() != null ) System.out.println("zedytowano: "
 						+ model.baza.update(model.zdarzenia.get(i).id, view.mainFrame.opis.getText(), 1, model.zdarzenia.get(i).data_rozpoczecia, model.zdarzenia.get(i).data_zakonczenia, null, 61, -1));
 			}
       }
@@ -110,6 +111,7 @@ public class MainFrameEvent implements ActionListener, ChangeListener{
 				if(model.baza.insert(opis, 1, startDate, finishDate, miejsce, 1, 1) == 1){
 					if(model.zdarzenia.add(new Zdarzenie(model.baza.nextID-1, opis, 1, startDate, finishDate, miejsce, 1, 1))){
 						JOptionPane.showMessageDialog(null, "Event was added");
+						model.mainFrame.tableMonth();
 						view.mainFrame.refreshTableMonth();
 					}
 				}
@@ -148,5 +150,19 @@ public class MainFrameEvent implements ActionListener, ChangeListener{
 				view.mainFrame.addEvent.setVisible(true);
 			}
 		}
+	}
+
+	public void mouseClicked(MouseEvent e) {
+			view.mainFrame.source = e.getSource();
+			if(view.mainFrame.source == view.mainFrame.data_roz){
+				if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;
+				if(model.mainFrame.startYear == 0) model.mainFrame.startYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+			else if(view.mainFrame.source == view.mainFrame.data_zak){
+				if(model.mainFrame.finishMonth == 0) model.mainFrame.finishMonth = model.currentMonth;
+				if(model.mainFrame.finishYear == 0) model.mainFrame.finishYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
 	}
 }
