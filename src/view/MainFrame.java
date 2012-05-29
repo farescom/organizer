@@ -31,7 +31,7 @@ public class MainFrame extends JFrame
 	public static JPanel calendar, statistics, tasks, main, tab, addEvent, flowPanel, options;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-	public JButton delete, edit, buttonAddEvent;
+	public static JButton delete, edit, buttonAddEvent;
 	public static JComboBox przypomnienie;
 	public static JTextArea opis;
 	public static JTextField miejsce, godzina, minuta;
@@ -67,7 +67,7 @@ public class MainFrame extends JFrame
 		tab = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tabbedPane = new JTabbedPane(JTabbedPane.RIGHT);
 		tabbedPane.addTab("Calendar", null, null, "1 Nothing");
-		tabbedPane.addTab("Current Event", null, null, "2 Nothing");
+		tabbedPane.addTab(model.checkedDay + " " + View.months[model.checkedMonth] + " Event", null, null, "2 Nothing");
 		tabbedPane.addTab("Add Event", null, null, "3 Nothing");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
@@ -87,8 +87,8 @@ public class MainFrame extends JFrame
 		options = new JPanel();
 		
 		currentEvent = new JScrollPane(model.mainFrame.tableDay);
-		currentEvent.setBorder(BorderFactory.createTitledBorder("Current Event"));
-		currentEvent.setPreferredSize(new Dimension(370, 160));
+		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + View.months[model.checkedMonth] + " Event"));
+		currentEvent.setPreferredSize(new Dimension(370, 250));
 		currentEvent.setVisible(false);
 		addEvent(c);
 		
@@ -103,8 +103,9 @@ public class MainFrame extends JFrame
 		tasks = new JPanel();
 		tasks.setBorder(BorderFactory.createTitledBorder("Tasks"));
 		delete = new JButton("Delete");
-
 		edit = new JButton("Edit");
+		edit.setEnabled(false);
+		delete.setEnabled(false);
 		
 		tasks.add(edit);
 		tasks.add(delete);
@@ -210,10 +211,10 @@ public class MainFrame extends JFrame
  
  	public void refreshTableDay()
  	{
-		//main.remove(currentEvent);
+ 		options.remove(currentEvent);
  		
  		currentEvent = new JScrollPane(model.mainFrame.tableDay);
-		currentEvent.setBorder(BorderFactory.createTitledBorder("Current Event"));
+		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + View.months[model.checkedMonth] + " Event"));
 		currentEvent.setPreferredSize(new Dimension(370, 160));
 		currentEvent.setVisible(true);
 

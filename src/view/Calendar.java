@@ -157,6 +157,7 @@ public class Calendar{
 			if(focused == true)
 			{
 				model.checkedDay = Integer.parseInt(value.toString());
+				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
 				model.mainFrame.tableDay();
 				View.mainFrame.refreshTableDay();
 				MainFrame.calendar.setVisible(false);
