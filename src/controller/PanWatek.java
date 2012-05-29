@@ -1,5 +1,9 @@
 package controller;
 
+// Do zrobienia
+// - wlaczenie tylko jednej muzyki (jak jakas juz jest, to nie wlaczaj drugiej)
+// - dobranie fajnej melodii
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.applet.AudioClip;
