@@ -21,7 +21,12 @@ class MultiLineCellRenderer implements TableCellRenderer {
 	public Component getTableCellRendererComponent(JTable table, Object value,
 			boolean isSelected, boolean hasFocus, int row, int column) {
 
-		JTextArea ta = new JTextArea(1, 10);
+		JTextArea ta = new JTextArea(1, 3);
+		
+		if(isSelected)
+		{
+			ta.setBackground(View.kolorDnia);
+		}
 		
 		ta.setLineWrap(true);
 		ta.setWrapStyleWord(true);
@@ -97,6 +102,14 @@ public class MainFrameModel {
 	     tableDay.getColumnModel().getColumn(0).setPreferredWidth(40);
 	     tableDay.getColumnModel().getColumn(1).setPreferredWidth(250);
 	     tableDay.getColumnModel().getColumn(2).setPreferredWidth(100);
+	     
+	     TableColumn event = tableDay.getColumn("Event");
+	     event.setCellRenderer(new MultiLineCellRenderer());
+	     for(int i = 0; i< tableDay.getRowCount(); i++)
+	     {
+	    	 //TableUtils.autoResizeRow(tableMonth, i);
+	    	 //adjustRowHeight(tableMonth, 0, 2);
+	     }
 	}
 	
 	public void tableMonth(){
@@ -142,10 +155,8 @@ public class MainFrameModel {
 	     tableMonth = new JTable(dataModelMonth);
 	     tableMonth.getColumnModel().getColumn(0).setPreferredWidth(30);
 	     tableMonth.getColumnModel().getColumn(1).setPreferredWidth(40);
-	     tableMonth.getColumnModel().getColumn(2).setPreferredWidth(180);
-	     tableMonth.getColumnModel().getColumn(3).setPreferredWidth(50);
-	     //tableMonth.setRowHeight(50);
-	     TableColumn event = tableMonth.getColumn("Event");
-	     event.setCellRenderer(new MultiLineCellRenderer());
+	     tableMonth.getColumnModel().getColumn(2).setPreferredWidth(150);
+	     tableMonth.getColumnModel().getColumn(3).setPreferredWidth(80);
+	     
 	}
 }
