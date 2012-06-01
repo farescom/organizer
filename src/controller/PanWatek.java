@@ -74,6 +74,7 @@ public class PanWatek extends Thread
 				// Alarm glosowy
 				System.out.println("-----------------");
 				clip.play();
+				//
 			}
 
 			// Komunikaty
