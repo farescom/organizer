@@ -54,11 +54,11 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		    int ile = 0;
 		    ArrayList<Zdarzenie> toDelete = new ArrayList<Zdarzenie>();
 		    int delete = 0;
-			for(int i=0; i<model.zdarzenia.size(); i++)
+			for(int i=0; i<model.mainFrame.tableDay.getRowCount(); i++)
 			{
-				if(model.mainFrame.tableMonth.isRowSelected(i)){
-					if(model.baza.delete(model.zdarzenia.get(i).id) == 1){
-						    toDelete.add(model.zdarzenia.get(i));
+				if(model.mainFrame.tableDay.isRowSelected(i)){
+					if(model.baza.delete(model.mainFrame.dayEvent.get(i).id) == 1){
+						    toDelete.add(model.zdarzenia.get(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(i))));
 							ile++;
 					}
 					else{
@@ -70,9 +70,11 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				model.zdarzenia.remove(toDelete.get(i));
 			}
 			
-			//System.out.println(model.zdarzenia);
+			System.out.println(model.zdarzenia);
 			
 			JOptionPane.showMessageDialog(null, ile+" event was deleted");
+			model.mainFrame.tableDay();
+			view.mainFrame.refreshTableDay();
 			model.mainFrame.tableMonth();
 			view.mainFrame.refreshTableMonth();
       }
@@ -96,7 +98,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			if(startMonth < 10) startMonthString = new String("0"+startMonth.toString());
 			else startMonthString = new String(startMonth.toString());
 			String startDayString;
-			if(startMonth < 10) startDayString = new String("0"+startDay.toString());
+			if(startDay < 10) startDayString = new String("0"+startDay.toString());
 			else startDayString = new String(startDay.toString());
 			Integer startYear = new Integer(model.mainFrame.startYear);
 			Integer finishDay = new Integer(model.mainFrame.finishDay);
@@ -136,6 +138,13 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				view.mainFrame.calendar.setVisible(true);
 				view.mainFrame.currentEvent.setVisible(false);
 				view.mainFrame.addEvent.setVisible(false);
+				view.mainFrame.edit.setEnabled(false);
+				view.mainFrame.delete.setEnabled(false);
+				for(int i=0; i<model.mainFrame.tableMonth.getRowCount(); i++)
+				{
+					if(model.mainFrame.tableMonth.isRowSelected(i))
+						model.mainFrame.tableMonth.getSelectionModel().removeSelectionInterval(i, i);
+				}
 			}
 			else if(view.mainFrame.tabbedPane.getSelectedIndex() == 1) 
 			{
@@ -148,6 +157,13 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				view.mainFrame.calendar.setVisible(false);
 				view.mainFrame.currentEvent.setVisible(false);
 				view.mainFrame.addEvent.setVisible(true);
+				view.mainFrame.edit.setEnabled(false);
+				view.mainFrame.delete.setEnabled(false);
+				for(int i=0; i<model.mainFrame.tableMonth.getRowCount(); i++)
+				{
+					if(model.mainFrame.tableMonth.isRowSelected(i))
+						model.mainFrame.tableMonth.getSelectionModel().removeSelectionInterval(i, i);
+				}
 			}
 		}
 	}

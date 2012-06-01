@@ -23,10 +23,10 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import view.CalendarProgram.buttonNext_Action;
-import view.CalendarProgram.buttonPrev_Action;
-import view.CalendarProgram.comboYear_Action;
-import view.CalendarProgram.tableCalendarRenderer;
+import view.Calendar.buttonNext_Action;
+import view.Calendar.buttonPrev_Action;
+import view.Calendar.comboYear_Action;
+import view.Calendar.tableCalendarRenderer;
 
 import model.Model;
 
