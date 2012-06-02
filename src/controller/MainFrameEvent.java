@@ -72,7 +72,6 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
               XML.fromXML(file, model.zdarzenia);
           }
           
-          System.out.println(model.zdarzenia.size());
 	  }
 	  else if (source == view.mainFrame.delete)  
       {
@@ -293,6 +292,11 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				}
 			}
 		}
+		else if(source == view.mainFrame.fromDate || source == view.mainFrame.toDate || source == view.mainFrame.fromHour
+				|| source == view.mainFrame.fromMinute || source == view.mainFrame.toHour || source == view.mainFrame.toMinute){
+			model.mainFrame.tableMonth();
+			view.mainFrame.refreshTableMonth();
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
@@ -341,6 +345,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	     	   view.mainFrame.toHour.setEnabled(false);
 	     	   view.mainFrame.toMinute.setEnabled(false);
 	        }
+			model.mainFrame.tableMonth();
+			view.mainFrame.refreshTableMonth();
 		}
 	}
 }

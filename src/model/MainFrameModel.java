@@ -31,11 +31,13 @@ public class MainFrameModel {
 	public JTable tableDay;
 	public JTable tableMonth;
 	
-	String day, month, year;
+	String day, month, year, hour, minute;
 	public int rowSelectedMonth = 0, rowSelectedDay = 0;
-	int ileDay = 0, ileMonth = 0;
+	int ileDay = 0, ileMonth = 0, ileMonthTemp = 0;
 	public ArrayList<Zdarzenie> monthEvent = new ArrayList<Zdarzenie>();
 	public ArrayList<Zdarzenie> dayEvent = new ArrayList<Zdarzenie>();
+	ArrayList<Zdarzenie> monthEventTemp = new ArrayList<Zdarzenie>();
+	ArrayList<Zdarzenie> dayEventTemp = new ArrayList<Zdarzenie>();
 	
 	public MainFrameModel()
 	{
@@ -108,22 +110,69 @@ public class MainFrameModel {
 	  	  for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
 	  		  year = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
-	  		  if(View.mainFrame.filterDate.isSelected() == true){
-	  			  day = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(8, 10));
-		  	      if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear
-		  	    		  && Integer.parseInt(day)>=Integer.parseInt(View.mainFrame.fromDate.getValue().toString())
-		  	    		  && Integer.parseInt(day)<=Integer.parseInt(View.mainFrame.toDate.getValue().toString())){
-			  			  ileMonth++;
-			      		  monthEvent.add(Model.zdarzenia.get(i));
-			      }
-	  		  }
-	  		  else{
-	  			if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear){
+	  		  
+		  		if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear){
 		  			  ileMonth++;
 		      		  monthEvent.add(Model.zdarzenia.get(i));
 		      	}
-	  		  }
 	  	  }
+	  	  
+	  	if(View.mainFrame.filterDate.isSelected() == true){
+	  		
+	  		monthEventTemp.removeAll(monthEventTemp);
+	  		ileMonthTemp = 0;
+	  		for(int i=0; i<monthEvent.size(); i++){
+				  day = new String(monthEvent.get(i).data_rozpoczecia.substring(8, 10));
+		  	      if(Integer.parseInt(day)>=Integer.parseInt(View.mainFrame.fromDate.getValue().toString())
+		  	    		  && Integer.parseInt(day)<=Integer.parseInt(View.mainFrame.toDate.getValue().toString())){
+			  			  
+		  	    	  	  ileMonthTemp++;
+			      		  monthEventTemp.add(monthEvent.get(i));
+			      }
+			}
+
+	  		monthEvent.removeAll(monthEvent);
+  			monthEvent.addAll(monthEventTemp);
+  			ileMonth = ileMonthTemp;
+		}
+	  	if(View.mainFrame.filterHour.isSelected() == true){
+
+	  		monthEventTemp.removeAll(monthEventTemp);
+	  		ileMonthTemp = 0;
+	  		for(int i=0; i<monthEvent.size(); i++){
+				  hour = new String(monthEvent.get(i).data_rozpoczecia.substring(11, 13));
+				  minute = new String(monthEvent.get(i).data_rozpoczecia.substring(14, 16));
+				  
+				  if(Integer.parseInt(hour)>Integer.parseInt(View.mainFrame.fromHour.getValue().toString())
+		  	    		  && Integer.parseInt(hour)<Integer.parseInt(View.mainFrame.toHour.getValue().toString())){
+
+		  	    	  	  ileMonthTemp++;
+			      		  monthEventTemp.add(monthEvent.get(i));
+			      }
+				  else if(Integer.parseInt(hour)==Integer.parseInt(View.mainFrame.fromHour.getValue().toString())){
+					  
+					  	if(Integer.parseInt(minute)>=Integer.parseInt(View.mainFrame.fromMinute.getValue().toString())){
+		  	    	 
+		  	    	  	  ileMonthTemp++;
+			      		  monthEventTemp.add(monthEvent.get(i));
+		  	    	  	}	  
+			      }
+				  else if(Integer.parseInt(hour)==Integer.parseInt(View.mainFrame.toHour.getValue().toString())){
+			  			  
+					  	System.out.println("Hour: "+hour+" Minute: "+minute);
+					  
+					  	if(Integer.parseInt(minute)<=Integer.parseInt(View.mainFrame.toMinute.getValue().toString())){
+		  	    	  	
+		  	    	  	  ileMonthTemp++;
+			      		  monthEventTemp.add(monthEvent.get(i));
+		  	    	  	}	  
+			      }
+			}
+
+	  		monthEvent.removeAll(monthEvent);
+  			monthEvent.addAll(monthEventTemp);
+  			ileMonth = ileMonthTemp;
+		}
 	  	  
 	  	  System.out.println(ileMonth);
 		
