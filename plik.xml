@@ -1,10 +1,96 @@
+<xml>
+
 <model.Zdarzenie>
-  <id>1</id>
-  <opis>Pi³ka Nozna</opis>
-  <czy__okres>0</czy__okres>
-  <data__rozpoczecia>3912-06-23</data__rozpoczecia>
-  <data__zakonczenia>3912-06-23</data__zakonczenia>
-  <miejsce>£upkowa</miejsce>
+  <id>300</id>
+  <opis>golas</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-06 12:22:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-06 12:22:00.0</data__zakonczenia>
+  <miejsce>golas</miejsce>
+  <waznosc>0</waznosc>
+  <rodzaj>1</rodzaj>
+  <godzina>12:22</godzina>
+  <dzien>06</dzien>
+</model.Zdarzenie>
+ 
+<model.Zdarzenie>
+  <id>302</id>
+  <opis>tghyh</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-03 12:22:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-03 12:22:00.0</data__zakonczenia>
+  <miejsce>hyhyh</miejsce>
   <waznosc>1</waznosc>
   <rodzaj>1</rodzaj>
+  <godzina>12:22</godzina>
+  <dzien>03</dzien>
 </model.Zdarzenie>
+ 
+<model.Zdarzenie>
+  <id>303</id>
+  <opis>golas</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-06 12:22:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-06 12:22:00.0</data__zakonczenia>
+  <miejsce>golas</miejsce>
+  <waznosc>7221</waznosc>
+  <rodzaj>1</rodzaj>
+  <godzina>12:22</godzina>
+  <dzien>06</dzien>
+</model.Zdarzenie>
+ 
+<model.Zdarzenie>
+  <id>304</id>
+  <opis>hyhyhjyj LUJ</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-06 12:22:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-06 12:22:00.0</data__zakonczenia>
+  <miejsce>yjyjyj</miejsce>
+  <waznosc>620</waznosc>
+  <rodzaj>1</rodzaj>
+  <godzina>12:22</godzina>
+  <dzien>06</dzien>
+</model.Zdarzenie>
+ 
+<model.Zdarzenie>
+  <id>305</id>
+  <opis>ggg</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-06 12:22:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-06 12:22:00.0</data__zakonczenia>
+  <miejsce>gg</miejsce>
+  <waznosc>0</waznosc>
+  <rodzaj>1</rodzaj>
+  <godzina>12:22</godzina>
+  <dzien>06</dzien>
+</model.Zdarzenie>
+ 
+<model.Zdarzenie>
+  <id>306</id>
+  <opis>gg</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-07 12:22:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-07 12:22:00.0</data__zakonczenia>
+  <miejsce>gg</miejsce>
+  <waznosc>22</waznosc>
+  <rodzaj>1</rodzaj>
+  <godzina>12:22</godzina>
+  <dzien>07</dzien>
+</model.Zdarzenie>
+ 
+<model.Zdarzenie>
+  <id>307</id>
+  <opis>dwa dni</opis>
+  <czy__okres>1</czy__okres>
+  <data__rozpoczecia>2012-06-08 12:00:00.0</data__rozpoczecia>
+  <data__zakonczenia>2012-06-08 12:00:00.0</data__zakonczenia>
+  <miejsce>dwa dni</miejsce>
+  <waznosc>2880</waznosc>
+  <rodzaj>1</rodzaj>
+  <godzina>12:00</godzina>
+  <dzien>08</dzien>
+</model.Zdarzenie>
+ 
+
+
+</xml>

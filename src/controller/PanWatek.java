@@ -72,14 +72,14 @@ public class PanWatek extends Thread
 			if (roznica == zdarzenia.get(i).waznosc)
 			{
 				// Alarm glosowy
-				System.out.println("-----------------");
+				//System.out.println("-----------------");
 				clip.play();
 			}
 
 			// Komunikaty
-			System.out.println(roznica);
-			System.out.println(stringowa_data);
-			System.out.println(rok + "-" + miesiac + "-" + dzien + " " + godzina + ":" + minuta);
+			//System.out.println(roznica);
+			//System.out.println(stringowa_data);
+			//System.out.println(rok + "-" + miesiac + "-" + dzien + " " + godzina + ":" + minuta);
 		}
 	  }
 	}

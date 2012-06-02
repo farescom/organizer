@@ -21,6 +21,7 @@ public class View {
  public AboutUsFrame aboutUsFrame;
  public SettingsFrame settingsFrame;
  public ColorFrame colorFrame;
+ public ExportFrame exportFrame;
  public static Calendar calendar;
  public static CalendarFrame calendarFrame;
  
@@ -39,6 +40,7 @@ public class View {
   ColorFrame.model = _model;
   CalendarFrame.model = _model;
   Calendar.model = _model;
+  CalendarFrame.model = _model;
   
   // WELCOME FRAME
   EventQueue.invokeLater( new Runnable()

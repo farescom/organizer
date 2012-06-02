@@ -40,7 +40,7 @@ public class Database
 	public String password;
 	public Connection connection;
 	public boolean czy_polaczono;
-	public String table = "zdarzenia_23";
+	public String table = "zdarzenia";
     public int dni_waznosci;
     public int kolor_1;
     public int kolor_2;
@@ -111,12 +111,12 @@ public class Database
 	           
 	           while (result.next())
 	           {
-	              if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
-	              else data_zakonczenia = null;
+	              //if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
+	              //else data_zakonczenia = null;
 	              
 	              zdarzenia.add(new Zdarzenie(result.getInt("id"), result.getString("opis"), 
 	            		  		result.getInt("czy_okres"), result.getString("data_rozpoczecia"), 
-	            		  		data_zakonczenia, result.getString("miejsce"), result.getInt("waznosc"),
+	            		  		result.getString("data_zakonczenia"), result.getString("miejsce"), result.getInt("waznosc"),
 	            		  		result.getInt("rodzaj")));
 	           }
 	           return 1;
@@ -144,16 +144,16 @@ public class Database
 			   
 			   Statement statement = connection.createStatement();
 	           ResultSet result = statement.executeQuery(zapytanie);
-	           String data_zakonczenia;
+	           //String data_zakonczenia;
 	           
 	           while (result.next())
 	           {
-	               if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
-	               else data_zakonczenia = null;
+	               //if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
+	               //else data_zakonczenia = null;
 	               
 	               zdarzenia.add(new Zdarzenie(result.getInt("id"), result.getString("opis"), 
 	               result.getInt("czy_okres"), result.getString("data_rozpoczecia"), 
-	               data_zakonczenia, result.getString("miejsce"), result.getInt("waznosc"),
+	               result.getString("data_zakonczenia"), result.getString("miejsce"), result.getInt("waznosc"),
 	               result.getInt("rodzaj")));
 	           }
 	           return 1;

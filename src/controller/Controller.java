@@ -13,6 +13,7 @@ public class Controller {
 	public static MainFrameEvent mainFrameEvent = new MainFrameEvent();
 	public static SettingsFrameEvent settingsFrameEvent = new SettingsFrameEvent();
 	public static ColorFrameEvent colorFrameEvent = new ColorFrameEvent();
+	public static ExportFrameEvent exportFrameEvent = new ExportFrameEvent();
 	
 	public Model model;
 	public View view;
@@ -37,12 +38,18 @@ public class Controller {
 		
 		MainFrameEvent.model = _model;
 		MainFrameEvent.view = _view;
+		
 		WelcomeFrameEvent.model = _model;
 		WelcomeFrameEvent.view = _view;
+		
 		SettingsFrameEvent.model = _model;
 		SettingsFrameEvent.view = _view;
+		
 		ColorFrameEvent.model = _model;
 		ColorFrameEvent.view = _view;
+		
+		ExportFrameEvent.model = _model;
+		ExportFrameEvent.view = _view;
 	}
 	
 }
