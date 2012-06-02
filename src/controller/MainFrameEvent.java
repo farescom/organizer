@@ -292,19 +292,9 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				}
 			}
 		}
-<<<<<<< HEAD
 		else if(source == view.mainFrame.fromDate || source == view.mainFrame.toDate || source == view.mainFrame.fromHour
 				|| source == view.mainFrame.fromMinute || source == view.mainFrame.toHour || source == view.mainFrame.toMinute){
-=======
-		else if(source == view.mainFrame.fromDate){
-			model.mainFrame.tableMonth();
-			view.mainFrame.refreshTableMonth();
-			
-			System.out.println("From Date: "+View.mainFrame.fromDate.getValue().toString());
-    	  	  System.out.println("To Date: "+View.mainFrame.toDate.getValue().toString());
-		}
-		else if(source == view.mainFrame.toDate){
->>>>>>> origin/master
+
 			model.mainFrame.tableMonth();
 			view.mainFrame.refreshTableMonth();
 		}
