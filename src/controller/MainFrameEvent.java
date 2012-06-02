@@ -70,8 +70,9 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
           {
               File file = fc.getSelectedFile();
               XML.fromXML(file, model.zdarzenia);
+			  model.mainFrame.tableMonth();
+			  view.mainFrame.refreshTableMonth();
           }
-          
 	  }
 	  else if (source == view.mainFrame.delete)  
       {
