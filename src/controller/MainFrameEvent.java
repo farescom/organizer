@@ -4,11 +4,13 @@ import java.awt.event.*;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
+import java.io.File;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -49,6 +51,28 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	  				view.mainFrame.location_x + (view.mainFrame.size().width/2) - (560/2),
 	  				view.mainFrame.location_y + (view.mainFrame.size().height/2) - (370/2) + 20);
 	  	if (!view.settingsFrame.isShowing()) view.settingsFrame.show();
+	  }
+	  else if (source == view.mainFrame.exportOption) 
+	  {
+		  	// Export
+		  if (view.exportFrame == null)
+		  	view.exportFrame = new ExportFrame("Export", 560, 370,
+		  		view.mainFrame.location_x + (view.mainFrame.size().width/2) - (560/2),
+		  		view.mainFrame.location_y + (view.mainFrame.size().height/2) - (370/2) + 20);
+		  if (!view.exportFrame.isShowing()) view.exportFrame.show();
+	  }
+	  else if (source == view.mainFrame.importOption) 
+	  {
+		  	// Import
+          final JFileChooser fc = new JFileChooser();
+          int returnVal = fc.showOpenDialog(view.exportFrame);
+          if (returnVal == JFileChooser.APPROVE_OPTION)
+          {
+              File file = fc.getSelectedFile();
+              XML.fromXML(file, model.zdarzenia);
+          }
+          
+          System.out.println(model.zdarzenia.size());
 	  }
 	  else if (source == view.mainFrame.delete)  
       {
