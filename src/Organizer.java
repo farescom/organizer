@@ -62,7 +62,7 @@ public class Organizer
 		String plik = "plik.xml";
 		XML.toXML(zdarzenia, plik);
 	
-		XML.fromXML(plik, zdarzenia2);
+		XML.fromXML(plik, zdarzenia2);//55
 		*/
 	
 	}

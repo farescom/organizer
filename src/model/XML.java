@@ -18,6 +18,11 @@ public class XML {
 	zdarzenie_XML = XML.fromXML(plik);
 	System.out.println(zdarzenie_XML.toString());*/
 	
+	public static Database baza;
+	public XML(Database baza)
+	{
+		this.baza = baza;
+	}
 	/**
 	* Metoda zapisuje dane Wydarzenie do pliku XML
 	* @param zdarzenie - Wydarzenie, ktore ma zostac zapisane do pliku XML
@@ -200,7 +205,14 @@ public class XML {
 				}
 				else
 				{
-					zdarzenia.add((Zdarzenie) xStream.fromXML(xml));
+					Zdarzenie nowe = (Zdarzenie) xStream.fromXML(xml);
+				 // zmiana identyfikatora
+					nowe.id = baza.nextID;
+				 // dodanie do listy w programie
+					zdarzenia.add(nowe);
+				 // dodanie do bazy
+					baza.insert(nowe.opis, nowe.czy_okres, nowe.data_rozpoczecia, nowe.data_zakonczenia,
+							nowe.miejsce, nowe.waznosc, nowe.rodzaj);
 					xml="";
 					licznik_obiektow++;
 				}
