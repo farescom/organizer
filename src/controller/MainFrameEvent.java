@@ -293,28 +293,20 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				}
 			}
 		}
+		else if(source == view.mainFrame.fromDate){
+			model.mainFrame.tableMonth();
+			view.mainFrame.refreshTableMonth();
+			
+			System.out.println("From Date: "+View.mainFrame.fromDate.getValue().toString());
+    	  	  System.out.println("To Date: "+View.mainFrame.toDate.getValue().toString());
+		}
+		else if(source == view.mainFrame.toDate){
+			model.mainFrame.tableMonth();
+			view.mainFrame.refreshTableMonth();
+		}
 	}
 
 	public void mouseClicked(MouseEvent e) {
-<<<<<<< HEAD
-		view.mainFrame.source = e.getSource();
-		if(view.mainFrame.source == view.mainFrame.data_roz){
-			if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;
-			if(model.mainFrame.startYear == 0) model.mainFrame.startYear = model.currentYear;
-			View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
-		}
-		else if(view.mainFrame.source == view.mainFrame.data_zak){
-			if(model.mainFrame.finishMonth == 0) model.mainFrame.finishMonth = model.currentMonth;
-			if(model.mainFrame.finishYear == 0) model.mainFrame.finishYear = model.currentYear;
-			View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
-		}
-		else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
-			if(model.mainFrame.alarmMonth == 0) model.mainFrame.alarmMonth = model.currentMonth;
-			if(model.mainFrame.alarmYear == 0) model.mainFrame.alarmYear = model.currentYear;
-			View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
-		}
-}
-=======
 			view.mainFrame.source = e.getSource();
 			if(view.mainFrame.source == view.mainFrame.data_roz){
 				if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;
@@ -362,5 +354,4 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	        }
 		}
 	}
->>>>>>> origin/master
 }

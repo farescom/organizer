@@ -31,6 +31,7 @@ public class Model {
 	{	
 		baza = new Database();
 		baza.czy_polaczono = baza.connection();
+		xml = new XML(baza);
 		
 		if(baza.czy_polaczono == true)
 		{
