@@ -138,7 +138,7 @@ public class Calendar{
 
 		//Apply renderers
 		tableCalendar.setDefaultRenderer(tableCalendar.getColumnClass(0), new tableCalendarRenderer());
-;	}
+	}
 
 	static class tableCalendarRenderer extends DefaultTableCellRenderer{
 		public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
