@@ -218,6 +218,9 @@ public class Calendar{
 			if (!year.equals(yearInt.toString())){
 				model.checkedYear = Integer.parseInt(year);
 				refreshCalendar(model.checkedMonth, model.checkedYear);
+				
+				model.mainFrame.tableMonth();
+				View.mainFrame.refreshTableMonth();
 			}
 		}
 	}

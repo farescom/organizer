@@ -31,8 +31,7 @@ public class MainFrameModel {
 	public JTable tableDay;
 	public JTable tableMonth;
 	
-	String month;
-	String day;
+	String day, month, year;
 	public int rowSelectedMonth = 0, rowSelectedDay = 0;
 	int ileDay = 0, ileMonth = 0;
 	public ArrayList<Zdarzenie> monthEvent = new ArrayList<Zdarzenie>();
@@ -108,7 +107,8 @@ public class MainFrameModel {
 		  
 	  	  for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
-	  		  if(Integer.parseInt(month) == Model.checkedMonth){
+	  		  year = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
+	  		  if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear){
 	  			  ileMonth++;
 	      		  monthEvent.add(Model.zdarzenia.get(i));
 	      	  }

@@ -324,15 +324,15 @@ public class CalendarFrame extends JFrame {
 				if(mainFrame.source == mainFrame.data_roz){
 					Integer yearInt = new Integer(model.mainFrame.startYear);
 					if (!year.equals(yearInt.toString())){
-						model.checkedYear = Integer.parseInt(year);
+						model.mainFrame.startYear = Integer.parseInt(year);
 						refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
 					}
 				}
 				else if(mainFrame.source == mainFrame.data_zak){
 					Integer yearInt = new Integer(model.mainFrame.finishYear);
 					if (!year.equals(yearInt.toString())){
-						model.checkedYear = Integer.parseInt(year);
-						refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
+						model.mainFrame.finishYear = Integer.parseInt(year);
+						refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
 					}
 				}
 				else if(mainFrame.source == mainFrame.dataAlarmu){

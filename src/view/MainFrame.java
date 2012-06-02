@@ -28,13 +28,13 @@ public class MainFrame extends JFrame
 	public JMenuItem importOption, exportOption, exit, settings;
 	
 	//public CalendarProgram calendarProgram = new CalendarProgram(this);
-	public static JPanel calendar, statistics, tasks, main, tab, addEvent, flowPanel, options, panelAlarm;
+	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent;
 	public static JComboBox przypomnienie;
 	public static JTextArea opis;
-	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu;
+	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu, fromDate, toDate, fromHour, fromMinute, toHour, toMinute;
 	public static String data_rozpoczecia, data_zakonczenia, data_alarmu;
 	public static JLabel lblDataRozpoczecia = new JLabel(), lblDataZakonczenia = new JLabel(), lblDataAlarmu = new JLabel();
 	public static JTabbedPane tabbedPane;
@@ -120,15 +120,66 @@ public class MainFrame extends JFrame
 		c.gridx = 1;
 		c.gridy = 0;
 		c.gridheight = 3;
-		statistics = new JPanel();
-		statistics.setPreferredSize(new Dimension(320, 100));
-		statistics.setBorder(BorderFactory.createTitledBorder("Filters"));
+		GridBagLayout layout = new GridBagLayout();
+		filters = new JPanel(layout);
+		filters.setPreferredSize(new Dimension(320, 100));
+		filters.setBorder(BorderFactory.createTitledBorder("Filters"));
+			
+			c.gridx = 1;
+			c.gridy = 0;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events from "));
+			fromDate = new JTextField(2);
+			flowPanel.add(fromDate);
+			flowPanel.add(new JLabel(" June to "));
+			toDate = new JTextField(2);
+			flowPanel.add(toDate);
+			flowPanel.add(new JLabel(" June"));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 1;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events from: "));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Hour: "));
+			fromHour = new JTextField(2);
+			flowPanel.add(fromHour);
+			flowPanel.add(new JLabel("Minute: "));
+			fromMinute = new JTextField(2);
+			flowPanel.add(fromMinute);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 2;
+			c.gridy = 1;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("To: "));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 2;
+			c.gridy = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Hour: "));
+			toHour = new JTextField(2);
+			flowPanel.add(toHour);
+			flowPanel.add(new JLabel("Minute: "));
+			toMinute = new JTextField(2);
+			flowPanel.add(toMinute);
+			filters.add(flowPanel, c);
+			
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridheight = 3;
 		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
 		
-		splitPane.setLeftComponent(statistics);
+		splitPane.setLeftComponent(filters);
 		splitPane.setRightComponent(nextEvent);
 		
 		main.add(splitPane, c);
@@ -364,8 +415,7 @@ public class MainFrame extends JFrame
 		minutaAlarmu.setText("");
 		lblDataRozpoczecia.setText("");
 		lblDataAlarmu.setText("");
- 		
- 		//przypomnienie.setText(model.mainFrame.dayEvent.get(model.mainFrame.rowSelected).miejsce);
+		przypomnienie.setSelectedIndex(0);
  	}
  	
  	private JComponent makeTextPanel(String string) {

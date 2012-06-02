@@ -183,10 +183,13 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			  		}
 		  			else{
 
-		  				if(model.baza.update(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1) == 1){
-		  					if(model.zdarzenia.set(model.zdarzenia.indexOf(model.zdarzenia.get(model.mainFrame.rowSelectedDay)),
-		  							new Zdarzenie(model.baza.nextID-1, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
+		  				System.out.println("ID: "+model.zdarzenia.get(model.mainFrame.rowSelectedDay).id);
+		  				if(model.baza.update(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1) == 1){
+		  					if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
+		  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
 								JOptionPane.showMessageDialog(null, "Event was edited");
+								model.mainFrame.tableDay();
+								view.mainFrame.refreshTableDay();
 								model.mainFrame.tableMonth();
 								view.mainFrame.refreshTableMonth();
 								view.mainFrame.opis.setText("");
@@ -204,6 +207,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 								model.mainFrame.startMonth = 0;
 								model.mainFrame.startYear = 0;
 								view.mainFrame.panelAlarm.setVisible(false);
+								
+								view.mainFrame.notEditEvent();
 							}
 						}
 						else JOptionPane.showMessageDialog(null, "Event was not edited");

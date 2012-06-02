@@ -35,7 +35,7 @@ public class Model {
 		if(baza.czy_polaczono == true)
 		{
 			baza.get("SELECT * FROM "+baza.table+" ORDER BY ID ASC", zdarzenia);
-			baza.update(299, "asd", 1, "2012-02-02", "2012-02-02", "asd", 20, 1);
+			//baza.update(299, "asd", 1, "2012-02-02", "2012-02-02", "asd", 20, 1);
 			
 			if(zdarzenia.size()-1 > 0) baza.nextID = zdarzenia.get(zdarzenia.size()-1).id+1;
 			mainFrame = new MainFrameModel();
