@@ -210,13 +210,22 @@ public class CalendarFrame extends JFrame {
 					if(mainFrame.source == mainFrame.data_roz){
 						model.mainFrame.startDay = Integer.parseInt(value.toString());
 						View.calendarFrame.dispose();
-						System.out.println("Data rozpoczecia: " + model.mainFrame.startDay + " / " + model.mainFrame.startMonth + " / " + model.mainFrame.startYear);
+						System.out.println("Data rozpoczecia: " + model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
+						View.mainFrame.lblDataRozpoczecia.setText(model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
 						mainFrame.source = null;
 					}
 					else if(mainFrame.source == mainFrame.data_zak){
 						model.mainFrame.finishDay = Integer.parseInt(value.toString());
 						View.calendarFrame.dispose();
-						System.out.println("Data zakonczenia: " + model.mainFrame.finishDay + " / " + model.mainFrame.finishMonth + " / " + model.mainFrame.finishYear);
+						System.out.println("Data zakonczenia: " + model.mainFrame.finishDay + " - " + model.mainFrame.finishMonth + " - " + model.mainFrame.finishYear);
+						View.mainFrame.lblDataZakonczenia.setText(model.mainFrame.finishDay + " - " + model.mainFrame.finishMonth + " - " + model.mainFrame.finishYear);
+						mainFrame.source = null;
+					}
+					else if(mainFrame.source == mainFrame.dataAlarmu){
+						model.mainFrame.alarmDay = Integer.parseInt(value.toString());
+						View.calendarFrame.dispose();
+						System.out.println("Data alarmu: " + model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
+						View.mainFrame.lblDataAlarmu.setText(model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
 						mainFrame.source = null;
 					}
 				}
@@ -255,6 +264,17 @@ public class CalendarFrame extends JFrame {
 					
 					refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
 				}
+				else if(mainFrame.source == mainFrame.dataAlarmu){
+					if (model.mainFrame.alarmMonth == 1){ //Back one year
+						model.mainFrame.alarmMonth = 12;
+						model.mainFrame.alarmYear -= 1;
+					}
+					else{ //Back one month
+						model.mainFrame.alarmMonth -= 1;
+					}
+					
+					refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
+				}
 			}
 		}
 		static class buttonNext_Action implements ActionListener{
@@ -283,6 +303,17 @@ public class CalendarFrame extends JFrame {
 					
 					refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
 				}
+				else if(mainFrame.source == mainFrame.dataAlarmu){
+					if (model.mainFrame.alarmMonth == 12){ //Foward one year
+						model.mainFrame.alarmMonth = 1;
+						model.mainFrame.alarmYear += 1;
+					}
+					else{ //Foward one month
+						model.mainFrame.alarmMonth += 1;
+					}
+					
+					refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
+				}
 			}
 		}
 		static class comboYear_Action implements ActionListener{
@@ -302,6 +333,13 @@ public class CalendarFrame extends JFrame {
 					if (!year.equals(yearInt.toString())){
 						model.checkedYear = Integer.parseInt(year);
 						refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
+					}
+				}
+				else if(mainFrame.source == mainFrame.dataAlarmu){
+					Integer yearInt = new Integer(model.mainFrame.alarmYear);
+					if (!year.equals(yearInt.toString())){
+						model.checkedYear = Integer.parseInt(year);
+						refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
 					}
 				}
 			}

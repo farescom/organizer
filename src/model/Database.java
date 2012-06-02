@@ -40,7 +40,7 @@ public class Database
 	public String password;
 	public Connection connection;
 	public boolean czy_polaczono;
-	public String table = "zdarzenia_23";
+	public String table = "zdarzenia";
     public int dni_waznosci;
     public int kolor_1;
     public int kolor_2;
@@ -111,12 +111,12 @@ public class Database
 	           
 	           while (result.next())
 	           {
-	              if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
-	              else data_zakonczenia = null;
+	              //if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
+	              //else data_zakonczenia = null;
 	              
 	              zdarzenia.add(new Zdarzenie(result.getInt("id"), result.getString("opis"), 
 	            		  		result.getInt("czy_okres"), result.getString("data_rozpoczecia"), 
-	            		  		data_zakonczenia, result.getString("miejsce"), result.getInt("waznosc"),
+	            		  		result.getString("data_zakonczenia"), result.getString("miejsce"), result.getInt("waznosc"),
 	            		  		result.getInt("rodzaj")));
 	           }
 	           return 1;
@@ -144,16 +144,16 @@ public class Database
 			   
 			   Statement statement = connection.createStatement();
 	           ResultSet result = statement.executeQuery(zapytanie);
-	           String data_zakonczenia;
+	           //String data_zakonczenia;
 	           
 	           while (result.next())
 	           {
-	               if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
-	               else data_zakonczenia = null;
+	               //if (result.getInt("czy_okres") == 1) data_zakonczenia = result.getString("data_zakonczenia");
+	               //else data_zakonczenia = null;
 	               
 	               zdarzenia.add(new Zdarzenie(result.getInt("id"), result.getString("opis"), 
 	               result.getInt("czy_okres"), result.getString("data_rozpoczecia"), 
-	               data_zakonczenia, result.getString("miejsce"), result.getInt("waznosc"),
+	               result.getString("data_zakonczenia"), result.getString("miejsce"), result.getInt("waznosc"),
 	               result.getInt("rodzaj")));
 	           }
 	           return 1;
@@ -169,7 +169,7 @@ public class Database
 	 * null, -1 oznaczaj¹ nie zmieniania danej pozycji
 	 */ 
 	 public int update(int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
-	   String miejsce, int waznosc, int rodzaj)
+	   String miejsce, long waznosc, int rodzaj)
 	{
 		try
 		{
@@ -184,7 +184,7 @@ public class Database
 	         if (data_rozpoczecia != null) result.updateString("data_rozpoczecia", data_rozpoczecia);
 	         if (data_zakonczenia != null) result.updateString("data_zakonczenia", data_zakonczenia);
 	         if (miejsce != null) result.updateString("miejsce", miejsce);
-	         if (waznosc != -1) result.updateInt("waznosc", waznosc);
+	         if (waznosc != -1) result.updateLong("waznosc", waznosc);
 	         if (rodzaj != -1) result.updateInt("rodzaj", rodzaj);
 	         result.updateRow();
 	         
@@ -215,7 +215,7 @@ public class Database
 	         if (zdarzenie.data_rozpoczecia != null) result.updateString("data_rozpoczecia", zdarzenie.data_rozpoczecia);
 	         if (zdarzenie.data_zakonczenia != null) result.updateString("data_zakonczenia", zdarzenie.data_zakonczenia);
 	         if (zdarzenie.miejsce != null) result.updateString("miejsce", zdarzenie.miejsce);
-	         if (zdarzenie.waznosc != -1) result.updateInt("waznosc", zdarzenie.waznosc);
+	         if (zdarzenie.waznosc != -1) result.updateLong("waznosc", zdarzenie.waznosc);
 	         if (zdarzenie.rodzaj != -1) result.updateInt("rodzaj", zdarzenie.rodzaj);
 	         result.updateRow();
 	         
@@ -231,7 +231,7 @@ public class Database
 	 * Metoda do dodawania krotek
 	 */ 
 	 public int insert(String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
-	   String miejsce, int waznosc, int rodzaj)
+	   String miejsce, long waznosc, int rodzaj)
 	{
 		try
 		{
