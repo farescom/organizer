@@ -28,19 +28,22 @@ public class MainFrame extends JFrame
 	public JMenuItem importOption, exportOption, exit, settings;
 	
 	//public CalendarProgram calendarProgram = new CalendarProgram(this);
-	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm;
+	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm, filtersPanel;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
 	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent;
 	public static JComboBox przypomnienie;
 	public static JTextArea opis;
-	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu, fromDate, toDate, fromHour, fromMinute, toHour, toMinute;
+	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu;
+	public static JSpinner fromDate, toDate, fromHour, fromMinute, toHour, toMinute;
+	public SpinnerModel spinnerModel;
 	public static String data_rozpoczecia, data_zakonczenia, data_alarmu;
 	public static JLabel lblDataRozpoczecia = new JLabel(), lblDataZakonczenia = new JLabel(), lblDataAlarmu = new JLabel();
 	public static JTabbedPane tabbedPane;
 	public static ImagePanel data_roz = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel data_zak = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel dataAlarmu = new ImagePanel(0, 16, 16, "data.png");
+	public static JCheckBox filterDate = new JCheckBox(), filterHour  = new JCheckBox();
 	public Object source = null;
 	GridBagConstraints c = new GridBagConstraints();
 	
@@ -64,7 +67,7 @@ public class MainFrame extends JFrame
         main = new JPanel(new GridBagLayout());
         
 		c.fill = GridBagConstraints.HORIZONTAL;
-		c.insets = new Insets(1, 1, 1, 1);
+		c.insets = new Insets(0, 0, 0, 0);
 		
 		tab = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tabbedPane = new JTabbedPane(JTabbedPane.RIGHT);
@@ -117,59 +120,7 @@ public class MainFrame extends JFrame
 		
 		main.add(tasks, c);
 		
-		c.gridx = 1;
-		c.gridy = 0;
-		c.gridheight = 3;
-		GridBagLayout layout = new GridBagLayout();
-		filters = new JPanel(layout);
-		filters.setPreferredSize(new Dimension(320, 100));
-		filters.setBorder(BorderFactory.createTitledBorder("Filters"));
-			
-			c.gridx = 1;
-			c.gridy = 0;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Show events from "));
-			fromDate = new JTextField(2);
-			flowPanel.add(fromDate);
-			flowPanel.add(new JLabel(" June to "));
-			toDate = new JTextField(2);
-			flowPanel.add(toDate);
-			flowPanel.add(new JLabel(" June"));
-			filters.add(flowPanel, c);
-			
-			c.gridx = 1;
-			c.gridy = 1;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Show events from: "));
-			filters.add(flowPanel, c);
-			
-			c.gridx = 1;
-			c.gridy = 2;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Hour: "));
-			fromHour = new JTextField(2);
-			flowPanel.add(fromHour);
-			flowPanel.add(new JLabel("Minute: "));
-			fromMinute = new JTextField(2);
-			flowPanel.add(fromMinute);
-			filters.add(flowPanel, c);
-			
-			c.gridx = 2;
-			c.gridy = 1;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("To: "));
-			filters.add(flowPanel, c);
-			
-			c.gridx = 2;
-			c.gridy = 2;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Hour: "));
-			toHour = new JTextField(2);
-			flowPanel.add(toHour);
-			flowPanel.add(new JLabel("Minute: "));
-			toMinute = new JTextField(2);
-			flowPanel.add(toMinute);
-			filters.add(flowPanel, c);
+		addFilters(c);
 			
 		c.gridx = 1;
 		c.gridy = 0;
@@ -179,7 +130,7 @@ public class MainFrame extends JFrame
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
 		
-		splitPane.setLeftComponent(filters);
+		splitPane.setLeftComponent(filtersPanel);
 		splitPane.setRightComponent(nextEvent);
 		
 		main.add(splitPane, c);
@@ -204,6 +155,100 @@ public class MainFrame extends JFrame
         this.setJMenuBar(menuBar);
     }
  
+ 
+ 	public void addFilters(GridBagConstraints c){
+ 		
+ 		c.insets = new Insets(0, 0, 0, 0);
+		filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		filtersPanel.setPreferredSize(new Dimension(320, 100));
+		filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
+		filters = new JPanel(new GridBagLayout());
+			
+			c.gridx = 0;
+			c.gridy = 0;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			filterDate = new JCheckBox();
+			filterDate.addItemListener(Controller.mainFrameEvent);
+			flowPanel.add(filterDate);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 0;
+			c.gridy = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			filterHour = new JCheckBox();
+			filterHour.addItemListener(Controller.mainFrameEvent);
+			flowPanel.add(filterHour);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 0;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events: "));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 2;
+			c.gridy = 0;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("From: "));
+			spinnerModel = new SpinnerNumberModel(12, 0, 23, 1);  
+			fromDate = new JSpinner(spinnerModel);
+			fromDate.setEnabled(false);
+			flowPanel.add(fromDate);
+			flowPanel.add(new JLabel(" June"));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 2;
+			c.gridy = 1;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("To: "));
+			spinnerModel = new SpinnerNumberModel(12, 0, 23, 1);  
+			toDate = new JSpinner(spinnerModel);
+			toDate.setEnabled(false);
+			flowPanel.add(toDate);
+			flowPanel.add(new JLabel(" June"));
+			filters.add(flowPanel, c);
+		
+			c.gridwidth = 2;
+			c.gridx = 1;
+			c.gridy = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events: "));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 3;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("From: "));
+			flowPanel.add(new JLabel("Hour: "));
+			spinnerModel = new SpinnerNumberModel(12, 0, 59, 1);  
+			fromHour = new JSpinner(spinnerModel);
+			fromHour.setEnabled(false);
+			flowPanel.add(fromHour);
+			flowPanel.add(new JLabel("Minute: "));
+			spinnerModel = new SpinnerNumberModel(12, 0, 59, 1);  
+			fromMinute = new JSpinner(spinnerModel);
+			fromMinute.setEnabled(false);
+			flowPanel.add(fromMinute);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 4;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("To: "));
+			flowPanel.add(new JLabel("Hour: "));
+			spinnerModel = new SpinnerNumberModel(12, 0, 59, 1);  
+			toHour = new JSpinner(spinnerModel);
+			toHour.setEnabled(false);
+			flowPanel.add(toHour);
+			flowPanel.add(new JLabel("Minute: "));
+			spinnerModel = new SpinnerNumberModel(12, 0, 59, 1);  
+			toMinute = new JSpinner(spinnerModel);
+			toMinute.setEnabled(false);
+			flowPanel.add(toMinute);
+			filters.add(flowPanel, c);
+		filtersPanel.add(filters);
+		c.insets = new Insets(1, 1, 1, 1);
+ 	}
  
  	public void addEvent(GridBagConstraints c)
  	{

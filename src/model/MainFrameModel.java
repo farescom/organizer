@@ -108,10 +108,21 @@ public class MainFrameModel {
 	  	  for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
 	  		  year = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
-	  		  if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear){
-	  			  ileMonth++;
-	      		  monthEvent.add(Model.zdarzenia.get(i));
-	      	  }
+	  		  if(View.mainFrame.filterDate.isSelected() == true){
+	  			  day = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(8, 10));
+		  	      if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear
+		  	    		  && Integer.parseInt(day)>=Integer.parseInt(View.mainFrame.fromDate.getValue().toString())
+		  	    		  && Integer.parseInt(day)<=Integer.parseInt(View.mainFrame.toDate.getValue().toString())){
+			  			  ileMonth++;
+			      		  monthEvent.add(Model.zdarzenia.get(i));
+			      }
+	  		  }
+	  		  else{
+	  			if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear){
+		  			  ileMonth++;
+		      		  monthEvent.add(Model.zdarzenia.get(i));
+		      	}
+	  		  }
 	  	  }
 	  	  
 	  	  System.out.println(ileMonth);
