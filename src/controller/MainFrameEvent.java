@@ -4,10 +4,7 @@ import java.awt.event.*;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.GridBagConstraints;
-<<<<<<< HEAD
-=======
 import java.io.File;
->>>>>>> origin/master
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;

@@ -77,15 +77,10 @@ public class PanWatek extends Thread
 			}
 
 			// Komunikaty
-<<<<<<< HEAD
+			
 			/*System.out.println(roznica);
 			System.out.println(stringowa_data);
 			System.out.println(rok + "-" + miesiac + "-" + dzien + " " + godzina + ":" + minuta);*/
-=======
-			//System.out.println(roznica);
-			//System.out.println(stringowa_data);
-			//System.out.println(rok + "-" + miesiac + "-" + dzien + " " + godzina + ":" + minuta);
->>>>>>> origin/master
 		}
 	  }
 	}
