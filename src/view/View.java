@@ -60,10 +60,9 @@ public class View {
                300+(SizeX_WelcomeFrame/2)-(SizeX_ProgressFrame/2), 100+(SizeY_WelcomeFrame/2)-(SizeY_ProgressFrame/2));
              progressFrame.setResizable(false);
              
-             //model.baza.delete(1);
             }  
         });
-  
+  /**/
   // MAIN FRAME
   EventQueue.invokeLater( new Runnable()
   {  

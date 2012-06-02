@@ -41,6 +41,7 @@ public class Database
 	public Connection connection;
 	public boolean czy_polaczono;
 	public String table = "zdarzenia";
+	public int identyfikator = 0;
     public int dni_waznosci;
     public int kolor_1;
     public int kolor_2;
@@ -317,6 +318,7 @@ public class Database
 				{
 					// Ustalanie tabeli ze zdarzeniami
 				     int id = result.getInt("ID");
+				     identyfikator = id;
 				     table = "zdarzenia_"+id;
 				     
 				     // Wydobywanie informacji o dniach waznosci i kolorach

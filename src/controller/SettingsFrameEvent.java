@@ -43,6 +43,7 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
         else if (source == view.settingsFrame.zapisz)
         {
         	// dokonanie trwa³ych zmian
+        	// 1- w programie
         	if(controller.kolor_dni_wolnych == 1)
         	{
         		controller.kolor_dni_wolnych2 = 1;
@@ -105,6 +106,12 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
             	view.kolorWybranegoDnia = Color.cyan;
             	view.mainFrame.setBackground(view.kolorWybranegoDnia);
         	}
+        	// 2 - W bazie
+        	model.baza.query2("UPDATE `user` SET `waznosc_zdarzen`="+controller.wybrana_liczba_dni+"," +
+        			"`kolorWeekendu`="+controller.kolor_dni_wolnych+"," +
+        			"`kolorDnia`="+controller.kolor_aktualnego_dnia+"," +
+        			"`kolorWybranegoDnia`="+controller.kolor_zaznaczonego_dnia+" " +
+        					"WHERE `ID` = "+model.baza.identyfikator);
         	controller.dni_waznosci = controller.wybrana_liczba_dni;
         	view.settingsFrame.hide();
         }

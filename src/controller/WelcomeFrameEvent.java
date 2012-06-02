@@ -40,13 +40,12 @@ public class WelcomeFrameEvent implements ActionListener{
         else if (source == view.welcomeFrame.about)  
         {
         	// O programie
-
         	 if (view.aboutUsFrame == null)
                  view.aboutUsFrame = new AboutUsFrame("O nas...", 560, 370,
                    view.welcomeFrame.location_x + (view.welcomeFrame.size().width/2) - (560/2),
                    view.welcomeFrame.location_y + (view.welcomeFrame.size().height/2) - (370/2) + 20);
              if (!view.aboutUsFrame.isShowing()) view.aboutUsFrame.show();
-        }	
+        }
         else if (source == view.welcomeFrame.exit)  
         {
         	System.exit(0);
@@ -80,6 +79,11 @@ public class WelcomeFrameEvent implements ActionListener{
         		
         		if(view.welcomeFrame.loginFlags == 1){
             		view.welcomeFrame.dispose();
+            		
+        			// Uruchumienie w¹tka alarmów
+        			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
+        			panWatek.start();
+        			
             		EventQueue.invokeLater( new Runnable()
             		{  
                         public void run()
