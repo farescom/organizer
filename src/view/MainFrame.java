@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.*;
-import java.sql.Date;
+import java.util.Date;
 import java.text.DateFormatSymbols;
 
 import javax.swing.*;
@@ -28,17 +28,19 @@ public class MainFrame extends JFrame
 	public JMenuItem importOption, exportOption, exit, settings;
 	
 	//public CalendarProgram calendarProgram = new CalendarProgram(this);
-	public static JPanel calendar, statistics, tasks, main, tab, addEvent, flowPanel, options;
+	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-	public static JButton delete, edit, buttonAddEvent;
+	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent;
 	public static JComboBox przypomnienie;
 	public static JTextArea opis;
-	public static JTextField miejsce, godzina, minuta;
-	public static String data_rozpoczecia, data_zakonczenia;
+	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu, fromDate, toDate, fromHour, fromMinute, toHour, toMinute;
+	public static String data_rozpoczecia, data_zakonczenia, data_alarmu;
+	public static JLabel lblDataRozpoczecia = new JLabel(), lblDataZakonczenia = new JLabel(), lblDataAlarmu = new JLabel();
 	public static JTabbedPane tabbedPane;
 	public static ImagePanel data_roz = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel data_zak = new ImagePanel(0, 16, 16, "data.png");
+	public static ImagePanel dataAlarmu = new ImagePanel(0, 16, 16, "data.png");
 	public Object source = null;
 	GridBagConstraints c = new GridBagConstraints();
 	
@@ -66,9 +68,9 @@ public class MainFrame extends JFrame
 		
 		tab = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tabbedPane = new JTabbedPane(JTabbedPane.RIGHT);
-		tabbedPane.addTab("Calendar", null, null, "1 Nothing");
-		tabbedPane.addTab(model.checkedDay + " " + View.months[model.checkedMonth] + " Event", null, null, "2 Nothing");
-		tabbedPane.addTab("Add Event", null, null, "3 Nothing");
+		tabbedPane.addTab("Calendar", null, null, "Show calendar");
+		tabbedPane.addTab(model.checkedDay + " " + View.months[model.checkedMonth] + " Event", null, null, "Show events");
+		tabbedPane.addTab("Add Event", null, null, "Add event");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
 		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
@@ -88,7 +90,7 @@ public class MainFrame extends JFrame
 		
 		currentEvent = new JScrollPane(model.mainFrame.tableDay);
 		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + View.months[model.checkedMonth] + " Event"));
-		currentEvent.setPreferredSize(new Dimension(370, 250));
+		currentEvent.setPreferredSize(new Dimension(370, 220));
 		currentEvent.setVisible(false);
 		addEvent(c);
 		
@@ -118,15 +120,66 @@ public class MainFrame extends JFrame
 		c.gridx = 1;
 		c.gridy = 0;
 		c.gridheight = 3;
-		statistics = new JPanel();
-		statistics.setPreferredSize(new Dimension(320, 100));
-		statistics.setBorder(BorderFactory.createTitledBorder("Statistics"));
+		GridBagLayout layout = new GridBagLayout();
+		filters = new JPanel(layout);
+		filters.setPreferredSize(new Dimension(320, 100));
+		filters.setBorder(BorderFactory.createTitledBorder("Filters"));
+			
+			c.gridx = 1;
+			c.gridy = 0;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events from "));
+			fromDate = new JTextField(2);
+			flowPanel.add(fromDate);
+			flowPanel.add(new JLabel(" June to "));
+			toDate = new JTextField(2);
+			flowPanel.add(toDate);
+			flowPanel.add(new JLabel(" June"));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 1;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events from: "));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Hour: "));
+			fromHour = new JTextField(2);
+			flowPanel.add(fromHour);
+			flowPanel.add(new JLabel("Minute: "));
+			fromMinute = new JTextField(2);
+			flowPanel.add(fromMinute);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 2;
+			c.gridy = 1;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("To: "));
+			filters.add(flowPanel, c);
+			
+			c.gridx = 2;
+			c.gridy = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Hour: "));
+			toHour = new JTextField(2);
+			flowPanel.add(toHour);
+			flowPanel.add(new JLabel("Minute: "));
+			toMinute = new JTextField(2);
+			flowPanel.add(toMinute);
+			filters.add(flowPanel, c);
+			
+		c.gridx = 1;
+		c.gridy = 0;
+		c.gridheight = 3;
 		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
 		
-		splitPane.setLeftComponent(statistics);
+		splitPane.setLeftComponent(filters);
 		splitPane.setRightComponent(nextEvent);
 		
 		main.add(splitPane, c);
@@ -154,13 +207,13 @@ public class MainFrame extends JFrame
  
  	public void addEvent(GridBagConstraints c)
  	{
- 		GridLayout layout = new GridLayout(4, 1);
+ 		GridLayout layout = new GridLayout(6, 1);
  		layout.setVgap(1);
  		addEvent = new JPanel(layout);
  		
  		
 		addEvent.setBorder(BorderFactory.createTitledBorder("Add Event"));
-		addEvent.setPreferredSize(new Dimension(370, 250));
+		addEvent.setPreferredSize(new Dimension(370, 300));
 		addEvent.setVisible(false);
 		
 		opis = new JTextArea(4, 25);
@@ -169,11 +222,15 @@ public class MainFrame extends JFrame
 		miejsce = new JTextField(10);
 		data_rozpoczecia = new String();
 		data_zakonczenia = new String();
-		String[] czas = {"15 minutes", "30 minutes", "45 minutes", "1 hour", "2 hours", "4 hours", "8 hours", "16 hours", "24 hours", "32 hours"};
-		przypomnienie = new JComboBox(czas);
+		data_alarmu = new String();
+		String[] takCzyNie = {"no", "yes"};
+		przypomnienie = new JComboBox(takCzyNie);
 		godzina = new JTextField(2);
 		minuta = new JTextField(2);
+		godzinaAlarmu = new JTextField(2);
+		minutaAlarmu = new JTextField(2);
 		buttonAddEvent = new JButton("Add Event");
+		buttonNotEditEvent = new JButton("Not Edit Event");
 		
 		flowPanel = new JPanel();
 		JLabel describe = new JLabel("Describe: ");
@@ -188,24 +245,64 @@ public class MainFrame extends JFrame
 		addEvent.add(flowPanel);
 		
 		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		flowPanel.add(new JLabel("Select date of start: "));
+		flowPanel.add(new JLabel("Date of start: "));
 		flowPanel.add(data_roz);
-		data_roz.addMouseListener(Controller.mainFrameEvent);
-		flowPanel.add(new JLabel("Select date of end: "));
-		flowPanel.add(data_zak);
-		data_zak.addMouseListener(Controller.mainFrameEvent);
-		flowPanel.add(new JLabel());
-		addEvent.add(flowPanel);
-		
-		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		flowPanel.add(new JLabel("Reminder: "));
-		flowPanel.add(przypomnienie);
+		lblDataRozpoczecia.setText(data_rozpoczecia);
+		flowPanel.add(lblDataRozpoczecia);
+		if(model.mainFrame.startDay != 0 && model.mainFrame.startMonth != 0 && model.mainFrame.startYear !=0)
+			lblDataRozpoczecia.setText(model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
 		flowPanel.add(new JLabel("Hour: "));
 		flowPanel.add(godzina);
 		flowPanel.add(new JLabel("Minute: "));
 		flowPanel.add(minuta);
+		data_roz.addMouseListener(Controller.mainFrameEvent);
+		addEvent.add(flowPanel);
+		
+		/*flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		flowPanel.add(new JLabel("Select date of end: "));
+		flowPanel.add(data_zak);
+		lblDataZakonczenia.setText(data_zakonczenia);
+		flowPanel.add(lblDataZakonczenia);
+		data_zak.addMouseListener(Controller.mainFrameEvent);
+		addEvent.add(flowPanel);*/
+		
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		flowPanel.add(new JLabel("Reminder: "));
+		flowPanel.add(przypomnienie);
+		przypomnienie.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				JComboBox cb = (JComboBox)e.getSource();
+				String napis = (String)cb.getSelectedItem();
+				if(napis == "yes")
+				{
+					panelAlarm.setVisible(true);
+				}
+				else{
+					panelAlarm.setVisible(false);
+				}
+			}
+		});
+		addEvent.add(flowPanel);
+		
+		panelAlarm = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		panelAlarm.add(new JLabel("Date of alarm: "));
+		panelAlarm.add(dataAlarmu);
+		lblDataAlarmu.setText(data_alarmu);
+		panelAlarm.add(lblDataAlarmu);
+		panelAlarm.add(new JLabel("Hour: "));
+		panelAlarm.add(godzinaAlarmu);
+		panelAlarm.add(new JLabel("Minute: "));
+		panelAlarm.add(minutaAlarmu);
+		dataAlarmu.addMouseListener(Controller.mainFrameEvent);
+		panelAlarm.setVisible(false);
+		addEvent.add(panelAlarm);
+		
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		flowPanel.add(buttonAddEvent);
 		buttonAddEvent.addActionListener(Controller.mainFrameEvent);
+		flowPanel.add(buttonNotEditEvent);
+		buttonNotEditEvent.addActionListener(Controller.mainFrameEvent);
+		buttonNotEditEvent.setVisible(false);
 		addEvent.add(flowPanel);
  	}
  
@@ -234,6 +331,91 @@ public class MainFrame extends JFrame
 
 		this.invalidate();
 		this.validate();
+ 	}
+ 	
+ 	public void editEvent(){
+ 		
+ 		Zdarzenie editZdarzenie = new Zdarzenie(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay));
+ 		
+ 		tabbedPane.setTitleAt(2, "Edit Event");
+ 		tabbedPane.setSelectedIndex(2);
+ 		tabbedPane.setEnabledAt(0, false);
+ 		tabbedPane.setEnabledAt(1, false);
+ 		addEvent.setVisible(true);
+ 		currentEvent.setVisible(false);
+ 		buttonAddEvent.setText("Edit Event");
+ 		buttonNotEditEvent.setVisible(true);
+ 		opis.setText(editZdarzenie.opis);
+ 		miejsce.setText(editZdarzenie.miejsce);
+ 		data_rozpoczecia = editZdarzenie.data_rozpoczecia;
+ 		model.mainFrame.startDay = Integer.parseInt(data_rozpoczecia.substring(8, 10));
+ 		model.mainFrame.startMonth = Integer.parseInt(data_rozpoczecia.substring(5, 7));
+ 		model.mainFrame.startYear = Integer.parseInt(data_rozpoczecia.substring(0, 4));
+ 		godzina.setText(editZdarzenie.godzina.substring(0, 2));
+ 		minuta.setText(editZdarzenie.godzina.substring(3, 5));
+ 		
+ 		lblDataRozpoczecia.setText(model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
+ 		
+ 		if(editZdarzenie.waznosc != 0){
+ 			
+ 			System.out.println(editZdarzenie.waznosc);
+ 			
+ 			przypomnienie.setSelectedIndex(1);
+ 			panelAlarm.setVisible(true);
+ 			
+ 			Date alarmDate = new Date();
+ 	 		alarmDate.setYear(model.mainFrame.startYear);
+ 	 		alarmDate.setMonth(model.mainFrame.startMonth);
+ 	 		alarmDate.setDate(model.mainFrame.startDay);
+ 	 		alarmDate.setHours(Integer.parseInt(editZdarzenie.godzina.substring(0, 2)));
+ 	 		alarmDate.setMinutes(Integer.parseInt(editZdarzenie.godzina.substring(3, 5)));
+ 	 		
+ 	 		long miliseconds = alarmDate.getTime() - editZdarzenie.waznosc*60*1000;
+ 	 		alarmDate = new Date(miliseconds);
+ 	 		
+ 	 		
+ 	 		if(alarmDate.getDay()<10) alarmDate.setDate(Integer.parseInt("0"+alarmDate.getDay()));
+ 	 		
+ 	 		data_alarmu = alarmDate.getYear()+"";
+ 	 		if(alarmDate.getMonth()<10) data_alarmu += "-0"+alarmDate.getMonth();
+ 	 		else data_alarmu += "-"+alarmDate.getMonth();
+ 	 		if(alarmDate.getDay()<10) data_alarmu += "-0"+alarmDate.getDay();
+ 	 		else data_alarmu += "-"+alarmDate.getDay();
+ 	 		
+ 	 		System.out.println("Data alarmu: "+ data_alarmu);
+ 	 		model.mainFrame.alarmDay = Integer.parseInt(data_alarmu.substring(8, 10));
+ 	 		model.mainFrame.alarmMonth = Integer.parseInt(data_alarmu.substring(5, 7));
+ 	 		model.mainFrame.alarmYear = Integer.parseInt(data_alarmu.substring(0, 4));
+ 	 		
+ 	 		System.out.println(new Integer(alarmDate.getHours()).toString());
+ 	 		
+ 	 		godzinaAlarmu.setText(new Integer(alarmDate.getHours()).toString());
+ 	 		minutaAlarmu.setText(new Integer(alarmDate.getMinutes()).toString());
+ 	 		
+ 	 		lblDataAlarmu.setText(model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
+ 		}
+ 		
+ 	}
+ 	
+ 	public void notEditEvent(){
+ 		
+ 		tabbedPane.setTitleAt(2, "Add Event");
+ 		tabbedPane.setSelectedIndex(1);
+ 		tabbedPane.setEnabledAt(0, true);
+ 		tabbedPane.setEnabledAt(1, true);
+ 		addEvent.setVisible(false);
+ 		currentEvent.setVisible(true);
+ 		buttonAddEvent.setText("Add Event");
+ 		buttonNotEditEvent.setVisible(false);
+		opis.setText("");
+		miejsce.setText("");
+		godzina.setText("");
+		minuta.setText("");
+		godzinaAlarmu.setText("");
+		minutaAlarmu.setText("");
+		lblDataRozpoczecia.setText("");
+		lblDataAlarmu.setText("");
+		przypomnienie.setSelectedIndex(0);
  	}
  	
  	private JComponent makeTextPanel(String string) {

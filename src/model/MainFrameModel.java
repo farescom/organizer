@@ -22,15 +22,17 @@ import controller.Controller;
 
 public class MainFrameModel {
 
-	public int startDay = 0, startMonth = 0, startYear = 0, finishDay = 0, finishMonth = 0, finishYear = 0;
+	public int startDay = 0, startMonth = 0, startYear = 0; 
+	public int finishDay = 0, finishMonth = 0, finishYear = 0;
+	public int alarmDay = 0, alarmMonth = 0, alarmYear = 0;
 	public static TableModel dataModelDay;
 	public static TableModel dataModelMonth;
 	
 	public JTable tableDay;
 	public JTable tableMonth;
 	
-	String month;
-	String day;
+	String day, month, year;
+	public int rowSelectedMonth = 0, rowSelectedDay = 0;
 	int ileDay = 0, ileMonth = 0;
 	public ArrayList<Zdarzenie> monthEvent = new ArrayList<Zdarzenie>();
 	public ArrayList<Zdarzenie> dayEvent = new ArrayList<Zdarzenie>();
@@ -81,13 +83,16 @@ public class MainFrameModel {
 	     };
 	     
 	     tableDay = new JTable(dataModelDay);
+	     tableDay.setName("tableDay");
 	     tableDay.getColumnModel().getColumn(0).setPreferredWidth(50);
 	     tableDay.getColumnModel().getColumn(1).setPreferredWidth(240);
 	     tableDay.getColumnModel().getColumn(2).setPreferredWidth(100);
+	     tableDay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	     
-	     tableDay.getColumnModel().getColumn(0).setCellRenderer(new MultiLineCellRenderer());
-	     tableDay.getColumnModel().getColumn(1).setCellRenderer(new MultiLineCellRenderer());
-	     tableDay.getColumnModel().getColumn(2).setCellRenderer(new MultiLineCellRenderer());
+	     MultiLineCellRenderer multiLineCellRenderer = new MultiLineCellRenderer();
+	     tableDay.getColumnModel().getColumn(0).setCellRenderer(multiLineCellRenderer);
+	     tableDay.getColumnModel().getColumn(1).setCellRenderer(multiLineCellRenderer);
+	     tableDay.getColumnModel().getColumn(2).setCellRenderer(multiLineCellRenderer);
 	     for(int i = 0; i< tableDay.getRowCount(); i++)
 	     {
 	    	 //tableDay.setRowHeight(15);
@@ -102,11 +107,14 @@ public class MainFrameModel {
 		  
 	  	  for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
-	  		  if(Integer.parseInt(month) == Model.checkedMonth){
+	  		  year = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
+	  		  if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(year) == Model.checkedYear){
 	  			  ileMonth++;
 	      		  monthEvent.add(Model.zdarzenia.get(i));
 	      	  }
 	  	  }
+	  	  
+	  	  System.out.println(ileMonth);
 		
 		dataModelMonth = new AbstractTableModel()
 		{
@@ -136,12 +144,14 @@ public class MainFrameModel {
 	     };
 	     
 	     tableMonth = new JTable(dataModelMonth);
+	     tableMonth.setName("tableMonth");
 	     tableMonth.getColumnModel().getColumn(0).setPreferredWidth(30);
 	     tableMonth.getColumnModel().getColumn(1).setPreferredWidth(40);
 	     tableMonth.getColumnModel().getColumn(2).setPreferredWidth(150);
 	     tableMonth.getColumnModel().getColumn(3).setPreferredWidth(80);
 	     tableMonth.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-	     tableMonth.setDefaultRenderer(tableMonth.getColumnClass(0), new TableMonthRenderer());
+	     TableMonthRenderer tableMonthRenderer = new TableMonthRenderer();
+	     tableMonth.setDefaultRenderer(tableMonth.getColumnClass(0), tableMonthRenderer);
 	     
 	}
 	
@@ -151,11 +161,9 @@ public class MainFrameModel {
 		public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
 			super.getTableCellRendererComponent(table, value, selected, focused, row, column);
 			
-			if(column == 0){
-				day = new Integer(value.toString());
-			}
-			
 			if((selected == true && MainFrame.tabbedPane.getSelectedIndex() != 1)){
+				day = Integer.parseInt(table.getValueAt(row, 0).toString());
+				
 				Model.checkedDay = day;
 				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
 				tableDay();
@@ -164,12 +172,17 @@ public class MainFrameModel {
 				MainFrame.currentEvent.setVisible(true);
 				MainFrame.addEvent.setVisible(false);
 				MainFrame.tabbedPane.setSelectedIndex(1);
+				rowSelectedMonth = row;
 			}
-			else if(selected == true && MainFrame.tabbedPane.getSelectedIndex() == 1 && Model.checkedDay != day){
-				Model.checkedDay = day;
-				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
-				tableDay();
-				View.mainFrame.refreshTableDay();
+			else if(selected == true && MainFrame.tabbedPane.getSelectedIndex() == 1){
+				day = Integer.parseInt(table.getValueAt(row, 0).toString());
+				if(Model.checkedDay != day)
+				{
+					Model.checkedDay = day;
+					MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
+					tableDay();
+					View.mainFrame.refreshTableDay();
+				}
 			}
 
 			setBorder(null);
@@ -196,16 +209,12 @@ public class MainFrameModel {
 				}
 				MainFrame.edit.setEnabled(true);
 				MainFrame.delete.setEnabled(true);
-			}
-			else{
-				MainFrame.edit.setEnabled(false);
-				MainFrame.delete.setEnabled(false);
+				rowSelectedDay = row;
 			}
 			
 			ta.setLineWrap(true);
 			ta.setWrapStyleWord(true);
 			ta.setOpaque(true);
-			ta.setRows(3);
 			ta.setText((value == null) ? "" : value.toString());
 			Font font = new Font("Lucida Console", Font.PLAIN, 12);
 			ta.setFont(font);

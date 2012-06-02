@@ -169,7 +169,7 @@ public class Database
 	 * null, -1 oznaczaj¹ nie zmieniania danej pozycji
 	 */ 
 	 public int update(int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
-	   String miejsce, int waznosc, int rodzaj)
+	   String miejsce, long waznosc, int rodzaj)
 	{
 		try
 		{
@@ -184,7 +184,7 @@ public class Database
 	         if (data_rozpoczecia != null) result.updateString("data_rozpoczecia", data_rozpoczecia);
 	         if (data_zakonczenia != null) result.updateString("data_zakonczenia", data_zakonczenia);
 	         if (miejsce != null) result.updateString("miejsce", miejsce);
-	         if (waznosc != -1) result.updateInt("waznosc", waznosc);
+	         if (waznosc != -1) result.updateLong("waznosc", waznosc);
 	         if (rodzaj != -1) result.updateInt("rodzaj", rodzaj);
 	         result.updateRow();
 	         
@@ -215,7 +215,7 @@ public class Database
 	         if (zdarzenie.data_rozpoczecia != null) result.updateString("data_rozpoczecia", zdarzenie.data_rozpoczecia);
 	         if (zdarzenie.data_zakonczenia != null) result.updateString("data_zakonczenia", zdarzenie.data_zakonczenia);
 	         if (zdarzenie.miejsce != null) result.updateString("miejsce", zdarzenie.miejsce);
-	         if (zdarzenie.waznosc != -1) result.updateInt("waznosc", zdarzenie.waznosc);
+	         if (zdarzenie.waznosc != -1) result.updateLong("waznosc", zdarzenie.waznosc);
 	         if (zdarzenie.rodzaj != -1) result.updateInt("rodzaj", zdarzenie.rodzaj);
 	         result.updateRow();
 	         
@@ -231,7 +231,7 @@ public class Database
 	 * Metoda do dodawania krotek
 	 */ 
 	 public int insert(String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
-	   String miejsce, int waznosc, int rodzaj)
+	   String miejsce, long waznosc, int rodzaj)
 	{
 		try
 		{
