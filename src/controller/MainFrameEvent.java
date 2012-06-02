@@ -28,7 +28,7 @@ import javax.swing.event.ListSelectionListener;
 import view.*;
 import model.*;
 
-public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener{
+public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener, ItemListener{
 
 	 public static View view;
 	 public static Model model;
@@ -296,6 +296,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	}
 
 	public void mouseClicked(MouseEvent e) {
+<<<<<<< HEAD
 		view.mainFrame.source = e.getSource();
 		if(view.mainFrame.source == view.mainFrame.data_roz){
 			if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;
@@ -313,4 +314,53 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
 		}
 }
+=======
+			view.mainFrame.source = e.getSource();
+			if(view.mainFrame.source == view.mainFrame.data_roz){
+				if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;
+				if(model.mainFrame.startYear == 0) model.mainFrame.startYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+			else if(view.mainFrame.source == view.mainFrame.data_zak){
+				if(model.mainFrame.finishMonth == 0) model.mainFrame.finishMonth = model.currentMonth;
+				if(model.mainFrame.finishYear == 0) model.mainFrame.finishYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
+				if(model.mainFrame.alarmMonth == 0) model.mainFrame.alarmMonth = model.currentMonth;
+				if(model.mainFrame.alarmYear == 0) model.mainFrame.alarmYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+	}
+	
+	public void itemStateChanged(ItemEvent e) {
+        
+		if(e.getItemSelectable() == view.mainFrame.filterDate){
+           if(view.mainFrame.filterDate.isSelected() == true){
+        	   view.mainFrame.fromDate.setEnabled(true);
+        	   view.mainFrame.toDate.setEnabled(true);
+           }
+           else{
+        	   view.mainFrame.fromDate.setEnabled(false);
+        	   view.mainFrame.toDate.setEnabled(false);
+           }
+           model.mainFrame.tableMonth();
+		   view.mainFrame.refreshTableMonth();
+		}
+		else if(e.getItemSelectable() == view.mainFrame.filterHour){
+			if(view.mainFrame.filterHour.isSelected() == true){
+	     	   view.mainFrame.fromHour.setEnabled(true);
+	     	   view.mainFrame.fromMinute.setEnabled(true);
+	     	   view.mainFrame.toHour.setEnabled(true);
+	     	   view.mainFrame.toMinute.setEnabled(true);
+	        }
+	        else{
+	     	   view.mainFrame.fromHour.setEnabled(false);
+	     	   view.mainFrame.fromMinute.setEnabled(false);
+	     	   view.mainFrame.toHour.setEnabled(false);
+	     	   view.mainFrame.toMinute.setEnabled(false);
+	        }
+		}
+	}
+>>>>>>> origin/master
 }
