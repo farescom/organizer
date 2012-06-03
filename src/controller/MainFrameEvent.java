@@ -142,7 +142,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  	if(opis != "" && miejsce != "" && startDay != 0 && startMonth != 0 && startYear != 0 && !hour.isEmpty() && !minute.isEmpty()
 		  		&& (view.mainFrame.panelAlarm.isVisible() == false || (view.mainFrame.panelAlarm.isVisible() == true
 		  				&& alarmDay != 0 && alarmMonth != 0 && alarmYear != 0 && !hourAlarm.isEmpty() && !minuteAlarm.isEmpty()))){
-				
+		  		
 		  		if(view.mainFrame.panelAlarm.isVisible() == true){
 					if(alarmMonth < 10) alarmMonthString = new String("0"+alarmMonth.toString());
 					else alarmMonthString = new String(alarmMonth.toString());
@@ -177,18 +177,23 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		else if(new Date(model.currentYear, model.currentMonth, model.currentDay).compareTo(new Date(startYear, startMonth, startDay)) == 1){
 		  			JOptionPane.showMessageDialog(null, "Data of start is too early");
 		  		}
-		  		else if((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
-		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute))){
+		  		else if(view.mainFrame.panelAlarm.isVisible() == true){
+		  			
+		  			if((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
+		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))
 		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
 		  		}
 		  		else{
 		  			if(view.mainFrame.buttonAddEvent.getText() == "Add Event"){
+		  				
+		  				System.out.println("add");
 		  				
 		  				switch(model.guest){
 						case 0: if(model.baza.insert(opis, 1, startDateString, finishDateString, miejsce, roznica, 1) == 1){
 									if(model.zdarzenia.add(new Zdarzenie(model.baza.nextID-1, opis, 1, startDateString, finishDateString, miejsce, roznica, 1))){
 										JOptionPane.showMessageDialog(null, "Event was added");
 										addEvent();
+										view.mainFrame.currentEvent.setVisible(false);
 									}
 									else JOptionPane.showMessageDialog(null, "Event was not added");
 								}
@@ -197,6 +202,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 						case 1: if(model.zdarzenia.add(new Zdarzenie(model.baza.nextID-1, opis, 1, startDateString, finishDateString, miejsce, roznica, 1))){
 									JOptionPane.showMessageDialog(null, "Event was added");
 									addEvent();
+									view.mainFrame.currentEvent.setVisible(false);
 									model.baza.nextID++;
 								}
 								else JOptionPane.showMessageDialog(null, "Event was not added");
@@ -210,8 +216,6 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				  					if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
 				  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
 										JOptionPane.showMessageDialog(null, "Event was edited");
-										model.mainFrame.tableDay();
-										view.mainFrame.refreshTableDay();
 										addEvent();
 										view.mainFrame.notEditEvent();
 									}
@@ -222,8 +226,6 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 						case 1: if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
 			  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
 									JOptionPane.showMessageDialog(null, "Event was edited");
-									model.mainFrame.tableDay();
-									view.mainFrame.refreshTableDay();
 									addEvent();
 									view.mainFrame.notEditEvent();
 								}
@@ -347,6 +349,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	}
 	
 	public void addEvent(){
+		model.mainFrame.tableDay();
+		view.mainFrame.refreshTableDay();
 		model.mainFrame.tableMonth();
 		view.mainFrame.refreshTableMonth();
 		view.mainFrame.opis.setText("");

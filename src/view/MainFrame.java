@@ -294,7 +294,7 @@ public class MainFrame extends JFrame
 		buttonAddEvent = new JButton("Add Event");
 		buttonNotEditEvent = new JButton("Not Edit Event");
 		
-		flowPanel = new JPanel();
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel describe = new JLabel("Describe: ");
 		flowPanel.setAlignmentY(TOP_ALIGNMENT);
 		flowPanel.add(describe);

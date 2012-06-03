@@ -131,6 +131,7 @@ public class SettingsFrame extends JFrame
         // Automatyczne usuwanie
         panel_5.add(new JLabel("   Usuwaj zdarzenia po "));
         	// splitpane
+            System.out.println(model.baza.dni_waznosci);
         	slider = new JSlider(0, 12, model.baza.dni_waznosci);
         	slider.addChangeListener(Controller.settingsFrameEvent);
         	panel_5.add(slider);
