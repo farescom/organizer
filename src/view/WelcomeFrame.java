@@ -68,11 +68,11 @@ public class WelcomeFrame extends JFrame
 	{
 		public JLabel login;
 		public JLabel password;
-		public JLabel result = new JLabel("Rezultat operacji");
+		public JLabel result = new JLabel("");
 		public JTextField loginT;
 		public JPasswordField passwordT;
 		public JPanel panel, panel_top, panel_middle, panel_bottom;
-		public JButton submitB, exitB;
+		public JButton submitB, exitB, loginAsGuest;
 		
 		public WelcomeInternalFrame(){}
 		
@@ -86,6 +86,7 @@ public class WelcomeFrame extends JFrame
 			panel_top = new JPanel();
 			panel_middle = new JPanel();
 			submitB = new JButton(text);
+			if(text=="Login") loginAsGuest = new JButton("Login as Guest");
 			exitB = new JButton("Exit");
 			
 			setLayout(new BorderLayout());
@@ -114,6 +115,10 @@ public class WelcomeFrame extends JFrame
     		panel_middle.setLayout(new FlowLayout());
     		panel_middle.add(submitB);
     		submitB.addActionListener(Controller.welcomeFrameEvent);
+    		if(loginAsGuest != null){
+    			panel_middle.add(loginAsGuest);
+    			loginAsGuest.addActionListener(Controller.welcomeFrameEvent);
+    		}
     		panel_middle.add(exitB);
     		exitB.addActionListener(Controller.welcomeFrameEvent);
     		panel.add(panel_middle, BorderLayout.SOUTH);

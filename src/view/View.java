@@ -64,7 +64,7 @@ public class View {
         });
   /**/
   // MAIN FRAME
-  EventQueue.invokeLater( new Runnable()
+  /*EventQueue.invokeLater( new Runnable()
   {  
             public void run()
             {  
@@ -78,7 +78,7 @@ public class View {
             	mainFrame.setResizable(false);
             	mainFrame.setResizable(false);
             }  
-        });
+        });*/
  }
  
 }

@@ -39,7 +39,7 @@ public class Database
 	public String user;
 	public String password;
 	public Connection connection;
-	public boolean czy_polaczono;
+	public static boolean czy_polaczono = false;
 	public String table = "zdarzenia";
 	public int identyfikator = 0;
     public int dni_waznosci;

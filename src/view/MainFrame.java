@@ -127,6 +127,8 @@ public class MainFrame extends JFrame
 		c.gridy = 0;
 		c.gridheight = 3;
 		
+		System.out.println(model.zdarzenia);
+		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
@@ -276,7 +278,7 @@ public class MainFrame extends JFrame
 		addEvent.setPreferredSize(new Dimension(370, 300));
 		addEvent.setVisible(false);
 		
-		opis = new JTextArea(4, 25);
+		opis = new JTextArea();
 		opis.setLineWrap(true);
 		opis.setTabSize(200);
 		miejsce = new JTextField(10);

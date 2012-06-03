@@ -3,6 +3,8 @@ package model;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
+import javax.swing.JOptionPane;
+
 import controller.PanWatek;
 
 /**
@@ -22,27 +24,14 @@ public class Model {
 	public static int checkedYear = currentYear;
 	
 	
+	public static int guest = 0;
 	public Database baza;
 	public XML xml;
 	public static ArrayList<Zdarzenie> zdarzenia = new ArrayList<Zdarzenie>();
 	public MainFrameModel mainFrame;
 	
-	public Model()
-	{	
-		baza = new Database();
-		baza.czy_polaczono = baza.connection();
-		xml = new XML(baza);
+	public Model(){
 		
-		if(baza.czy_polaczono == true)
-		{
-			baza.get("SELECT * FROM "+baza.table+" ORDER BY ID ASC", zdarzenia);
-			
-			if(zdarzenia.size()-1 > 0) baza.nextID = zdarzenia.get(zdarzenia.size()-1).id+1;
-			mainFrame = new MainFrameModel();
-		}
-		else
-		{
-			// dzialamy w trybie bez netu
-		}
+		baza = new Database();
 	}
 }

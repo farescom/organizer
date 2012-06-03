@@ -3,6 +3,8 @@ import com.thoughtworks.xstream.XStream;
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 /**
 * Klasa odpowiedzialna za operowanie pomiêdzy XMLem a Wydarzeniem.
 */
@@ -206,13 +208,21 @@ public class XML {
 				else
 				{
 					Zdarzenie nowe = (Zdarzenie) xStream.fromXML(xml);
-				 // zmiana identyfikatora
+					// zmiana identyfikatora
 					nowe.id = baza.nextID;
-				 // dodanie do listy w programie
-					zdarzenia.add(nowe);
-				 // dodanie do bazy
-					baza.insert(nowe.opis, nowe.czy_okres, nowe.data_rozpoczecia, nowe.data_zakonczenia,
-							nowe.miejsce, nowe.waznosc, nowe.rodzaj);
+					
+					switch(Model.guest){
+					case 0: // dodanie do listy w programie
+							zdarzenia.add(nowe);
+							// dodanie do bazy
+							baza.insert(nowe.opis, nowe.czy_okres, nowe.data_rozpoczecia, nowe.data_zakonczenia,
+										nowe.miejsce, nowe.waznosc, nowe.rodzaj);
+							break;
+					case 1: // dodanie do listy w programie
+							zdarzenia.add(nowe);
+							baza.nextID++;
+							break;
+	  				}
 					xml="";
 					licznik_obiektow++;
 				}

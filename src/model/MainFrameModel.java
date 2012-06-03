@@ -106,7 +106,9 @@ public class MainFrameModel {
 		
 		monthEvent.removeAll(monthEvent);
 		ileMonth=0;
-		  
+		
+		System.out.println(Model.zdarzenia);
+		
 	  	  for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
 	  		  year = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
@@ -158,8 +160,6 @@ public class MainFrameModel {
 		  	    	  	}	  
 			      }
 				  else if(Integer.parseInt(hour)==Integer.parseInt(View.mainFrame.toHour.getValue().toString())){
-			  			  
-					  	System.out.println("Hour: "+hour+" Minute: "+minute);
 					  
 					  	if(Integer.parseInt(minute)<=Integer.parseInt(View.mainFrame.toMinute.getValue().toString())){
 		  	    	  	
@@ -173,8 +173,6 @@ public class MainFrameModel {
   			monthEvent.addAll(monthEventTemp);
   			ileMonth = ileMonthTemp;
 		}
-	  	  
-	  	  System.out.println(ileMonth);
 		
 		dataModelMonth = new AbstractTableModel()
 		{

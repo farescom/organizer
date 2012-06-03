@@ -2,10 +2,15 @@ package controller;
 import java.awt.EventQueue;
 import java.awt.event.*;
 
+import javax.swing.JOptionPane;
+
 import view.AboutUsFrame;
 import view.MainFrame;
 import view.View;
+import model.Database;
+import model.MainFrameModel;
 import model.Model;
+import model.XML;
 
 /**
 * Klasa zewnetrzna obslugujaca wszystkie zdarzenia zaistniale w oknie powitalnym
@@ -52,6 +57,9 @@ public class WelcomeFrameEvent implements ActionListener{
         }
         else if (source == view.welcomeFrame.registerFrame.submitB)  
         {
+			model.baza.czy_polaczono = model.baza.connection();
+			model.xml = new XML(model.baza);
+        	
         	if(model.baza.czy_polaczono == true)
         	{
 
@@ -73,43 +81,54 @@ public class WelcomeFrameEvent implements ActionListener{
         }
         else if (source == view.welcomeFrame.loginFrame.submitB)  
         {
+        	if(model.baza.czy_polaczono == false){
+    			model.baza.czy_polaczono = model.baza.connection();
+    			model.xml = new XML(model.baza);
+        	}
+        	
         	if(model.baza.czy_polaczono == true)
         	{
         		view.welcomeFrame.loginFlags = model.baza.login(view.welcomeFrame.loginFrame.loginT.getText(), view.welcomeFrame.loginFrame.passwordT.getPassword());
         		
         		if(view.welcomeFrame.loginFlags == 1){
-            		view.welcomeFrame.dispose();
             		
-        			// Uruchumienie w¹tka alarmów
-        			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
-        			panWatek.start();
-        			
-            		EventQueue.invokeLater( new Runnable()
-            		{  
-                        public void run()
-                        {  
-                        	int SizeX_WelcomeFrame = 720;
-                        	int SizeY_WelcomeFrame = 420;
-                        	
-                        	int SizeX_ProgressFrame = 300;
-                        	int SizeY_ProgressFrame = 80;
-                        	
-                        	view.mainFrame = new MainFrame("Kalendarz", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
-                        	view.mainFrame.setResizable(false);
-                        	view.mainFrame.setResizable(false);
-                        }  
-                    });
-            		//model.baza.get("SELECT * FROM "+model.baza.table, model.zdarzenia);
+        				model.baza.get("SELECT * FROM "+model.baza.table+" ORDER BY ID ASC", model.zdarzenia);
+        				
+        				if(model.zdarzenia.size()-1 > 0) model.baza.nextID = model.zdarzenia.get(model.zdarzenia.size()-1).id+1;
+        				
+        				view.welcomeFrame.dispose();
+        				model.mainFrame = new MainFrameModel();
+        				
+        				
+        				// Uruchumienie w¹tka alarmów
+            			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
+            			panWatek.start();
+            			
+                		EventQueue.invokeLater( new Runnable()
+                		{  
+                            public void run()
+                            {  
+                            	int SizeX_WelcomeFrame = 720;
+                            	int SizeY_WelcomeFrame = 420;
+                            	
+                            	int SizeX_ProgressFrame = 300;
+                            	int SizeY_ProgressFrame = 80;
+                            	
+                            	view.mainFrame = new MainFrame("Kalendarz", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
+                            	view.mainFrame.setResizable(false);
+                            	view.mainFrame.setResizable(false);
+                            }  
+                        });
             	}
             	else if(view.welcomeFrame.loginFlags == 0){
-            		view.welcomeFrame.loginFrame.show_result("Musisz wypelnic wszsytkie pola!");
+            		view.welcomeFrame.loginFrame.show_result("You must fill all fields!");
             	}
             	else if(view.welcomeFrame.loginFlags == 2){
-            		view.welcomeFrame.loginFrame.show_result("Nieudana próba logowania!");
+            		view.welcomeFrame.loginFrame.show_result("Access denied!");
             	}
         	}
         	else{
-        		view.welcomeFrame.registerFrame.show_result("Brak polaczenia z baza danych!");
+        		view.welcomeFrame.registerFrame.show_result("Connection with database is unavailable! Try again later!");
         	}
         	
         }
@@ -120,6 +139,36 @@ public class WelcomeFrameEvent implements ActionListener{
         else if (source == view.welcomeFrame.loginFrame.exitB)  
         {
         	view.welcomeFrame.loginFrame.dispose();
+        }
+        else if (source == view.welcomeFrame.loginFrame.loginAsGuest)  
+        {
+        	model.guest = 1;
+        	
+        	model.baza.nextID = 0;
+        	model.xml = new XML(model.baza);
+        	
+        	view.welcomeFrame.dispose();
+        	model.mainFrame = new MainFrameModel();
+    		
+			// Uruchumienie w¹tka alarmów
+			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
+			panWatek.start();
+			
+    		EventQueue.invokeLater( new Runnable()
+    		{  
+                public void run()
+                {  
+                	int SizeX_WelcomeFrame = 720;
+                	int SizeY_WelcomeFrame = 420;
+                	
+                	int SizeX_ProgressFrame = 300;
+                	int SizeY_ProgressFrame = 80;
+                	
+                	view.mainFrame = new MainFrame("Kalendarz", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
+                	view.mainFrame.setResizable(false);
+                	view.mainFrame.setResizable(false);
+                }  
+            });
         }
 	}
 	

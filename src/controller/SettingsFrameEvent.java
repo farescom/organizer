@@ -2,6 +2,8 @@ package controller;
 
 import java.awt.event.*;
 import java.awt.Color;
+
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
@@ -107,13 +109,19 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
             	view.mainFrame.setBackground(view.kolorWybranegoDnia);
         	}
         	// 2 - W bazie
-        	model.baza.query2("UPDATE `user` SET `waznosc_zdarzen`="+controller.wybrana_liczba_dni+"," +
-        			"`kolorWeekendu`="+controller.kolor_dni_wolnych+"," +
-        			"`kolorDnia`="+controller.kolor_aktualnego_dnia+"," +
-        			"`kolorWybranegoDnia`="+controller.kolor_zaznaczonego_dnia+" " +
-        					"WHERE `ID` = "+model.baza.identyfikator);
-        	controller.dni_waznosci = controller.wybrana_liczba_dni;
-        	view.settingsFrame.hide();
+        	switch(model.guest){
+			case 0: model.baza.query2("UPDATE `user` SET `waznosc_zdarzen`="+controller.wybrana_liczba_dni+"," +
+		        			"`kolorWeekendu`="+controller.kolor_dni_wolnych+"," +
+		        			"`kolorDnia`="+controller.kolor_aktualnego_dnia+"," +
+		        			"`kolorWybranegoDnia`="+controller.kolor_zaznaczonego_dnia+" " +
+		        					"WHERE `ID` = "+model.baza.identyfikator);
+		        	controller.dni_waznosci = controller.wybrana_liczba_dni;
+		        	view.settingsFrame.hide();
+					break;
+			case 1: controller.dni_waznosci = controller.wybrana_liczba_dni;
+        			view.settingsFrame.hide();
+					break;
+			}
         }
         else if (source == view.settingsFrame.anuluj)
         {
