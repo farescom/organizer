@@ -39,7 +39,7 @@ public class WelcomeFrame extends JFrame
         setVisible(true);
         
         // Tworzenie zdjecia
-		zdjecie = new ImagePanel(0, SizeX, SizeY, "jakub.jpg");
+		zdjecie = new ImagePanel(0, SizeX, SizeY, "tlo.png");
 		setContentPane(zdjecie);
         
         // Tworzenie menu
@@ -89,6 +89,7 @@ public class WelcomeFrame extends JFrame
 			if(text=="Login") loginAsGuest = new JButton("Login as Guest");
 			exitB = new JButton("Exit");
 			
+			
 			setLayout(new BorderLayout());
 			setBounds(200, 200, 500, 500);
     		
@@ -128,6 +129,7 @@ public class WelcomeFrame extends JFrame
     		result.setForeground(Color.gray);
     		panel_bottom = new JPanel();
 			panel_bottom.setLayout(new FlowLayout());
+			panel_bottom.setPreferredSize(new Dimension(100, 20));
 			panel_bottom.add(result);
 			add(panel_bottom, BorderLayout.SOUTH);
     		

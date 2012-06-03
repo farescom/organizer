@@ -136,39 +136,37 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		String alarmDayString;
 		String startDateString = new String(startYear.toString()+"-"+startMonthString+"-"+startDayString+" "+hour+":"+minute+":00");
 		String finishDateString = new String(startDateString);
-		Date startDate, alarmDate;
+		Date startDate = new Date(), alarmDate = new Date();
 		long roznica = 0;
 		
-		if(view.mainFrame.panelAlarm.isVisible() == true){
-			if(alarmMonth < 10) alarmMonthString = new String("0"+alarmMonth.toString());
-			else alarmMonthString = new String(alarmMonth.toString());
-			if(alarmDay < 10) alarmDayString = new String("0"+alarmDay.toString());
-			else alarmDayString = new String(alarmDay.toString());
-			String alarmDateString = new String(alarmYear.toString()+"-"+alarmMonthString+"-"+alarmDayString);
-			
-			startDate = new Date();
-			startDate.setYear(startYear);
-			startDate.setMonth(startMonth);
-			startDate.setDate(startDay);
-			startDate.setHours(Integer.parseInt(hour));
-			startDate.setMinutes(Integer.parseInt(minute));
-			
-			alarmDate = new Date();
-			alarmDate.setYear(alarmYear);
-			alarmDate.setMonth(alarmMonth);
-			alarmDate.setDate(alarmDay);
-			alarmDate.setHours(Integer.parseInt(hourAlarm));
-			alarmDate.setMinutes(Integer.parseInt(minuteAlarm));
-			
-			roznica = ((startDate.getTime()/60000)-(alarmDate.getTime()/60000));
-			
-			System.out.println("Roznica: "+roznica);
-		}
-		    
-		  	if(opis != "" && miejsce != "" && startDay != 0 && startMonth != 0 && startYear != 0 && hour != "" && minute != ""
+		  	if(opis != "" && miejsce != "" && startDay != 0 && startMonth != 0 && startYear != 0 && !hour.isEmpty() && !minute.isEmpty()
 		  		&& (view.mainFrame.panelAlarm.isVisible() == false || (view.mainFrame.panelAlarm.isVisible() == true
-		  				&& alarmDay != 0 && alarmMonth != 0 && alarmYear != 0))){
+		  				&& alarmDay != 0 && alarmMonth != 0 && alarmYear != 0 && !hourAlarm.isEmpty() && !minuteAlarm.isEmpty()))){
 				
+		  		if(view.mainFrame.panelAlarm.isVisible() == true){
+					if(alarmMonth < 10) alarmMonthString = new String("0"+alarmMonth.toString());
+					else alarmMonthString = new String(alarmMonth.toString());
+					if(alarmDay < 10) alarmDayString = new String("0"+alarmDay.toString());
+					else alarmDayString = new String(alarmDay.toString());
+					String alarmDateString = new String(alarmYear.toString()+"-"+alarmMonthString+"-"+alarmDayString);
+					
+					startDate.setYear(startYear);
+					startDate.setMonth(startMonth);
+					startDate.setDate(startDay);
+					startDate.setHours(Integer.parseInt(hour));
+					startDate.setMinutes(Integer.parseInt(minute));
+					
+					alarmDate.setYear(alarmYear);
+					alarmDate.setMonth(alarmMonth);
+					alarmDate.setDate(alarmDay);
+					alarmDate.setHours(Integer.parseInt(hourAlarm));
+					alarmDate.setMinutes(Integer.parseInt(minuteAlarm));
+					
+					roznica = ((startDate.getTime()/60000)-(alarmDate.getTime()/60000));
+					
+					System.out.println("Roznica: "+roznica);
+				}
+		  		
 		  		
 		  		if(Integer.parseInt(hour)<0 || Integer.parseInt(hour)>23 || Integer.parseInt(minute)<0 || Integer.parseInt(minute)>59){
 		  			JOptionPane.showMessageDialog(null, "You typed bad hours for start");
@@ -179,7 +177,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		else if(new Date(model.currentYear, model.currentMonth, model.currentDay).compareTo(new Date(startYear, startMonth, startDay)) == 1){
 		  			JOptionPane.showMessageDialog(null, "Data of start is too early");
 		  		}
-		  		else if(new Date(startYear, startMonth, startDay).compareTo(new Date(alarmYear, alarmMonth, alarmDay)) == -1){
+		  		else if((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
+		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute))){
 		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
 		  		}
 		  		else{
@@ -296,7 +295,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		}
 	}
 
-	public void mouseClicked(MouseEvent e) {
+	public void mousePressed(MouseEvent e) {
 			view.mainFrame.source = e.getSource();
 			if(view.mainFrame.source == view.mainFrame.data_roz){
 				if(model.mainFrame.startMonth == 0) model.mainFrame.startMonth = model.currentMonth;

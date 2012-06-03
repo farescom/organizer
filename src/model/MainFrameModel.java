@@ -106,9 +106,7 @@ public class MainFrameModel {
 		
 		monthEvent.removeAll(monthEvent);
 		ileMonth=0;
-		
-		System.out.println(Model.zdarzenia);
-		
+		  
 	  	  for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
 	  		  year = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));

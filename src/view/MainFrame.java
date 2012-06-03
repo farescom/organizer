@@ -127,8 +127,6 @@ public class MainFrame extends JFrame
 		c.gridy = 0;
 		c.gridheight = 3;
 		
-		System.out.println(model.zdarzenia);
-		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
@@ -278,9 +276,11 @@ public class MainFrame extends JFrame
 		addEvent.setPreferredSize(new Dimension(370, 300));
 		addEvent.setVisible(false);
 		
-		opis = new JTextArea();
+		
+		opis = new JTextArea(2, 25);
 		opis.setLineWrap(true);
 		opis.setTabSize(200);
+		JScrollPane textAreaPane = new JScrollPane(opis);
 		miejsce = new JTextField(10);
 		data_rozpoczecia = new String();
 		data_zakonczenia = new String();
@@ -298,7 +298,7 @@ public class MainFrame extends JFrame
 		JLabel describe = new JLabel("Describe: ");
 		flowPanel.setAlignmentY(TOP_ALIGNMENT);
 		flowPanel.add(describe);
-		flowPanel.add(opis);
+		flowPanel.add(textAreaPane);
 		addEvent.add(flowPanel);	
 		
 		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
