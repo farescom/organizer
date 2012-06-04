@@ -185,7 +185,7 @@ public class Database
 	         if (data_rozpoczecia != null) result.updateString("data_rozpoczecia", data_rozpoczecia);
 	         if (data_zakonczenia != null) result.updateString("data_zakonczenia", data_zakonczenia);
 	         if (miejsce != null) result.updateString("miejsce", miejsce);
-	         if (waznosc != -1) result.updateLong("waznosc", waznosc);
+	         if (waznosc != -2) result.updateLong("waznosc", waznosc);
 	         if (rodzaj != -1) result.updateInt("rodzaj", rodzaj);
 	         result.updateRow();
 	         
@@ -216,7 +216,7 @@ public class Database
 	         if (zdarzenie.data_rozpoczecia != null) result.updateString("data_rozpoczecia", zdarzenie.data_rozpoczecia);
 	         if (zdarzenie.data_zakonczenia != null) result.updateString("data_zakonczenia", zdarzenie.data_zakonczenia);
 	         if (zdarzenie.miejsce != null) result.updateString("miejsce", zdarzenie.miejsce);
-	         if (zdarzenie.waznosc != -1) result.updateLong("waznosc", zdarzenie.waznosc);
+	         if (zdarzenie.waznosc != -2) result.updateLong("waznosc", zdarzenie.waznosc);
 	         if (zdarzenie.rodzaj != -1) result.updateInt("rodzaj", zdarzenie.rodzaj);
 	         result.updateRow();
 	         
