@@ -42,7 +42,7 @@ public class Organizer
 		
 	    /*
 		ArrayList <Zdarzenie> zdarzenia = new ArrayList <Zdarzenie>();
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)//sd
 		{
 			zdarzenia.add(new Zdarzenie(i, "Opis Zdarzenia nr "+i, 1,
 					"2012-05-12 12:00:00", "2012-05-12 12:00:00", "polska", 0, 0));
