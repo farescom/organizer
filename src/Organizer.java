@@ -1,3 +1,7 @@
+import java.applet.AudioClip;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -16,7 +20,7 @@ import view.View;
 /**
  * G³ówna klasa programu
  * @author Tomasz Adrianowski
- * @author Sliman Jakub El-Fara
+ * @author Sliman Jakub El-Fara 
  */
 public class Organizer
 {
@@ -38,7 +42,7 @@ public class Organizer
 		
 	    /*
 		ArrayList <Zdarzenie> zdarzenia = new ArrayList <Zdarzenie>();
-		for (int i = 0; i < 3; i++)
+		for (int i = 0; i < 3; i++)//sd
 		{
 			zdarzenia.add(new Zdarzenie(i, "Opis Zdarzenia nr "+i, 1,
 					"2012-05-12 12:00:00", "2012-05-12 12:00:00", "polska", 0, 0));
@@ -64,6 +68,20 @@ public class Organizer
 	
 		XML.fromXML(plik, zdarzenia2);//55
 		*/
-	
+	    AudioClip clip;
+		File f;
+		URL soundURL = null;
+		f = new File ("src/resources/alarm8.wav");
+		try
+		{
+			soundURL = f.toURI().toURL();
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		clip = java.applet.Applet.newAudioClip(soundURL);
+		clip.play();
+	    
 	}
 }

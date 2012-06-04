@@ -30,7 +30,7 @@ public class PanWatek extends Thread
 	}
 	public void run()
 	{
-		f = new File ("src/resources/alarm.wav");
+		f = new File ("src/resources/alarm3.wav");
 		try
 		{
 			soundURL = f.toURI().toURL();
@@ -44,9 +44,9 @@ public class PanWatek extends Thread
 	  while(true)
 	  {
 		
-		try {Thread.sleep(1000*60);}				// sprawdzanie co minute
+		try {Thread.sleep(1000*10);}				// sprawdzanie co minute
 		catch (InterruptedException e1) { e1.printStackTrace();}
-		
+
 		for (int i = 0; i <zdarzenia.size(); i++)   // Dla kazdego zdarzenia
 		{
 			// 1 - aktualna data
@@ -69,10 +69,11 @@ public class PanWatek extends Thread
 			// roznica mierzona w minutach od aktualnego czasu do zdarzenia
 			long roznica = ((data_zdarzenia.getTime()/60000)-(data_teraz.getTime()/60000));
 			
+			System.out.println(roznica + ": " + zdarzenia.get(i).waznosc);
 			if (roznica == zdarzenia.get(i).waznosc)
 			{
 				// Alarm glosowy
-				//System.out.println("-----------------");
+				System.out.println("-----------------");
 				clip.play();
 			}
 
