@@ -30,7 +30,7 @@ public class PanWatek extends Thread
 	}
 	public void run()
 	{
-		f = new File ("src/resources/alarm3.wav");
+		f = new File ("src/resources/alarm.wav");
 		try
 		{
 			soundURL = f.toURI().toURL();
@@ -44,7 +44,7 @@ public class PanWatek extends Thread
 	  while(true)
 	  {
 		
-		try {Thread.sleep(1000*10);}				// sprawdzanie co minute
+		try {Thread.sleep(1000*60);}				// sprawdzanie co minute
 		catch (InterruptedException e1) { e1.printStackTrace();}
 
 		for (int i = 0; i <zdarzenia.size(); i++)   // Dla kazdego zdarzenia
@@ -75,6 +75,9 @@ public class PanWatek extends Thread
 				// Alarm glosowy
 				System.out.println("-----------------");
 				clip.play();
+				try {Thread.sleep(1000*6);}
+				catch (InterruptedException e1) { e1.printStackTrace();}
+				clip.stop();
 			}
 
 			// Komunikaty

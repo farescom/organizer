@@ -39,7 +39,7 @@ public class WelcomeFrame extends JFrame
         setVisible(true);
         
         // Tworzenie zdjecia              // 25
-		zdjecie = new ImagePanel(0, SizeX-5, SizeY-54, "tlo2.png");
+		zdjecie = new ImagePanel(0, SizeX-6, SizeY-54, "tlo2.png");
 		setContentPane(zdjecie);
         
         // Tworzenie menu
