@@ -160,7 +160,8 @@ public class MainFrame extends JFrame
  	public void addFilters(GridBagConstraints c){
  		
  		c.insets = new Insets(-3, 0, 0, 0);
-		filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		//filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, -5));
+ 		filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		filtersPanel.setPreferredSize(new Dimension(320, 100));
 		filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
 		filters = new JPanel(new GridBagLayout());
