@@ -75,7 +75,7 @@ public class WelcomeFrameEvent implements ActionListener{
             	}
         	}
         	else{
-        		view.welcomeFrame.registerFrame.show_result("Brak polaczenia z baza danych!");
+        		view.welcomeFrame.registerFrame.show_result("Connection with database is unavailable! Try again later!");
         	}
         	
         }

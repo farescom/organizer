@@ -14,6 +14,8 @@ import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import view.MainFrame;
 import view.View;
@@ -58,6 +60,18 @@ public class MainFrameModel {
 	      	  }
 	  	 }
 		
+		class comparator implements Comparator<Zdarzenie>{
+
+			@Override
+			public int compare(Zdarzenie o1, Zdarzenie o2) {				
+				
+				return o1.godzina.compareTo(o2.godzina);
+			}
+	  		
+	  	}
+	  	
+	  	Collections.sort(dayEvent, new comparator());
+		
 		dataModelDay = new AbstractTableModel()
 		{
 			  /**
@@ -72,7 +86,6 @@ public class MainFrameModel {
 	          }
 			  public int getColumnCount() { return 3; }
 	          public int getRowCount() { return ileDay;}
-	          public boolean isEditable(){ return true; }
 	          public Object getValueAt(int row, int col) {
 	        	  switch(col)
 	        	  {
@@ -172,6 +185,24 @@ public class MainFrameModel {
   			ileMonth = ileMonthTemp;
 		}
 		
+	  	class comparator implements Comparator<Zdarzenie>{
+
+	  		int wartosc = 0;
+			@Override
+			public int compare(Zdarzenie o1, Zdarzenie o2) {				
+				
+				wartosc = o1.dzien.compareTo(o2.dzien);
+				if(wartosc == 0){
+					wartosc = o1.godzina.compareTo(o2.godzina);
+				}
+				return wartosc;
+			}
+	  		
+	  	}
+	  	
+	  	Collections.sort(monthEvent, new comparator());
+	  	
+	  	
 		dataModelMonth = new AbstractTableModel()
 		{
 			  /**

@@ -156,13 +156,15 @@ public class Calendar{
 			}
 			if(focused == true)
 			{
-				model.checkedDay = Integer.parseInt(value.toString());
-				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
-				model.mainFrame.tableDay();
-				View.mainFrame.refreshTableDay();
-				MainFrame.calendar.setVisible(false);
-				MainFrame.currentEvent.setVisible(true);
-				MainFrame.tabbedPane.setSelectedIndex(1);
+				if(value != null){
+					model.checkedDay = Integer.parseInt(value.toString());
+					MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
+					model.mainFrame.tableDay();
+					View.mainFrame.refreshTableDay();
+					MainFrame.calendar.setVisible(false);
+					MainFrame.currentEvent.setVisible(true);
+					MainFrame.tabbedPane.setSelectedIndex(1);
+				}
 			}
 			if(selected == true)
 			{
