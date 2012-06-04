@@ -1,14 +1,13 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-
 import javax.swing.*;
-
 import model.Model;
 
-
+/**
+* Klasa rozszerzaj¹ca JPanel. Umo¿liwia utworzenie Panelu wype³nionego zdjêciem "w tle".
+* Rysowanie zdjêcia odbywa siê poprzez nadpisanie metody paintComponent
+*/ 
 public class ImagePanel extends JPanel
 {
 	private static final long serialVersionUID = 1L;
@@ -21,6 +20,13 @@ public class ImagePanel extends JPanel
 	
 	public static Model model;
 	
+	/**
+	* Konstruktor klasy odpowiadajacy za utworzenie panelu ze zdjêciem
+	* @param nazwa nazwa panelu
+	* @param odstep odstep zdjecia od krancow panelu
+	* @param SizeX szerokosc panelu
+	* @param SizeY wysokosc panelu
+	*/ 
 	ImagePanel(String nazwa, int odstep, int SizeX, int SizeY)
 	{
 		super();
@@ -32,6 +38,13 @@ public class ImagePanel extends JPanel
 		image = Toolkit.getDefaultToolkit().getImage("src/resources/"+nazwa);
 	}
 	
+	/**
+	* Konstruktor klasy odpowiadajacy za utworzenie panelu ze zdjêciem
+	* @param odstep odstep zdjecia od krancow panelu
+	* @param SizeX szerokosc panelu
+	* @param SizeY wysokosc panelu
+	* @param nazwa nazwa panelu
+	*/ 
 	ImagePanel(int odstep, int SizeX, int SizeY, String nazwa)
 	{
 		super();
@@ -43,6 +56,10 @@ public class ImagePanel extends JPanel
 		image = Toolkit.getDefaultToolkit().getImage("src/resources/"+nazwa);
 	}
 
+	/**
+	* Metoda odpowiedzialna za odrysowywanie komponentu
+	* @param g obiekt klasy Graphics, za pomoca ktorego odbywa sie rysowanie w scenie.
+	*/ 
 	public void paintComponent(Graphics g)
 	{
 		 g.drawImage(image,odstep,odstep,SizeX,SizeY, this);

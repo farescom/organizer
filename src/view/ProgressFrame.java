@@ -1,22 +1,17 @@
 package view;
 
 import model.*;
-import controller.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JLabel;
-import controller.WelcomeFrameEvent;
-import java.sql.Date;
-import java.util.ArrayList;
-import java.awt.EventQueue;
 import java.awt.Button;
-import java.awt.EventQueue;
 
-public class ProgressFrame extends JFrame implements ActionListener
+/**
+* Klasa reprezentuj¹ca ramkê "postêpu", w której wyœwietlane s¹ informacje o procentowej
+* iloœci wczytanych danych programu do pamiêci.
+*/ 
+public class ProgressFrame extends JFrame
 {
 	private static final long serialVersionUID = 1L;
 	JPanel panel;
@@ -27,6 +22,15 @@ public class ProgressFrame extends JFrame implements ActionListener
 	
 	public static Model model;
 	
+	/**
+	* Konstruktor klasy odpowiadajacy za utworzenie okna wyœwietlaj¹cego informacje o 
+	* uruchamianym programie (w postaci procentu).
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
+	*/ 
 	public ProgressFrame(String tytul, int SizeX, int SizeY, int x, int y)
     {  
         super(tytul);  
@@ -49,20 +53,5 @@ public class ProgressFrame extends JFrame implements ActionListener
         progressBar.setValue(0);
         panel.add(progressBar);
         add(panel);
-                
-        but = new Button("cos");
-        panel.add(but);
-        but.addActionListener(this);
     }
-	
-	public void actionPerformed(ActionEvent e)
-	{
-        Object source = e.getSource();
-        if(source == but)  
-        {
-        	procent += 15;
-        	tekst.setText("Trwa logowanie do programu... ("+procent+"%)");
-        	progressBar.setValue(procent);
-        }
-	} 
 }

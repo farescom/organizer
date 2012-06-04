@@ -15,12 +15,11 @@ import java.awt.Color;
 import model.Model;
 
 /**
-* Klasa odpowiadajaca za utworzenie ramki ustawien
+* Klasa odpowiadajaca za eksportowanie danych z programu.
 */ 
 public class ExportFrame extends JFrame
 {
 	private static final long serialVersionUID = 1L;
-	
 	
 	public JPanel panel_0, panel_1, panel_2, panel_3, panel_4, panel_5, panel_6;
 	public JLabel kolor, alarm, kasowanie, dni;
@@ -35,7 +34,12 @@ public class ExportFrame extends JFrame
 	//public AboutUsFrameEvent aboutUsFrameEvent;
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna powitalnego
+	* Konstruktor klasy odpowiadajacy za utworzenie okna eksportowania
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
 	*/ 
 	public ExportFrame(String tytul, int SizeX, int SizeY, int x, int y) 
     {  

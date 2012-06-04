@@ -15,7 +15,10 @@ import java.awt.Color;
 import model.Model;
 
 /**
-* Klasa odpowiadajaca za utworzenie ramki ustawien
+* Klasa reprezentuj¹ca ramkê "Ustawieñ".
+* W tej ramce u¿ytkownik mo¿e zmieniæ wiele ustawieñ zwi¹zanych z trybem dzia³ania programu.
+* W przypadku wyboru opcji "zapisz" wszystkie zmiany s¹ zachowywane w aplikacji i w zdalnej
+* bazie danych.
 */ 
 public class SettingsFrame extends JFrame
 {
@@ -31,10 +34,13 @@ public class SettingsFrame extends JFrame
 	public JSlider slider;
 	public static Model model;
 	
-	//public AboutUsFrameEvent aboutUsFrameEvent;
-	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna powitalnego
+	* Konstruktor klasy odpowiadajacy za utworzenie okna
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
 	*/ 
 	public SettingsFrame(String tytul, int SizeX, int SizeY, int x, int y) 
     {  
@@ -138,8 +144,7 @@ public class SettingsFrame extends JFrame
         	// tekst
         	dni = new JLabel(model.baza.dni_waznosci+" miesi¹cu.");
         	panel_5.add(dni);
-
-        	
+	
         zapisz = new JButton("Zapisz");
         anuluj = new JButton("Anuluj");
         panel_6.add(zapisz);

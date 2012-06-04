@@ -4,9 +4,12 @@ import java.awt.Color;
 import model.Model;
 
 /**
-* Glowna klasa widoku, ktora bedzie jako skladowe zawierac w sobie wszystkie klasy widoku
+* Glowna klasa widoku, odpowiedzialna miêdzy innymi za tworzenie obiektów klas warstwy interfejsu
+* u¿ytkownika.
+* Klasa zawiera w sobie wszystkie klasy widoku
 */ 
-public class View {
+public class View
+{
 
 // Parametry koloru
  public static Color kolorWeekendu = Color.LIGHT_GRAY;
@@ -27,6 +30,11 @@ public class View {
  
  public Model model;
  
+ /**
+ * Kontruktor klasy widoki.
+ * Tworzy obiekty sk³adowe warstwy interfejsu u¿ytkownika i wyœwietla g³ówne okno aplikacji.
+ * @param _model referencja do g³ównej klasy warstwy danych "Model"
+ */ 
  public View(Model _model)
  {
   this.model = _model;

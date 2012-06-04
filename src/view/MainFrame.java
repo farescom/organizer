@@ -1,26 +1,24 @@
 package view;
 
 import model.*;
-
 import java.awt.*;
 import java.awt.event.*;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.*;
 import java.util.Date;
-import java.text.DateFormatSymbols;
-
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-import javax.swing.table.TableModel;
 
 import model.Model;
 import controller.Controller;
 
+/**
+* Klasa reprezentuj¹ca ramkê okna g³ównego.
+* W tej ramce u¿ytkownik ma dostêp do:
+* - graficznego kalendarza,
+* - aktualnych zdarzeñ,
+* - panelu zarz¹dzania zdarzeniami.
+*/ 
 public class MainFrame extends JFrame
 {
 	private static final long serialVersionUID = 2L;
@@ -53,7 +51,14 @@ public class MainFrame extends JFrame
 	
 	public static Model model;
 	
- 
+	/**
+	* Konstruktor klasy odpowiadajacy za utworzenie okna
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
+	*/ 
  public MainFrame(String tytul, int x, int y, int locationX, int locationY)
     {  
         super(tytul);  
