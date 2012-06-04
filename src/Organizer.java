@@ -20,7 +20,7 @@ import view.View;
 /**
  * G³ówna klasa programu
  * @author Tomasz Adrianowski
- * @author Sliman Jakub El-Fara
+ * @author Sliman Jakub El-Fara 
  */
 public class Organizer
 {
