@@ -73,7 +73,7 @@ public class MainFrame extends JFrame
 		tab = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tabbedPane = new JTabbedPane(JTabbedPane.RIGHT);
 		tabbedPane.addTab("Calendar", null, null, "Show calendar");
-		tabbedPane.addTab(model.checkedDay + " " + View.months[model.checkedMonth] + " Event", null, null, "Show events");
+		tabbedPane.addTab(" "+model.checkedDay + " " + View.months[model.checkedMonth] + " Event", null, null, "Show events");
 		tabbedPane.addTab("Add Event", null, null, "Add event");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
@@ -159,12 +159,11 @@ public class MainFrame extends JFrame
  
  	public void addFilters(GridBagConstraints c){
  		
- 		c.insets = new Insets(0, 0, 0, 0);
+ 		c.insets = new Insets(-3, 0, 0, 0);
 		filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		filtersPanel.setPreferredSize(new Dimension(320, 100));
 		filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
 		filters = new JPanel(new GridBagLayout());
-		filters.setBorder(BorderFactory.createLineBorder(Color.black));
 			
 			c.gridx = 0;
 			c.gridy = 0;
@@ -182,32 +181,22 @@ public class MainFrame extends JFrame
 			flowPanel.add(filterHour);
 			filters.add(flowPanel, c);
 			
-			c.gridx = 1;
-			c.gridy = 0;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Show events: "));
-			filters.add(flowPanel, c);
 			
-			c.gridx = 2;
+			
+			c.gridx = 1;
 			c.gridy = 0;
 			GregorianCalendar cal = new GregorianCalendar(model.currentYear, model.currentMonth-1, 1);
 			int nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("From: "));
-				spinnerModel = new SpinnerNumberModel(model.currentDay, 0, nod, 1);  
+			flowPanel.add(new JLabel("Show events from "));
+			spinnerModel = new SpinnerNumberModel(model.currentDay, 0, nod, 1);  
 				fromDate = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)fromDate.getEditor()).getTextField().setEditable(false);
 				fromDate.addChangeListener(Controller.mainFrameEvent);
 				fromDate.setEnabled(false);
 			flowPanel.add(fromDate);
-			flowPanel.add(new JLabel(" Day"));
-			filters.add(flowPanel, c);
-			
-			c.gridx = 2;
-			c.gridy = 1;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("To:      "));
-				spinnerModel = new SpinnerNumberModel(nod, 0, nod, 1);  
+			flowPanel.add(new JLabel(" to "));
+			spinnerModel = new SpinnerNumberModel(nod, 0, nod, 1);  
 				toDate = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)toDate.getEditor()).getTextField().setEditable(false);
 				toDate.addChangeListener(Controller.mainFrameEvent);
@@ -215,8 +204,7 @@ public class MainFrame extends JFrame
 			flowPanel.add(toDate);
 			flowPanel.add(new JLabel(" Day"));
 			filters.add(flowPanel, c);
-		
-			c.gridwidth = 2;
+			
 			c.gridx = 1;
 			c.gridy = 2;
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
