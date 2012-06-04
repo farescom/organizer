@@ -1,3 +1,7 @@
+import java.applet.AudioClip;
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -64,6 +68,20 @@ public class Organizer
 	
 		XML.fromXML(plik, zdarzenia2);//55
 		*/
-	
+	    AudioClip clip;
+		File f;
+		URL soundURL = null;
+		f = new File ("src/resources/alarm8.wav");
+		try
+		{
+			soundURL = f.toURI().toURL();
+		}
+		catch (MalformedURLException e)
+		{
+			e.printStackTrace();
+		}
+		clip = java.applet.Applet.newAudioClip(soundURL);
+		clip.play();
+	    
 	}
 }
