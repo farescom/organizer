@@ -53,32 +53,41 @@ public class View {
              int SizeX_ProgressFrame = 300;
              int SizeY_ProgressFrame = 80;
              
-             welcomeFrame = new WelcomeFrame("Witaj", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
-             welcomeFrame.setResizable(false);
-
-             progressFrame = new ProgressFrame("Logowanie...", SizeX_ProgressFrame, SizeY_ProgressFrame,
+             progressFrame = new ProgressFrame("Uruchamianie...", SizeX_ProgressFrame, SizeY_ProgressFrame,
                300+(SizeX_WelcomeFrame/2)-(SizeX_ProgressFrame/2), 100+(SizeY_WelcomeFrame/2)-(SizeY_ProgressFrame/2));
              progressFrame.setResizable(false);
-             
             }  
-        });
-  /**/
-  // MAIN FRAME
-  /*EventQueue.invokeLater( new Runnable()
+   });
+  
+  int licznik = 7;
+  float procent = 0;
+  for (int i = 0; i < licznik; i++)
+  {
+	  try {Thread.sleep(500);}
+	  catch (InterruptedException e1) { e1.printStackTrace();}
+	  procent += 100/licznik;
+	  if (procent == 98) procent = 100;
+	  progressFrame.tekst.setText("Trwa ³adowanie programu... ("+procent+"%)");
+	  progressFrame.progressBar.setValue((int) procent);
+  }
+  try {Thread.sleep(500);} catch (InterruptedException e1) { e1.printStackTrace();}
+  progressFrame.hide();
+  
+  // WELCOME FRAME
+  EventQueue.invokeLater( new Runnable()
   {  
             public void run()
             {  
-            	int SizeX_WelcomeFrame = 720;
-            	int SizeY_WelcomeFrame = 420;
-            	
-            	int SizeX_ProgressFrame = 300;
-            	int SizeY_ProgressFrame = 80;
-            	
-            	mainFrame = new MainFrame("Kalendarz", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
-            	mainFrame.setResizable(false);
-            	mainFrame.setResizable(false);
+             int SizeX_WelcomeFrame = 720;
+             int SizeY_WelcomeFrame = 420;
+             
+             int SizeX_ProgressFrame = 300;
+             int SizeY_ProgressFrame = 80;
+             
+             welcomeFrame = new WelcomeFrame("Witaj", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
+             welcomeFrame.setResizable(false);
             }  
-        });*/
+  });
  }
  
 }
