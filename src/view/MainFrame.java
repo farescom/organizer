@@ -164,6 +164,7 @@ public class MainFrame extends JFrame
 		filtersPanel.setPreferredSize(new Dimension(320, 100));
 		filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
 		filters = new JPanel(new GridBagLayout());
+		filters.setBorder(BorderFactory.createLineBorder(Color.black));
 			
 			c.gridx = 0;
 			c.gridy = 0;
@@ -205,7 +206,7 @@ public class MainFrame extends JFrame
 			c.gridx = 2;
 			c.gridy = 1;
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("To: "));
+			flowPanel.add(new JLabel("To:      "));
 				spinnerModel = new SpinnerNumberModel(nod, 0, nod, 1);  
 				toDate = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)toDate.getEditor()).getTextField().setEditable(false);
@@ -233,7 +234,7 @@ public class MainFrame extends JFrame
 				fromHour.addChangeListener(Controller.mainFrameEvent);
 				fromHour.setEnabled(false);
 			flowPanel.add(fromHour);
-			flowPanel.add(new JLabel("Minute: "));
+			flowPanel.add(new JLabel("  Minute: "));
 				spinnerModel = new SpinnerNumberModel(00, 0, 59, 1);  
 				fromMinute = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)fromMinute.getEditor()).getTextField().setEditable(false);
@@ -246,14 +247,14 @@ public class MainFrame extends JFrame
 			c.gridy = 4;
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			flowPanel.add(new JLabel("To: "));
-			flowPanel.add(new JLabel("Hour: "));
+			flowPanel.add(new JLabel("     Hour: "));
 				spinnerModel = new SpinnerNumberModel(20, 0, 23, 1);  
 				toHour = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)toHour.getEditor()).getTextField().setEditable(false);
 				toHour.addChangeListener(Controller.mainFrameEvent);
 				toHour.setEnabled(false);
 			flowPanel.add(toHour);
-			flowPanel.add(new JLabel("Minute: "));
+			flowPanel.add(new JLabel("  Minute: "));
 				spinnerModel = new SpinnerNumberModel(00, 0, 59, 1);  
 				toMinute = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)toMinute.getEditor()).getTextField().setEditable(false);
@@ -374,7 +375,7 @@ public class MainFrame extends JFrame
  		
  		currentEvent = new JScrollPane(model.mainFrame.tableDay);
 		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + View.months[model.checkedMonth] + " Event"));
-		currentEvent.setPreferredSize(new Dimension(370, 160));
+		currentEvent.setPreferredSize(new Dimension(370, 215));
 		currentEvent.setVisible(true);
 
 		options.add(currentEvent);
@@ -405,6 +406,9 @@ public class MainFrame extends JFrame
  		tabbedPane.setEnabledAt(1, false);
  		addEvent.setVisible(true);
  		currentEvent.setVisible(false);
+ 		model.mainFrame.tableMonth.setRowSelectionAllowed(false);
+ 		filterDate.setEnabled(false);
+ 		filterHour.setEnabled(false);
  		buttonAddEvent.setText("Edit Event");
  		buttonNotEditEvent.setVisible(true);
  		opis.setText(editZdarzenie.opis);
@@ -467,6 +471,9 @@ public class MainFrame extends JFrame
  		tabbedPane.setEnabledAt(1, true);
  		addEvent.setVisible(false);
  		currentEvent.setVisible(true);
+ 		model.mainFrame.tableMonth.setRowSelectionAllowed(true);
+ 		filterDate.setEnabled(true);
+ 		filterHour.setEnabled(true);
  		buttonAddEvent.setText("Add Event");
  		buttonNotEditEvent.setVisible(false);
 		opis.setText("");

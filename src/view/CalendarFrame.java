@@ -207,26 +207,29 @@ public class CalendarFrame extends JFrame {
 				}
 				if(focused == true && mainFrame.source != null)
 				{
-					if(mainFrame.source == mainFrame.data_roz){
-						model.mainFrame.startDay = Integer.parseInt(value.toString());
-						View.calendarFrame.dispose();
-						System.out.println("Data rozpoczecia: " + model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
-						View.mainFrame.lblDataRozpoczecia.setText(model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
-						mainFrame.source = null;
-					}
-					else if(mainFrame.source == mainFrame.data_zak){
-						model.mainFrame.finishDay = Integer.parseInt(value.toString());
-						View.calendarFrame.dispose();
-						System.out.println("Data zakonczenia: " + model.mainFrame.finishDay + " - " + model.mainFrame.finishMonth + " - " + model.mainFrame.finishYear);
-						View.mainFrame.lblDataZakonczenia.setText(model.mainFrame.finishDay + " - " + model.mainFrame.finishMonth + " - " + model.mainFrame.finishYear);
-						mainFrame.source = null;
-					}
-					else if(mainFrame.source == mainFrame.dataAlarmu){
-						model.mainFrame.alarmDay = Integer.parseInt(value.toString());
-						View.calendarFrame.dispose();
-						System.out.println("Data alarmu: " + model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
-						View.mainFrame.lblDataAlarmu.setText(model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
-						mainFrame.source = null;
+					if(value != null){
+						
+						if(mainFrame.source == mainFrame.data_roz){
+							model.mainFrame.startDay = Integer.parseInt(value.toString());
+							View.calendarFrame.dispose();
+							System.out.println("Data rozpoczecia: " + model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
+							View.mainFrame.lblDataRozpoczecia.setText(model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
+							mainFrame.source = null;
+						}
+						else if(mainFrame.source == mainFrame.data_zak){
+							model.mainFrame.finishDay = Integer.parseInt(value.toString());
+							View.calendarFrame.dispose();
+							System.out.println("Data zakonczenia: " + model.mainFrame.finishDay + " - " + model.mainFrame.finishMonth + " - " + model.mainFrame.finishYear);
+							View.mainFrame.lblDataZakonczenia.setText(model.mainFrame.finishDay + " - " + model.mainFrame.finishMonth + " - " + model.mainFrame.finishYear);
+							mainFrame.source = null;
+						}
+						else if(mainFrame.source == mainFrame.dataAlarmu){
+							model.mainFrame.alarmDay = Integer.parseInt(value.toString());
+							View.calendarFrame.dispose();
+							System.out.println("Data alarmu: " + model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
+							View.mainFrame.lblDataAlarmu.setText(model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
+							mainFrame.source = null;
+						}
 					}
 				}
 				if(selected == true)
