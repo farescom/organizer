@@ -104,8 +104,6 @@ public class Calendar{
 		//Variables
 		int nod, som; //Number Of Days, Start Of Month
 		
-		System.out.println("Month: "+month);
-		
 		//Allow/disallow buttons
 		buttonPrev.setEnabled(true);
 		buttonNext.setEnabled(true);

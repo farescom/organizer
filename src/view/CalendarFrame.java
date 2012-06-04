@@ -155,8 +155,6 @@ public class CalendarFrame extends JFrame {
 			//Variables
 			int nod, som; //Number Of Days, Start Of Month
 			
-			System.out.println("Month: "+month);
-			
 			//Allow/disallow buttons
 			buttonPrev.setEnabled(true);
 			buttonNext.setEnabled(true);
@@ -252,7 +250,6 @@ public class CalendarFrame extends JFrame {
 					else{ //Back one month
 						model.mainFrame.startMonth -= 1;
 					}
-					System.out.println(model.mainFrame.startMonth);
 					
 					refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
 				}
@@ -291,7 +288,6 @@ public class CalendarFrame extends JFrame {
 					else{ //Foward one month
 						model.mainFrame.startMonth += 1;
 					}
-					System.out.println(model.mainFrame.startMonth);
 					
 					refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
 				}

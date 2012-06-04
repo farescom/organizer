@@ -179,6 +179,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
 		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
 		  		}
+		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((startDate.compareTo(alarmDate) == 1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) < Integer.parseInt(hour))
+		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
+		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
+		  		}
 		  		else{
 		  			if(view.mainFrame.buttonAddEvent.getText() == "Add Event"){
 		  				
