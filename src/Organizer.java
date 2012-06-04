@@ -68,20 +68,6 @@ public class Organizer
 	
 		XML.fromXML(plik, zdarzenia2);//55
 		*/
-	    AudioClip clip;
-		File f;
-		URL soundURL = null;
-		f = new File ("src/resources/alarm8.wav");
-		try
-		{
-			soundURL = f.toURI().toURL();
-		}
-		catch (MalformedURLException e)
-		{
-			e.printStackTrace();
-		}
-		clip = java.applet.Applet.newAudioClip(soundURL);
-		clip.play();
 	    
 	}
 }

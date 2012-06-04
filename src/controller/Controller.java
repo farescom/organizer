@@ -14,6 +14,7 @@ public class Controller {
 	public static SettingsFrameEvent settingsFrameEvent = new SettingsFrameEvent();
 	public static ColorFrameEvent colorFrameEvent = new ColorFrameEvent();
 	public static ExportFrameEvent exportFrameEvent = new ExportFrameEvent();
+	//public static LoginWatek loginWatek = new LoginWatek();
 	
 	public Model model;
 	public View view;
@@ -50,6 +51,9 @@ public class Controller {
 		
 		ExportFrameEvent.model = _model;
 		ExportFrameEvent.view = _view;
+		
+		//LoginWatek.model = _model;
+		//LoginWatek.view = _view;
 	}
 	
 }

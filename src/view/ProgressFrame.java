@@ -53,8 +53,6 @@ public class ProgressFrame extends JFrame implements ActionListener
         but = new Button("cos");
         panel.add(but);
         but.addActionListener(this);
-
-
     }
 	
 	public void actionPerformed(ActionEvent e)

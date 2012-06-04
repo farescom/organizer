@@ -99,7 +99,6 @@ public class WelcomeFrameEvent implements ActionListener{
         				view.welcomeFrame.dispose();
         				model.mainFrame = new MainFrameModel();
         				
-        				
         				// Uruchumienie w¹tka alarmów
             			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
             			panWatek.start();
