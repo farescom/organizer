@@ -23,6 +23,7 @@ public class Model {
 	public static int checkedMonth = currentMonth;
 	public static int checkedYear = currentYear;
 	
+	public static JOptionPane alarmInformation;
 	
 	public static int guest = 0;
 	public Database baza;

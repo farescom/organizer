@@ -7,10 +7,17 @@ package controller;
 import java.util.ArrayList;
 import java.util.Date;
 import java.applet.AudioClip;
+import java.awt.Color;
+import java.awt.EventQueue;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import javax.swing.JOptionPane;
+
+import view.MainFrame;
+import view.View;
+import model.Model;
 import model.Zdarzenie;
 
 public class PanWatek extends Thread
@@ -21,6 +28,9 @@ public class PanWatek extends Thread
 	AudioClip clip;
 	File f;
 	URL soundURL = null;
+	
+	public static View view;
+	public static Model model;
 	
 	public PanWatek(String nazwa, int minuty, ArrayList<Zdarzenie> zdarzenia)
 	{
@@ -69,22 +79,33 @@ public class PanWatek extends Thread
 			// roznica mierzona w minutach od aktualnego czasu do zdarzenia
 			long roznica = ((data_zdarzenia.getTime()/60000)-(data_teraz.getTime()/60000));
 			
-			System.out.println(roznica + ": " + zdarzenia.get(i).waznosc);
-			if (roznica == zdarzenia.get(i).waznosc)
+			System.out.println(roznica + ": " + model.zdarzenia.get(i).waznosc);
+			if (roznica == model.zdarzenia.get(i).waznosc)
 			{
 				// Alarm dŸwiêkowy / Alarm kolorowy
 					clip.play();
+					
+					if(model.alarmInformation == null){
+						messageThread(i);
+					}
 					try
 					{
+						model.mainFrame.alarmID = i;
 						for (int ii = 0; ii < 3; ii++)
 						{
 							// czerwony kolor
-							   System.out.println("red");
+							model.mainFrame.alarmColor = new Color(241, 122, 88);
+							model.mainFrame.tableMonth();
+							view.mainFrame.refreshTableMonth();
 							Thread.sleep(1000*1);
+							
 							// normalny - czyli bialy
-							   System.out.println("white");
+							model.mainFrame.alarmColor = Color.white;
+							model.mainFrame.tableMonth();
+							view.mainFrame.refreshTableMonth();
 							Thread.sleep(1000*1);
 						}
+						model.mainFrame.alarmID = -1;
 					}
 					catch (InterruptedException e1) { e1.printStackTrace();}
 					clip.stop();
@@ -97,5 +118,19 @@ public class PanWatek extends Thread
 			System.out.println(rok + "-" + miesiac + "-" + dzien + " " + godzina + ":" + minuta);*/
 		}
 	  }
+	}
+	
+	public void messageThread(final int i){
+		EventQueue.invokeLater( new Runnable()
+		{  
+            public void run()
+            {  
+            	model.alarmInformation = new JOptionPane();
+				model.alarmInformation.showMessageDialog(null, "Remember!\n Hour: "+model.zdarzenia.get(i).godzina+
+						"\n Describe: "+model.zdarzenia.get(i).opis+"\n Place: "+model.zdarzenia.get(i).miejsce);
+				model.zdarzenia.get(i).waznosc = -1;
+				if(model.guest == 0) model.baza.update(model.zdarzenia.get(i).id, model.zdarzenia.get(i));
+            }  
+        });
 	}
 }

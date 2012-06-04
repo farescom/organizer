@@ -14,12 +14,13 @@ public class Controller {
 	public static SettingsFrameEvent settingsFrameEvent = new SettingsFrameEvent();
 	public static ColorFrameEvent colorFrameEvent = new ColorFrameEvent();
 	public static ExportFrameEvent exportFrameEvent = new ExportFrameEvent();
+	public static PanWatek panWatek;
 	
 	public Model model;
 	public View view;
 	
 	// Wazne flagi kontrolera - okreœlaj¹ faktyczne ustawieñ
-	public static int dni_waznosci = 30;	// ile dni zdarzenia istnieja, po czym zostana skasowane
+	public static int dni_waznosci = 1;	// ile dni zdarzenia istnieja, po czym zostana skasowane
 	public static int kolor_dni_wolnych2 = 1;
 	public static int kolor_aktualnego_dnia2 = 1;
 	public static int kolor_zaznaczonego_dnia2 = 1;
@@ -29,7 +30,7 @@ public class Controller {
 		public static int kolor_aktualnego_dnia = 1;
 		public static int kolor_zaznaczonego_dnia = 1;
 		public static Color inny_kolor = Color.LIGHT_GRAY;
-		public static int wybrana_liczba_dni = 30;
+		public static int wybrana_liczba_dni = 1;
 	
 	public Controller(Model _model, View _view)
 	{
@@ -50,6 +51,9 @@ public class Controller {
 		
 		ExportFrameEvent.model = _model;
 		ExportFrameEvent.view = _view;
+		
+		PanWatek.model = _model;
+		PanWatek.view = _view;
 	}
 	
 }

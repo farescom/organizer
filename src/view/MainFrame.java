@@ -410,7 +410,7 @@ public class MainFrame extends JFrame
  		
  		lblDataRozpoczecia.setText(model.mainFrame.startDay + " - " + model.mainFrame.startMonth + " - " + model.mainFrame.startYear);
  		
- 		if(editZdarzenie.waznosc != 0){
+ 		if(editZdarzenie.waznosc > 0){
  			
  			System.out.println(editZdarzenie.waznosc);
  			

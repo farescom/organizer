@@ -30,6 +30,9 @@ public class MainFrameModel {
 	public static TableModel dataModelDay;
 	public static TableModel dataModelMonth;
 	
+	public static Color alarmColor = Color.white;
+	public static int alarmID = -1;
+	
 	public JTable tableDay;
 	public JTable tableMonth;
 	
@@ -217,7 +220,6 @@ public class MainFrameModel {
 	          }
 			  public int getColumnCount() { return 4; }
 	          public int getRowCount() { return ileMonth; }
-	          public boolean isEditable(){ return true; }
 	          public Object getValueAt(int row, int col) {
 	        	  switch(col)
 	        	  {
@@ -248,9 +250,12 @@ public class MainFrameModel {
 		public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
 			super.getTableCellRendererComponent(table, value, selected, focused, row, column);
 			
+			JTextArea ta = new JTextArea();
+			
 			if((selected == true && MainFrame.tabbedPane.getSelectedIndex() != 1)){
 				day = Integer.parseInt(table.getValueAt(row, 0).toString());
 				
+				ta.setBackground(new Color(184, 207, 229));
 				Model.checkedDay = day;
 				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
 				tableDay();
@@ -262,6 +267,8 @@ public class MainFrameModel {
 				rowSelectedMonth = row;
 			}
 			else if(selected == true && MainFrame.tabbedPane.getSelectedIndex() == 1){
+				
+				ta.setBackground(new Color(184, 207, 229));
 				day = Integer.parseInt(table.getValueAt(row, 0).toString());
 				if(Model.checkedDay != day)
 				{
@@ -271,10 +278,18 @@ public class MainFrameModel {
 					View.mainFrame.refreshTableDay();
 				}
 			}
-
+			
+			if(alarmID != -1 && monthEvent.indexOf(Model.zdarzenia.get(alarmID)) == row){
+				ta.setBackground(alarmColor);
+			}
+			
 			setBorder(null);
 			setForeground(Color.black);
-			return this;  
+			ta.setLineWrap(true);
+			ta.setWrapStyleWord(true);
+			ta.setOpaque(true);
+			ta.setText((value == null) ? "" : value.toString());
+			return ta;  
 		}
 	}
 	

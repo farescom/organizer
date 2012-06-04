@@ -101,8 +101,8 @@ public class WelcomeFrameEvent implements ActionListener{
         				
         				
         				// Uruchumienie w¹tka alarmów
-            			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
-            			panWatek.start();
+            			Controller.panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
+            			Controller.panWatek.start();
             			
                 		EventQueue.invokeLater( new Runnable()
                 		{  
