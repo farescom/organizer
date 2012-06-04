@@ -7,18 +7,16 @@ import view.View;
 /**
 * Glowna klasa kontrolera, ktora bedzie jako skladowe zawierac w sobie wszystkie klasy kontrolera
 */ 
-public class Controller {
+public class Controller
+{
 
 	public static WelcomeFrameEvent welcomeFrameEvent = new WelcomeFrameEvent();
 	public static MainFrameEvent mainFrameEvent = new MainFrameEvent();
 	public static SettingsFrameEvent settingsFrameEvent = new SettingsFrameEvent();
 	public static ColorFrameEvent colorFrameEvent = new ColorFrameEvent();
 	public static ExportFrameEvent exportFrameEvent = new ExportFrameEvent();
-<<<<<<< HEAD
-	//public static LoginWatek loginWatek = new LoginWatek();
-=======
 	public static PanWatek panWatek;
->>>>>>> origin/master
+	//public static LoginWatek loginWatek = new LoginWatek(); -- nie korzystamy
 	
 	public Model model;
 	public View view;
@@ -55,14 +53,12 @@ public class Controller {
 		
 		ExportFrameEvent.model = _model;
 		ExportFrameEvent.view = _view;
-		
-<<<<<<< HEAD
-		//LoginWatek.model = _model;
-		//LoginWatek.view = _view;
-=======
+
 		PanWatek.model = _model;
 		PanWatek.view = _view;
->>>>>>> origin/master
+		
+		//LoginWatek.model = _model;
+		//LoginWatek.view = _view;
 	}
 	
 }

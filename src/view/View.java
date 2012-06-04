@@ -67,7 +67,7 @@ public class View {
 	  catch (InterruptedException e1) { e1.printStackTrace();}
 	  procent += 100/licznik;
 	  if (procent == 98) procent = 100;
-	  progressFrame.tekst.setText("Trwa logowanie do programu... ("+procent+"%)");
+	  progressFrame.tekst.setText("Trwa ³adowanie programu... ("+procent+"%)");
 	  progressFrame.progressBar.setValue((int) procent);
   }
   try {Thread.sleep(500);} catch (InterruptedException e1) { e1.printStackTrace();}
@@ -88,24 +88,6 @@ public class View {
              welcomeFrame.setResizable(false);
             }  
   });
-  
-  /**/
-  // MAIN FRAME
-  /*EventQueue.invokeLater( new Runnable()
-  {  
-            public void run()
-            {  
-            	int SizeX_WelcomeFrame = 720;
-            	int SizeY_WelcomeFrame = 420;
-            	
-            	int SizeX_ProgressFrame = 300;
-            	int SizeY_ProgressFrame = 80;
-            	
-            	mainFrame = new MainFrame("Kalendarz", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
-            	mainFrame.setResizable(false);
-            	mainFrame.setResizable(false);
-            }  
-        });*/
  }
  
 }

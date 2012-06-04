@@ -40,7 +40,7 @@ public class ProgressFrame extends JFrame implements ActionListener
         panel = new JPanel();
                 
         // Tworzenie tekstu
-        tekst = new JLabel("Trwa logowanie do programu... ("+procent+"%)");
+        tekst = new JLabel("Trwa ³adowanie programu... ("+procent+"%)");
         panel.add(tekst);
                 
         // Tworzenie progressBar
