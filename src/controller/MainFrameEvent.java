@@ -163,8 +163,6 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 					alarmDate.setMinutes(Integer.parseInt(minuteAlarm));
 					
 					roznica = ((startDate.getTime()/60000)-(alarmDate.getTime()/60000));
-					
-					System.out.println("Roznica: "+roznica);
 				}
 		  		
 		  		
@@ -177,10 +175,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		else if(new Date(model.currentYear, model.currentMonth, model.currentDay).compareTo(new Date(startYear, startMonth, startDay)) == 1){
 		  			JOptionPane.showMessageDialog(null, "Data of start is too early");
 		  		}
-		  		else if(view.mainFrame.panelAlarm.isVisible() == true){
-		  			
-		  			if((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
-		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))
+		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
+		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
 		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
 		  		}
 		  		else{
