@@ -38,8 +38,8 @@ public class WelcomeFrame extends JFrame
         setLocation(x,y);  
         setVisible(true);
         
-        // Tworzenie zdjecia
-		zdjecie = new ImagePanel(0, SizeX, SizeY, "tlo.png");
+        // Tworzenie zdjecia              // 25
+		zdjecie = new ImagePanel(0, SizeX-5, SizeY-54, "tlo2.png");
 		setContentPane(zdjecie);
         
         // Tworzenie menu
