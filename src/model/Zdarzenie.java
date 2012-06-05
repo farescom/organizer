@@ -19,7 +19,19 @@ public class Zdarzenie
     public String godzina;
     public String dzien;
     
-	/** Kontruktor klasy Zdarzenie */
+	 /** Kontruktor klasy Zdarzenie
+	 * @param id identyfikator zdarzenia
+	 * @param opis opis zdarzenia
+	 * @param czy_okres flaga oznaczajaca, ze zdarzenie jest
+	 * - punktem w czasie (wartosc 0) np. czas rozpoczêcia zajêæ
+	 * - okresem w czasie (wartosc 1) np. okres trwania zajêæ (od-do)
+	 * @param data_rozpoczecia data rozpoczêcia danego zdarzenia
+	 * @param data_zakonczenia data zakonczenia danego zdarzenia
+	 * @param miejsce miejsce zdarzenia
+	 * @param waznosc okresla czy dane zdarzenia ma ustawiony alarm i czas, w ktorym alarm sie wlacza
+	 * (podawany w minutach przed data rozpoczecia zdarzenia).
+	 * @param rodzaj dodatkowy atrybut zdarzen zarezerwowane na potrzeby rozbudowy w przyszlosci
+	 */ 
     public Zdarzenie( int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia, String miejsce, long waznosc, int rodzaj)
     {
     	this.id = id;
@@ -35,6 +47,10 @@ public class Zdarzenie
     	this.dzien = new String(this.data_rozpoczecia.substring(8, 10));
     }
     
+	 /** Kontruktor kopiujacy klasy Zdarzenie
+	 * @param zdarzenie referencja do obiektu typu zdarzenie na podstawie, ktorego zostanie
+	 * utworzone nowe zdarzenie.
+	 */
     public Zdarzenie(Zdarzenie zdarzenie)
     {
     	this.id = zdarzenie.id;
@@ -50,6 +66,9 @@ public class Zdarzenie
     	this.dzien = new String(zdarzenie.data_rozpoczecia.substring(8, 10));
     }
     
+	 /** Metoda konwersji obiektu typu zdarzenie do Stringa.
+	 * @return referencja do obiektu klasy String zawierajacego ³añcuch opisujacy zdarzenie.
+	 */
     public String toString()
     {
     	return (id + " " + opis + " " + data_rozpoczecia + " " + data_zakonczenia +

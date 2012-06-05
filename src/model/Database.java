@@ -8,32 +8,11 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
-* Klasa odpowiedzialna za komunikacjê z baz¹ danych.
-* @param args tablica argumentów wywo³ania programu
+* Klasa odpowiedzialna za komunikacjê z baz¹ danych. Obiekt tej klasy reprezentuje fizyczn¹
+* bazê danych i udostêpnia podstawowe metody komunikacji z ni¹: get, set, modify, delete ...
 */
 public class Database
-{
-	
-	 /* Baza danych
-	 Database baza = new Database();
-	 ArrayList<Zdarzenie> zdarzenia = new ArrayList<Zdarzenie>();
-	 baza.connection();
-	 baza.get(-1, zdarzenia); System.out.println(" ");  // wszystkie zdarzenia
-	 baza.get(1, zdarzenia); System.out.println(" "); // zdarzenie o id = 1
-	 baza.get(4, zdarzenia); System.out.println(" "); // zdarzenie o id nieistniejacym
-	 baza.get("SELECT * FROM zdarzenia", zdarzenia);  // zapytanie
-	 Date datunka = new Date(15);
-	 baza.update(2, "tekst", 1, datunka, datunka, null, 61, -1); // null lub -1 gdy nietykalne
-
-	 Zdarzenie jakies = new Zdarzenie(2, "tekstss", 1, datunka, datunka, null, 6, -1);
-	 baza.update(2, jakies);
-
-	 baza.insert("aaa", 111, datunka, datunka, "aa", 11, 111); // null lub -1 gdy nietykalne
-	 zdarzenia.removeAll(zdarzenia);
-	 baza.get(-1, zdarzenia);
-	 System.out.println(zdarzenia.toString()); System.out.println(" ");
-	 */
-		
+{	
 	public String driver;
 	public String sql_server_address;
 	public String user;
@@ -61,6 +40,10 @@ public class Database
 	 
 	 /**
 	 * Kontruktor tworzy obiekt klasy Database z ustawieniami podanymi jako argumenty
+	 * @param driver nazwa sterownika bazy
+	 * @param sql_server_address adres serwera bazy danych
+	 * @param user nazwa uzytkownika bazy
+	 * @param password haslo uzytkownika bazy
 	 */
 	 public Database (String driver, String sql_server_address, String user, String password)
 	{
@@ -72,6 +55,8 @@ public class Database
 	 
 	 /**
 	 * Metoda tworzy po³¹czenie z baz¹ danych
+	 * @return wartosc "true" w przypadku gdy po³¹czenie odby³o siê z powodzeniem
+	 * 		   w kazdym innym przypadku "false".
 	 */
 	 public boolean connection()
 		{
@@ -89,6 +74,7 @@ public class Database
 	 
 	 /**
 	 * Metoda ustala tablice zdarzeñ dla zalogowanego u¿ytkownika
+	 * @param table nazwa tablicy zawierajacej dane danego uzytkownika
 	 */
 	 public void set_table(String table)
 	 {
@@ -97,7 +83,7 @@ public class Database
 	 
 	 /**
 	 * Metoda wykonuje przekazane polecenie i zwraca wyniki do listy podanej w drugim parametrze
-	 * @param zapytanie zapytanie sql
+	 * @param zapytanie zapytanie napisane w jezyku sql
 	 * @param zdarzenia referencja do obiektu klasy ArrayList, do którego zostan¹ dopisane zwrócone wyniki
 	 */
 	 public int get(String zapytanie, ArrayList <Zdarzenie> zdarzenia)
@@ -167,7 +153,20 @@ public class Database
 	 
 	 /**
 	 * Metoda do aktualizacji krotek w bazie danych
-	 * null, -1 oznaczaj¹ nie zmieniania danej pozycji
+	 * podanie na jakimœ polu wartoœci (null - dla obiektów, lub -1 dla typów prostych)
+	 * oznacza, ¿e dana pozycja ma nie byæ zmieniana.
+	 * @param id identyfikator zdarzenia, ktore ma zostac zmodifikowane
+	 * @param opis opis zdarzenia
+	 * @param czy_okres flaga oznaczajaca, ze zdarzenie jest
+	 * - punktem w czasie (wartosc 0) np. czas rozpoczêcia zajêæ
+	 * - okresem w czasie (wartosc 1) np. okres trwania zajêæ (od-do)
+	 * @param data_rozpoczecia data rozpoczêcia danego zdarzenia
+	 * @param data_zakonczenia data zakonczenia danego zdarzenia
+	 * @param miejsce miejsce zdarzenia
+	 * @param waznosc okresla czy dane zdarzenia ma ustawiony alarm i czas, w ktorym alarm sie wlacza
+	 * (podawany w minutach przed data rozpoczecia zdarzenia).
+	 * @param rodzaj dodatkowy atrybut zdarzen zarezerwowane na potrzeby rozbudowy w przyszlosci
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
 	 */ 
 	 public int update(int id, String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
 	   String miejsce, long waznosc, int rodzaj)
@@ -198,9 +197,13 @@ public class Database
 	}
 	 
 	 /**
-	 * Metoda do aktualizacji krotek
-	 * null, -1 oznaczaj¹ nie zmieniania danej pozycji
-	 */ 
+		 * Metoda do aktualizacji krotek w bazie danych
+		 * podanie na jakimœ polu wartoœci (null - dla obiektów, lub -1 dla typów prostych)
+		 * oznacza, ¿e dana pozycja ma nie byæ zmieniana.
+		 * @param id identyfikator zdarzenia, ktore ma zostac zmodyfikowane
+		 * @param zdarzenie referencja do obiektu klasy Zdarzenie zawierajacego dane do modyfikacji
+		 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
+		 */ 
 	 public int update(int id, Zdarzenie zdarzenie)
 	 {
 		try
@@ -230,6 +233,17 @@ public class Database
 	 
 	 /**
 	 * Metoda do dodawania krotek
+	 * @param opis opis zdarzenia
+	 * @param czy_okres flaga oznaczajaca, ze zdarzenie jest
+	 * - punktem w czasie (wartosc 0) np. czas rozpoczêcia zajêæ
+	 * - okresem w czasie (wartosc 1) np. okres trwania zajêæ (od-do)
+	 * @param data_rozpoczecia data rozpoczêcia danego zdarzenia
+	 * @param data_zakonczenia data zakonczenia danego zdarzenia
+	 * @param miejsce miejsce zdarzenia
+	 * @param waznosc okresla czy dane zdarzenia ma ustawiony alarm i czas, w ktorym alarm sie wlacza
+	 * (podawany w minutach przed data rozpoczecia zdarzenia).
+	 * @param rodzaj dodatkowy atrybut zdarzen zarezerwowane na potrzeby rozbudowy w przyszlosci
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
 	 */ 
 	 public int insert(String opis, int czy_okres, String data_rozpoczecia, String data_zakonczenia,
 	   String miejsce, long waznosc, int rodzaj)
@@ -253,9 +267,10 @@ public class Database
 	 }
 	 
 	 /**
-	 * Metoda do rejestrowania uzytkownika
+	 * Metoda do rejestrowania nowego uzytkownika w bazie
 	 * @param login - string okreslajacy login nowego uzytkownika
 	 * @param password - string okreslajacy haslo nowego uzytkownika
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
 	 */ 
 	 public int register(String login, char[] password)
 	{
@@ -303,6 +318,7 @@ public class Database
 	 * Metoda do logowania uzytkownika
 	 * @param login - string okreslajacy login uzytkownika
 	 * @param password - string okreslajacy haslo uzytkownika
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
 	 */ 
 	 public int login(String login, char[] password)
 	{
@@ -375,6 +391,8 @@ public class Database
 	 
 	 /**
 	 * Metoda usuwa z tabeli krotki o podanej wartosci id
+	 * @param numer identyfikator zdarzenia, ktore ma zostac usuniete z bazy danych
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
 	 */
 	 public int delete(int numer)
 	{
@@ -395,6 +413,11 @@ public class Database
 	    }
 	}
 	 
+	 /**
+	 * Metoda do wykonywania zdefiniowanego przez uzytkownika zapytania sql typu "odczyt" 
+	 * @param zapytanie zapytanie sql zapisane w obiekcie typu String
+     * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
+	 */
 	 public int query(String zapytanie)
 	{
 		try
@@ -411,8 +434,10 @@ public class Database
 	}
 	 
 	 /**
-		 * Metoda usuwa z tabeli krotki spe³niaj¹ce pewien warunek
-		 */
+	 * Metoda do wykonywania zdefiniowanego przez uzytkownika zapytania sql typu "mofyfikuj" 
+	 * @param zapytanie zapytanie sql zapisane w obiekcie typu String
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
+     */
 		 public int query2(String zapytanie)
 		{
 			try

@@ -6,29 +6,27 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
-* Klasa odpowiedzialna za operowanie pomiêdzy XMLem a Wydarzeniem.
+* Klasa odpowiedzialna za operowanie pomiêdzy XMLem a Zdarzeniami.
+* Zawiera dwie podstawowe metody: konwersji danych z programu do formatu XML i odwrotnie.
 */
 public class XML {
 	
-	/*Przyklad wykorzystania XML
-	Zdarzenie zdarzenie = new Zdarzenie(1, "Pi³ka Nozna", 0, new Date(2012, 05, 23), new Date(2012, 05, 23), "£upkowa", 1, 1);
-	Zdarzenie zdarzenie_XML;
-	
-	String plik = "plik.xml";
-	XML.toXML(zdarzenie, plik);
-
-	zdarzenie_XML = XML.fromXML(plik);
-	System.out.println(zdarzenie_XML.toString());*/
-	
 	public static Database baza;
+	
+	/**
+	* Kontruktor domyslny klasy. Ustawia referencje do bazy danych na ktorej beda wykonywane 
+	* operacje konwersji.
+	* @param baza referencja do bazy danych.
+	*/
 	public XML(Database baza)
 	{
 		this.baza = baza;
 	}
+	
 	/**
-	* Metoda zapisuje dane Wydarzenie do pliku XML
-	* @param zdarzenie - Wydarzenie, ktore ma zostac zapisane do pliku XML
-	* @param file_name - nazwa pliku XML
+	* Metoda zapisuje dane Zdarzenie do pliku XML
+	* @param zdarzenie - zdarzenie, ktore ma zostac zapisane do pliku XML
+	* @param file_name - nazwa pliku XML, do ktorego ma zostac zapisane zdarzenie
 	*/
 	public static void toXML(Zdarzenie zdarzenie, String file_name)
 	{	
@@ -56,6 +54,11 @@ public class XML {
 		}
 	}
 	
+	/**
+	* Metoda zapisuje kolekcje zdarzen do pliku XML
+	* @param zdarzenia - kolekcja zdarzen, ktore maja zostac zapisane do pliku XML
+	* @param file_name - nazwa pliku XML, do ktorego ma zostac zapisane zdarzenie
+	*/
 	public static void toXML(ArrayList <Zdarzenie> zdarzenia, String file_name)
 	{	
 		XStream xStream = new XStream();
@@ -85,6 +88,12 @@ public class XML {
 		}
 	}
 	
+	/**
+	* Metoda zapisuje kolekcje zdarzen do pliku XML
+	* @param zdarzenia - kolekcja zdarzen, ktore maja zostac zapisane do pliku XML
+	* @param file_name - obiekt typu File zawierajacy w sobie m.in. sciezke do miejsca
+	* w ktorym ma zostac zapisany plik XML.
+	*/
 	public static void toXML(ArrayList <Zdarzenie> zdarzenia, File file)
 	{	
 		XStream xStream = new XStream();
@@ -115,7 +124,8 @@ public class XML {
 	
 	/**
 	* Metoda odczytuje dane Wydarzenie z pliku XML
-	* @param file_name - nazwa pliku XML
+	* @param file_name - nazwa pliku XML, z ktorego ma zostac wczytane zdarzenie.
+	* return referencja do obiektu typu Zdarzenie
 	*/
 	public static Zdarzenie fromXML(String file_name)
 	{	
@@ -146,6 +156,12 @@ public class XML {
 		return (Zdarzenie) xStream.fromXML(xml);
 	}
 	
+	/**
+	* Metoda odczytuje dane Wydarzenie z pliku XML
+	* @param file_name - nazwa pliku XML, z ktorego maja zostac wczytane zdarzenia.
+	* @param zdarzenia - referencja do kolekcji, do ktorej zostana zapisane wydobyte
+	* z pliku XML zdarzenia
+	*/
 	public static void fromXML(String file_name, ArrayList <Zdarzenie> zdarzenia)
 	{	
 		XStream xStream = new XStream();
@@ -184,6 +200,13 @@ public class XML {
 		}
 	}
 	
+	/**
+	* Metoda odczytuje dane Wydarzenie z pliku XML
+	* @param file_name - obiekt typu File zawierajacy m.in. sciezke pliku XML,
+	* z ktorego maja zostac wczytane zdarzenia.
+	* @param zdarzenia - referencja do kolekcji, do ktorej zostana zapisane wydobyte
+	* z pliku XML zdarzenia
+	*/
 	public static void fromXML(File file_name, ArrayList <Zdarzenie> zdarzenia)
 	{	
 		XStream xStream = new XStream();

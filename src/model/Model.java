@@ -8,7 +8,8 @@ import javax.swing.JOptionPane;
 import controller.PanWatek;
 
 /**
-* Glowna klasa modelu, ktora bedzie jako skladowe zawierac w sobie wszystkie klasy modelu
+* Glowna klasa modelu, odpowiedzialna miêdzy innymi za tworzenie obiektów klas warstwy danych
+* Klasa zawiera w sobie wszystkie klasy modelu
 */ 
 public class Model {
 
@@ -31,8 +32,11 @@ public class Model {
 	public static ArrayList<Zdarzenie> zdarzenia = new ArrayList<Zdarzenie>();
 	public MainFrameModel mainFrame;
 	
-	public Model(){
-		
+	/**
+	* Kontruktor domyœlny klasy. Tworzy obiekt klasy Database.
+	*/ 
+	public Model()
+	{
 		baza = new Database();
 	}
 }
