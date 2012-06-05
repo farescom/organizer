@@ -20,13 +20,16 @@ public class WelcomeFrameEvent implements ActionListener{
 	public static View view;
 	public static Model model;
 	
+	/**
+	* Kontruktor domyœlny klasy.
+	*/ 
 	public WelcomeFrameEvent(){}
 
 	/**
 	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
 	 * @param e - dostêp do konkretnego zdarzenia
 	 */
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e){
 		
 		Object source = e.getSource();  
         if(source == view.welcomeFrame.register)  

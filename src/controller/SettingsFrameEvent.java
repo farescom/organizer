@@ -11,15 +11,25 @@ import javax.swing.event.ChangeListener;
 import view.*;
 import model.*;
 
+/**
+* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodz¹ce z okna SettingsFrame
+*/ 
 public class SettingsFrameEvent implements ActionListener, ChangeListener
 {
  public static View view;
  public static Model model;
  public Controller controller;
  
+ /**
+ * Kontruktor domyœlny klasy.
+ */ 
  public SettingsFrameEvent(){}
  //public SettingsFrameEvent(Controller controller){this.controller = controller;}
 
+   /**
+	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
+	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	*/
 	public void actionPerformed(ActionEvent e)
 	{
 		Object source = e.getSource();  
@@ -146,6 +156,11 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
         }
 	}
 	
+   /**
+	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych wykonaniem pewnych zmian
+	* w komponentach np. przesuniêciem suwaka.
+	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	*/
 	public void stateChanged(ChangeEvent e)
 	{
 	    JSlider source = (JSlider)e.getSource();
