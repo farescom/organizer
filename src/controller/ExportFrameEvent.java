@@ -10,16 +10,26 @@ import javax.swing.event.ChangeListener;
 import view.*;
 import model.*;
 
-public class ExportFrameEvent implements ActionListener, ChangeListener
+/**
+* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodz¹ce z okna eksportowania
+* danych aplikacji "ExportFrame"
+*/ 
+public class ExportFrameEvent implements ActionListener
 {
  public static View view;
  public static Model model;
  public static Controller controller;
  public int opcja = 1;
  
- 
+ /**
+ * Kontruktor domyœlny klasy.
+ */ 
  public ExportFrameEvent(){}
 
+   /**
+	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
+	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	*/
 	public void actionPerformed(ActionEvent e)
 	{
 		Object source = e.getSource();  
@@ -55,9 +65,5 @@ public class ExportFrameEvent implements ActionListener, ChangeListener
         	opcja = 1;
         if(source == view.exportFrame.opcja_2) 
         	opcja = 2;
-	}
-	
-	public void stateChanged(ChangeEvent e)
-	{
 	}	
 }
