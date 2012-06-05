@@ -22,6 +22,10 @@ import view.View;
 
 import controller.Controller;
 
+/**
+* Klasa odpowiadaj¹ca za warstwê modelu g³ównego okna aplikacji.
+* Definicja zmiennych, inicjalizacja zmiennych.
+*/
 public class MainFrameModel {
 
 	public int startDay = 0, startMonth = 0, startYear = 0; 
@@ -44,12 +48,19 @@ public class MainFrameModel {
 	ArrayList<Zdarzenie> monthEventTemp = new ArrayList<Zdarzenie>();
 	ArrayList<Zdarzenie> dayEventTemp = new ArrayList<Zdarzenie>();
 	
+	/**
+	* Konstruktor klasy MainFrameModel odpowiadajacy za uruchomienie metod odpowiedzialnych za wygenerowanie
+	* modelu dla tabel przechowuj¹cych zdarzenia z danego dnia b¹dŸ z danego miesi¹ca.
+	*/ 
 	public MainFrameModel()
 	{
 		tableDay();
 		tableMonth();
 	}
 	
+	/**
+	* Metoda odpowiadajaca za wygenerowanie modelu i zawartoœci tabeli przechowuj¹cej wydarzenia z danego dnia
+	*/
 	public void tableDay(){
 		
 		dayEvent.removeAll(dayEvent);
@@ -118,6 +129,9 @@ public class MainFrameModel {
 	     }
 	}
 	
+	/**
+	* Metoda odpowiadajaca za wygenerowanie modelu i zawartoœci tabeli przechowuj¹cej wydarzenia z danego miesi¹ca
+	*/
 	public void tableMonth(){
 		
 		monthEvent.removeAll(monthEvent);
@@ -244,6 +258,10 @@ public class MainFrameModel {
 	     
 	}
 	
+	/**
+	* Klasa odpowiadaj¹ca za sposób w jakim s¹ wyœwietlane dane w danej komórce tabeli przechowuj¹cej
+	* zdarzenia z danego miesi¹ca
+	*/
 	class TableMonthRenderer extends DefaultTableCellRenderer{
 		public Integer day = 0;
 		
@@ -293,6 +311,10 @@ public class MainFrameModel {
 		}
 	}
 	
+	/**
+	* Klasa odpowiadaj¹ca za sposób w jakim s¹ wyœwietlane dane w danej komórce tabeli przechowuj¹cej
+	* zdarzenia z danego dnia
+	*/
 	class MultiLineCellRenderer implements TableCellRenderer {
 		
 		@Override
