@@ -23,8 +23,8 @@ import view.View;
 import controller.Controller;
 
 /**
-* Klasa odpowiadaj¹ca za warstwê modelu g³ównego okna aplikacji.
-* Definicja zmiennych, inicjalizacja zmiennych.
+* Klasa odpowiadaj¹ca za warstwê modelu g³ównego okna aplikacji
+* Definicja zmiennych, inicjalizacja zmiennych
 */
 public class MainFrameModel {
 
