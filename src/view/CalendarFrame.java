@@ -23,9 +23,8 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-import view.Calendar.buttonNext_Action;
-import view.Calendar.buttonPrev_Action;
-import view.Calendar.comboYear_Action;
+import controller.Controller;
+
 import view.Calendar.tableCalendarRenderer;
 
 import model.Model;
@@ -40,6 +39,15 @@ public class CalendarFrame extends JFrame {
 	
 	public CalendarProgram calendarProgram;
 	public JPanel calendar;
+	
+	public static JLabel labelMonth, labelYear;
+	public static JButton buttonPrev, buttonNext;
+	public static JTable tableCalendar;
+	public static JComboBox comboYear;
+	public static JFrame frameMain;
+	public static DefaultTableModel mtableCalendar; //Table model
+	public static JScrollPane stableCalendar; //The scrollpane
+	public static JPanel panelCalendar, panelTop, panelBottom, panelMonth;
 	
 	public static Model model;
 	
@@ -75,16 +83,7 @@ public class CalendarFrame extends JFrame {
 	/**
 	* Klasa wewnetrzna odpowiadajaca za wyswietlenie kalendarza w ramce kalendarza (w CalendarFrame)
 	*/ 
-	static class CalendarProgram{
-		
-		public static JLabel labelMonth, labelYear;
-		public static JButton buttonPrev, buttonNext;
-		public static JTable tableCalendar;
-		public static JComboBox comboYear;
-		public static JFrame frameMain;
-		public static DefaultTableModel mtableCalendar; //Table model
-		public static JScrollPane stableCalendar; //The scrollpane
-		public static JPanel panelCalendar, panelTop, panelBottom, panelMonth;
+	public static class CalendarProgram{
 
 		static MainFrame mainFrame;
 		
@@ -120,8 +119,8 @@ public class CalendarFrame extends JFrame {
 			stableCalendar.setPreferredSize(new Dimension(360, 140));
 			
 			//Register action listeners
-			buttonPrev.addActionListener(new buttonPrev_Action());
-			buttonNext.addActionListener(new buttonNext_Action());
+			buttonPrev.addActionListener(Controller.mainFrameEvent);
+			buttonNext.addActionListener(Controller.mainFrameEvent);
 			
 			//Add controls to pane
 			panelTop.add(buttonPrev, BorderLayout.WEST);
@@ -165,7 +164,7 @@ public class CalendarFrame extends JFrame {
 				comboYear.addItem(String.valueOf(i));
 			}
 			comboYear.setSelectedItem(String.valueOf(model.currentYear)); //Select the correct year in the combo box
-			comboYear.addActionListener(new comboYear_Action());
+			comboYear.addActionListener(Controller.mainFrameEvent);
 			
 			
 			//Refresh calendar
@@ -189,7 +188,7 @@ public class CalendarFrame extends JFrame {
 			buttonNext.setEnabled(true);
 			if (month == 1 && year <= model.currentYear-100){buttonPrev.setEnabled(false);} //Too early
 			if (month == 12 && year >= model.currentYear+100){buttonNext.setEnabled(false);} //Too late
-			labelMonth.setText(View.months[month]); //Refresh the month label (at the top)
+			labelMonth.setText(model.months[month]); //Refresh the month label (at the top)
 			labelMonth.setBounds(160-labelMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
 			comboYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 			
@@ -225,14 +224,14 @@ public class CalendarFrame extends JFrame {
 			public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
 				super.getTableCellRendererComponent(table, value, selected, focused, row, column);
 				if (column == 5 || column == 6){ //Week-end
-					setBackground(View.kolorWeekendu);
+					setBackground(model.kolorWeekendu);
 				}
 				else{ //Week
 					setBackground(new Color(255, 255, 255));
 				}
 				if (value != null){
 					if (Integer.parseInt(value.toString()) == model.currentDay && model.currentMonth == model.checkedMonth && model.currentYear == model.checkedYear){ //Today
-						setBackground(View.kolorDnia);
+						setBackground(model.kolorDnia);
 					}
 				}
 				if(focused == true && mainFrame.source != null)
@@ -264,129 +263,11 @@ public class CalendarFrame extends JFrame {
 				}
 				if(selected == true)
 				{
-					setBackground(View.kolorWybranegoDnia);
+					setBackground(model.kolorWybranegoDnia);
 				}
 				setBorder(null);
 				setForeground(Color.black);
 				return this;  
-			}
-		}
-
-		/**
-		* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac wstecz) dla kalendarza
-		* w ramce kalendarza (w CalendarFrame)
-		*/
-		static class buttonPrev_Action implements ActionListener{
-			public void actionPerformed (ActionEvent e){
-				if(mainFrame.source == mainFrame.data_roz){
-					if (model.mainFrame.startMonth == 1){ //Back one year
-						model.mainFrame.startMonth = 12;
-						model.mainFrame.startYear -= 1;
-					}
-					else{ //Back one month
-						model.mainFrame.startMonth -= 1;
-					}
-					
-					refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-				}
-				else if(mainFrame.source == mainFrame.data_zak){
-					if (model.mainFrame.finishMonth == 1){ //Back one year
-						model.mainFrame.finishMonth = 12;
-						model.mainFrame.finishYear -= 1;
-					}
-					else{ //Back one month
-						model.mainFrame.finishMonth -= 1;
-					}
-					
-					refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
-				}
-				else if(mainFrame.source == mainFrame.dataAlarmu){
-					if (model.mainFrame.alarmMonth == 1){ //Back one year
-						model.mainFrame.alarmMonth = 12;
-						model.mainFrame.alarmYear -= 1;
-					}
-					else{ //Back one month
-						model.mainFrame.alarmMonth -= 1;
-					}
-					
-					refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
-				}
-			}
-		}
-		
-		/**
-		* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac dalej) dla kalendarza
-		* w ramce kalendarza (w CalendarFrame)
-		*/
-		static class buttonNext_Action implements ActionListener{
-			public void actionPerformed (ActionEvent e){
-				
-				if(mainFrame.source == mainFrame.data_roz){
-					if (model.mainFrame.startMonth == 12){ //Foward one year
-						model.mainFrame.startMonth = 1;
-						model.mainFrame.startYear += 1;
-					}
-					else{ //Foward one month
-						model.mainFrame.startMonth += 1;
-					}
-					
-					refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-				}
-				else if(mainFrame.source == mainFrame.data_zak){
-					if (model.mainFrame.finishMonth == 12){ //Foward one year
-						model.mainFrame.finishMonth = 1;
-						model.mainFrame.finishYear += 1;
-					}
-					else{ //Foward one month
-						model.mainFrame.finishMonth += 1;
-					}
-					
-					refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
-				}
-				else if(mainFrame.source == mainFrame.dataAlarmu){
-					if (model.mainFrame.alarmMonth == 12){ //Foward one year
-						model.mainFrame.alarmMonth = 1;
-						model.mainFrame.alarmYear += 1;
-					}
-					else{ //Foward one month
-						model.mainFrame.alarmMonth += 1;
-					}
-					
-					refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
-				}
-			}
-		}
-		
-		/**
-		* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru roku dla kalendarza
-		* w ramce kalendarza (w CalendarFrame)
-		*/
-		static class comboYear_Action implements ActionListener{
-			public void actionPerformed (ActionEvent e){
-				JComboBox cb = (JComboBox)e.getSource();
-				String year = (String)cb.getSelectedItem();
-				
-				if(mainFrame.source == mainFrame.data_roz){
-					Integer yearInt = new Integer(model.mainFrame.startYear);
-					if (!year.equals(yearInt.toString())){
-						model.mainFrame.startYear = Integer.parseInt(year);
-						refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
-					}
-				}
-				else if(mainFrame.source == mainFrame.data_zak){
-					Integer yearInt = new Integer(model.mainFrame.finishYear);
-					if (!year.equals(yearInt.toString())){
-						model.mainFrame.finishYear = Integer.parseInt(year);
-						refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
-					}
-				}
-				else if(mainFrame.source == mainFrame.dataAlarmu){
-					Integer yearInt = new Integer(model.mainFrame.alarmYear);
-					if (!year.equals(yearInt.toString())){
-						model.checkedYear = Integer.parseInt(year);
-						refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
-					}
-				}
 			}
 		}
 	}

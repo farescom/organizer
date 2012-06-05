@@ -18,7 +18,6 @@ public class ExportFrameEvent implements ActionListener
 {
  public static View view;
  public static Model model;
- public static Controller controller;
  public int opcja = 1;
  
  /**

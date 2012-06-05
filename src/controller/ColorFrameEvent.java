@@ -28,8 +28,8 @@ public class ColorFrameEvent implements ActionListener
         Object source = e.getSource();
         if(source == view.colorFrame.zatwierdz)  
         {
-        	controller.inny_kolor = view.colorFrame.tcc.getColor();
-        	controller.kolor_dni_wolnych = 4;
+        	model.inny_kolor = view.colorFrame.tcc.getColor();
+        	model.kolor_dni_wolnych = 4;
         	view.colorFrame.hide();
         }
         else if(source == view.colorFrame.anuluj)  

@@ -55,8 +55,8 @@ public class Calendar{
 		stableCalendar.setPreferredSize(new Dimension(360, 140));
 		
 		//Register action listeners
-		buttonPrev.addActionListener(new buttonPrev_Action());
-		buttonNext.addActionListener(new buttonNext_Action());
+		buttonPrev.addActionListener(Controller.mainFrameEvent);
+		buttonNext.addActionListener(Controller.mainFrameEvent);
 		
 		//Add controls to pane
 		panelTop.add(buttonPrev, BorderLayout.WEST);
@@ -98,7 +98,7 @@ public class Calendar{
 			comboYear.addItem(String.valueOf(i));
 		}
 		comboYear.setSelectedItem(String.valueOf(model.currentYear)); //Select the correct year in the combo box
-		comboYear.addActionListener(new comboYear_Action());
+		comboYear.addActionListener(Controller.mainFrameEvent);
 		
 		
 		//Refresh calendar
@@ -122,7 +122,7 @@ public class Calendar{
 		buttonNext.setEnabled(true);
 		if (month == 1 && year <= model.currentYear-100){buttonPrev.setEnabled(false);} //Too early
 		if (month == 12 && year >= model.currentYear+100){buttonNext.setEnabled(false);} //Too late
-		labelMonth.setText(View.months[month]); //Refresh the month label (at the top)
+		labelMonth.setText(model.months[month]); //Refresh the month label (at the top)
 		labelMonth.setBounds(160-labelMonth.getPreferredSize().width/2, 25, 180, 25); //Re-align label with calendar
 		comboYear.setSelectedItem(String.valueOf(year)); //Select the correct year in the combo box
 		
@@ -158,21 +158,21 @@ public class Calendar{
 		public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
 			super.getTableCellRendererComponent(table, value, selected, focused, row, column);
 			if (column == 5 || column == 6){ //Week-end
-				setBackground(View.kolorWeekendu);
+				setBackground(model.kolorWeekendu);
 			}
 			else{ //Week
 				setBackground(new Color(255, 255, 255));
 			}
 			if (value != null){
 				if (Integer.parseInt(value.toString()) == model.currentDay && model.currentMonth == model.checkedMonth && model.currentYear == model.checkedYear){ //Today
-					setBackground(View.kolorDnia);
+					setBackground(model.kolorDnia);
 				}
 			}
 			if(focused == true)
 			{
 				if(value != null){
 					model.checkedDay = Integer.parseInt(value.toString());
-					MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
+					MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + model.months[Model.checkedMonth] + " Event");
 					model.mainFrame.tableDay();
 					View.mainFrame.refreshTableDay();
 					MainFrame.calendar.setVisible(false);
@@ -182,73 +182,11 @@ public class Calendar{
 			}
 			if(selected == true)
 			{
-				setBackground(View.kolorWybranegoDnia);
+				setBackground(model.kolorWybranegoDnia);
 			}
 			setBorder(null);
 			setForeground(Color.black);
 			return this;  
-		}
-	}
-	
-	/**
-	* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac wstecz) dla kalendarza "sciennego"
-	*/
-	static class buttonPrev_Action implements ActionListener{
-		public void actionPerformed (ActionEvent e){
-
-				if (model.checkedMonth == 1){ //Back one year
-					model.checkedMonth = 12;
-					model.checkedYear -= 1;
-				}
-				else{ //Back one month
-					model.checkedMonth -= 1;
-				}
-				
-				model.mainFrame.tableMonth();
-				View.mainFrame.refreshTableMonth();
-				
-				refreshCalendar(model.checkedMonth, model.checkedYear);
-			
-		}
-	}
-	
-	/**
-	* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac dalej) dla kalendarza "sciennego"
-	*/ 
-	static class buttonNext_Action implements ActionListener{
-		public void actionPerformed (ActionEvent e){
-			
-				if (model.checkedMonth == 12){ //Foward one year
-					model.checkedMonth = 1;
-					model.checkedYear += 1;
-				}
-				else{ //Foward one month
-					model.checkedMonth += 1;
-				}
-				
-				model.mainFrame.tableMonth();
-				View.mainFrame.refreshTableMonth();
-				refreshCalendar(model.checkedMonth, model.checkedYear);
-			
-		}
-	}
-	
-	/**
-	* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru roku dla kalendarza "sciennego"
-	*/ 
-	static class comboYear_Action implements ActionListener{
-		public void actionPerformed (ActionEvent e){
-			JComboBox cb = (JComboBox)e.getSource();
-			String year = (String)cb.getSelectedItem();
-			 
-			Integer yearInt = new Integer(model.checkedYear);
-			if (!year.equals(yearInt.toString())){
-				model.checkedYear = Integer.parseInt(year);
-				refreshCalendar(model.checkedMonth, model.checkedYear);
-				
-				model.mainFrame.tableMonth();
-				View.mainFrame.refreshTableMonth();
-			}
 		}
 	}
 }
