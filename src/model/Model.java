@@ -1,5 +1,6 @@
 package model;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
@@ -13,7 +14,7 @@ import controller.PanWatek;
 */ 
 public class Model {
 
-	// Aktualny dzien na kalendarzu
+	// Aktualny dzien
 	private static GregorianCalendar cal = new GregorianCalendar(); //Create calendar
 	public static int currentDay = cal.get(GregorianCalendar.DAY_OF_MONTH);
 	public static int currentMonth = cal.get(GregorianCalendar.MONTH)+1;
@@ -24,6 +25,25 @@ public class Model {
 	public static int checkedMonth = currentMonth;
 	public static int checkedYear = currentYear;
 	
+	// Parametry koloru
+	 public static Color kolorWeekendu = Color.LIGHT_GRAY;
+	 public static Color kolorDnia = new Color(100, 250, 100);
+	 public static Color kolorWybranegoDnia = new Color(250, 100, 100);
+	 public static String[] months =  {"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+	
+	// Wazne flagi kontrolera - okreœlaj¹ faktyczne ustawieñ
+	public static int dni_waznosci = 1;	// ile dni zdarzenia istnieja, po czym zostana skasowane
+	public static int kolor_dni_wolnych2 = 1;
+	public static int kolor_aktualnego_dnia2 = 1;
+	public static int kolor_zaznaczonego_dnia2 = 1;
+		
+	// flagi z ktorych korzysta przycisk "zapisz ustawienia"
+	public static int kolor_dni_wolnych = 1;
+	public static int kolor_aktualnego_dnia = 1;
+	public static int kolor_zaznaczonego_dnia = 1;
+	public static Color inny_kolor = Color.LIGHT_GRAY;
+	public static int wybrana_liczba_dni = 1;
+	 
 	// Okno informacyjne w momencie uruchomienia alarmu
 	public static JOptionPane alarmInformation;
 	

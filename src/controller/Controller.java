@@ -21,19 +21,6 @@ public class Controller
 	public Model model;
 	public View view;
 	
-	// Wazne flagi kontrolera - okreœlaj¹ faktyczne ustawieñ
-	public static int dni_waznosci = 1;	// ile dni zdarzenia istnieja, po czym zostana skasowane
-	public static int kolor_dni_wolnych2 = 1;
-	public static int kolor_aktualnego_dnia2 = 1;
-	public static int kolor_zaznaczonego_dnia2 = 1;
-	
-	// flagi z ktorych korzysta przycisk "zapisz ustawienia"
-		public static int kolor_dni_wolnych = 1;
-		public static int kolor_aktualnego_dnia = 1;
-		public static int kolor_zaznaczonego_dnia = 1;
-		public static Color inny_kolor = Color.LIGHT_GRAY;
-		public static int wybrana_liczba_dni = 1;
-	
 	/**
 	 * Konstruktor klasy Controller.
 	 * Inicjalizuje niektore sk³adowe statyczne klas, bed¹cych skladowymi klasy Controller
@@ -62,9 +49,6 @@ public class Controller
 
 		PanWatek.model = _model;
 		PanWatek.view = _view;
-		
-		//LoginWatek.model = _model;
-		//LoginWatek.view = _view;
 	}
 	
 }

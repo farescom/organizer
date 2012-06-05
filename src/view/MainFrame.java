@@ -24,7 +24,7 @@ public class MainFrame extends JFrame
 	private static final long serialVersionUID = 2L;
 	public JMenuBar menuBar;
 	public JMenu menu;
-	public JMenuItem importOption, exportOption, exit, settings;
+	public JMenuItem importOption, exportOption, exit = new JMenuItem(), settings;
 	
 	//public CalendarProgram calendarProgram = new CalendarProgram(this);
 	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm, filtersPanel;
@@ -78,7 +78,7 @@ public class MainFrame extends JFrame
 		tab = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		tabbedPane = new JTabbedPane(JTabbedPane.RIGHT);
 		tabbedPane.addTab("Calendar", null, null, "Show calendar");
-		tabbedPane.addTab(" "+model.checkedDay + " " + View.months[model.checkedMonth] + " Event", null, null, "Show events");
+		tabbedPane.addTab(" "+model.checkedDay + " " + model.months[model.checkedMonth] + " Event", null, null, "Show events");
 		tabbedPane.addTab("Add Event", null, null, "Add event");
 		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
 		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
@@ -98,7 +98,7 @@ public class MainFrame extends JFrame
 		options = new JPanel();
 		
 		currentEvent = new JScrollPane(model.mainFrame.tableDay);
-		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + View.months[model.checkedMonth] + " Event"));
+		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + model.months[model.checkedMonth] + " Event"));
 		currentEvent.setPreferredSize(new Dimension(370, 220));
 		currentEvent.setVisible(false);
 		addEvent(c);
@@ -134,7 +134,7 @@ public class MainFrame extends JFrame
 		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
-		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
+		nextEvent.setBorder(BorderFactory.createTitledBorder(model.months[Model.checkedMonth] + " Event"));
 		
 		splitPane.setLeftComponent(filtersPanel);
 		splitPane.setRightComponent(nextEvent);
@@ -143,22 +143,22 @@ public class MainFrame extends JFrame
 		
 		add(main);
 		
-        menuBar = new JMenuBar();
-           menu = new JMenu("File");
-        	importOption = new JMenuItem("Import", KeyEvent.VK_F1);
-        	importOption.addActionListener(Controller.mainFrameEvent);
-        	exportOption = new JMenuItem("Export", KeyEvent.VK_F2);
-        	exportOption.addActionListener(Controller.mainFrameEvent);
-        	settings = new JMenuItem("Settings", KeyEvent.VK_F3);
-        	settings.addActionListener(Controller.mainFrameEvent);
-        	exit = new JMenuItem("Exit", KeyEvent.VK_F4);
-        	exit.addActionListener(Controller.mainFrameEvent);
-          menu.add(importOption);
-          menu.add(exportOption);
-          menu.add(settings);
-          menu.add(exit);
-        menuBar.add(menu);
-        this.setJMenuBar(menuBar);
+		 menuBar = new JMenuBar();
+	        menu = new JMenu("File");
+	     	importOption = new JMenuItem("Import", KeyEvent.VK_F1);
+	     	importOption.addActionListener(Controller.mainFrameEvent);
+	     	exportOption = new JMenuItem("Export", KeyEvent.VK_F2);
+	     	exportOption.addActionListener(Controller.mainFrameEvent);
+	     	settings = new JMenuItem("Settings", KeyEvent.VK_F3);
+	     	settings.addActionListener(Controller.mainFrameEvent);
+	     	exit = new JMenuItem("Exit", KeyEvent.VK_F4);
+	     	exit.addActionListener(Controller.mainFrameEvent);
+	       menu.add(importOption);
+	       menu.add(exportOption);
+	       menu.add(settings);
+	       menu.add(exit);
+	     menuBar.add(menu);
+	     this.setJMenuBar(menuBar);
     }
  
  
@@ -169,8 +169,7 @@ public class MainFrame extends JFrame
  	public void addFilters(GridBagConstraints c){
  		
  		c.insets = new Insets(-3, 0, 0, 0);
-		//filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, -5));
- 		filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+		filtersPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 0, -4));
 		filtersPanel.setPreferredSize(new Dimension(320, 100));
 		filtersPanel.setBorder(BorderFactory.createTitledBorder("Filters"));
 		filters = new JPanel(new GridBagLayout());
@@ -379,7 +378,7 @@ public class MainFrame extends JFrame
  		options.remove(currentEvent);
  		
  		currentEvent = new JScrollPane(model.mainFrame.tableDay);
-		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + View.months[model.checkedMonth] + " Event"));
+		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + model.months[model.checkedMonth] + " Event"));
 		currentEvent.setPreferredSize(new Dimension(370, 215));
 		currentEvent.setVisible(true);
 
@@ -396,7 +395,7 @@ public class MainFrame extends JFrame
  	{	
  		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
 		nextEvent.setPreferredSize(new Dimension(320, 240));
-		nextEvent.setBorder(BorderFactory.createTitledBorder(View.months[Model.checkedMonth] + " Event"));
+		nextEvent.setBorder(BorderFactory.createTitledBorder(model.months[Model.checkedMonth] + " Event"));
 
 		splitPane.setRightComponent(nextEvent); 
 

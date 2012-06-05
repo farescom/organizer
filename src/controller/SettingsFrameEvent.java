@@ -18,7 +18,6 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
 {
  public static View view;
  public static Model model;
- public Controller controller;
  
  /**
  * Kontruktor domyœlny klasy.
@@ -33,9 +32,9 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
 	public void actionPerformed(ActionEvent e)
 	{
 		Object source = e.getSource();  
-        if(source == view.settingsFrame.opcja_1)  		controller.kolor_dni_wolnych = 1;
-        else if(source == view.settingsFrame.opcja_2)  	controller.kolor_dni_wolnych = 2;
-        else if(source == view.settingsFrame.opcja_3)  	controller.kolor_dni_wolnych = 3;
+        if(source == view.settingsFrame.opcja_1)  		model.kolor_dni_wolnych = 1;
+        else if(source == view.settingsFrame.opcja_2)  	model.kolor_dni_wolnych = 2;
+        else if(source == view.settingsFrame.opcja_3)  	model.kolor_dni_wolnych = 3;
         else if(source == view.settingsFrame.opcja_4)  
         {
     	  	// Paleta kolorow
@@ -45,90 +44,90 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
     	  				view.settingsFrame.location_y + (view.settingsFrame.size().height/2) - (420/2) + 20);
     	  	if (!view.colorFrame.isShowing()) view.colorFrame.show();
         }
-        else if(source == view.settingsFrame.dzien_1)  controller.kolor_aktualnego_dnia = 1;
-        else if(source == view.settingsFrame.dzien_2)  controller.kolor_aktualnego_dnia = 2;
-        else if(source == view.settingsFrame.dzien_3)  controller.kolor_aktualnego_dnia = 3;
+        else if(source == view.settingsFrame.dzien_1)  model.kolor_aktualnego_dnia = 1;
+        else if(source == view.settingsFrame.dzien_2)  model.kolor_aktualnego_dnia = 2;
+        else if(source == view.settingsFrame.dzien_3)  model.kolor_aktualnego_dnia = 3;
         
-        else if(source == view.settingsFrame.zaz_1)  controller.kolor_zaznaczonego_dnia = 1;
-        else if(source == view.settingsFrame.zaz_2)  controller.kolor_zaznaczonego_dnia = 2;
-        else if(source == view.settingsFrame.zaz_3)  controller.kolor_zaznaczonego_dnia = 3;
+        else if(source == view.settingsFrame.zaz_1)  model.kolor_zaznaczonego_dnia = 1;
+        else if(source == view.settingsFrame.zaz_2)  model.kolor_zaznaczonego_dnia = 2;
+        else if(source == view.settingsFrame.zaz_3)  model.kolor_zaznaczonego_dnia = 3;
         else if (source == view.settingsFrame.zapisz)
         {
         	// dokonanie trwa³ych zmian
         	// 1- w programie
-        	if(controller.kolor_dni_wolnych == 1)
+        	if(model.kolor_dni_wolnych == 1)
         	{
-        		controller.kolor_dni_wolnych2 = 1;
-            	view.kolorWeekendu = Color.LIGHT_GRAY;
-            	view.mainFrame.setBackground(view.kolorWeekendu);
+        		model.kolor_dni_wolnych2 = 1;
+            	model.kolorWeekendu = Color.LIGHT_GRAY;
+            	view.mainFrame.setBackground(model.kolorWeekendu);
         	}
-        	else if(controller.kolor_dni_wolnych == 2)
+        	else if(model.kolor_dni_wolnych == 2)
         	{
-        		controller.kolor_dni_wolnych2 = 2;
-            	view.kolorWeekendu = Color.white;
-            	view.mainFrame.setBackground(view.kolorWeekendu);
+        		model.kolor_dni_wolnych2 = 2;
+        		model.kolorWeekendu = Color.white;
+        		view.mainFrame.setBackground(model.kolorWeekendu);
         	}
-        	else if(controller.kolor_dni_wolnych == 3)
+        	else if(model.kolor_dni_wolnych == 3)
         	{
-        		controller.kolor_dni_wolnych2 = 3;
-            	view.kolorWeekendu = Color.cyan;
-            	view.mainFrame.setBackground(view.kolorWeekendu);
+        		model.kolor_dni_wolnych2 = 3;
+        		model.kolorWeekendu = Color.cyan;
+        		view.mainFrame.setBackground(model.kolorWeekendu);
         	}
-        	else if(controller.kolor_dni_wolnych == 4)
+        	else if(model.kolor_dni_wolnych == 4)
         	{
-        		controller.kolor_dni_wolnych2 = 4;
-            	view.kolorWeekendu = controller.inny_kolor;
-            	view.mainFrame.setBackground(view.kolorWeekendu);
+        		model.kolor_dni_wolnych2 = 4;
+        		model.kolorWeekendu = model.inny_kolor;
+        		view.mainFrame.setBackground(model.kolorWeekendu);
         	}
 
-        	if(controller.kolor_aktualnego_dnia == 1)
+        	if(model.kolor_aktualnego_dnia == 1)
         	{
-        		controller.kolor_aktualnego_dnia2 = 1;
-            	view.kolorDnia = new Color(100, 250, 100);
-            	view.mainFrame.setBackground(view.kolorDnia);
+        		model.kolor_aktualnego_dnia2 = 1;
+        		model.kolorDnia = new Color(100, 250, 100);
+            	view.mainFrame.setBackground(model.kolorDnia);
         	}
-        	else if(controller.kolor_aktualnego_dnia == 2)
+        	else if(model.kolor_aktualnego_dnia == 2)
         	{
-        		controller.kolor_aktualnego_dnia2 = 2;
-            	view.kolorDnia = Color.white;
-            	view.mainFrame.setBackground(view.kolorDnia);
+        		model.kolor_aktualnego_dnia2 = 2;
+        		model.kolorDnia = Color.white;
+            	view.mainFrame.setBackground(model.kolorDnia);
         	}
-        	else if(controller.kolor_aktualnego_dnia == 3)
+        	else if(model.kolor_aktualnego_dnia == 3)
         	{
-        		controller.kolor_aktualnego_dnia2 = 3;
-            	view.kolorDnia = Color.cyan;
-            	view.mainFrame.setBackground(view.kolorDnia);
+        		model.kolor_aktualnego_dnia2 = 3;
+        		model.kolorDnia = Color.cyan;
+            	view.mainFrame.setBackground(model.kolorDnia);
         	}
         	
-        	if(controller.kolor_zaznaczonego_dnia == 1)
+        	if(model.kolor_zaznaczonego_dnia == 1)
         	{
-        		controller.kolor_zaznaczonego_dnia2 = 1;
-            	view.kolorWybranegoDnia = new Color(250, 100, 100);
-            	view.mainFrame.setBackground(view.kolorWybranegoDnia);
+        		model.kolor_zaznaczonego_dnia2 = 1;
+        		model.kolorWybranegoDnia = new Color(250, 100, 100);
+            	view.mainFrame.setBackground(model.kolorWybranegoDnia);
         	}
-        	else if(controller.kolor_zaznaczonego_dnia == 2)
+        	else if(model.kolor_zaznaczonego_dnia == 2)
         	{
-        		controller.kolor_zaznaczonego_dnia2 = 2;
-            	view.kolorWybranegoDnia = Color.white;
-            	view.mainFrame.setBackground(view.kolorWybranegoDnia);
+        		model.kolor_zaznaczonego_dnia2 = 2;
+        		model.kolorWybranegoDnia = Color.white;
+            	view.mainFrame.setBackground(model.kolorWybranegoDnia);
         	}
-        	else if(controller.kolor_zaznaczonego_dnia == 3)
+        	else if(model.kolor_zaznaczonego_dnia == 3)
         	{
-        		controller.kolor_zaznaczonego_dnia2 = 3;
-            	view.kolorWybranegoDnia = Color.cyan;
-            	view.mainFrame.setBackground(view.kolorWybranegoDnia);
+        		model.kolor_zaznaczonego_dnia2 = 3;
+        		model.kolorWybranegoDnia = Color.cyan;
+            	view.mainFrame.setBackground(model.kolorWybranegoDnia);
         	}
         	// 2 - W bazie
         	switch(model.guest){
-			case 0: model.baza.query2("UPDATE `user` SET `waznosc_zdarzen`="+controller.wybrana_liczba_dni+"," +
-		        			"`kolorWeekendu`="+controller.kolor_dni_wolnych+"," +
-		        			"`kolorDnia`="+controller.kolor_aktualnego_dnia+"," +
-		        			"`kolorWybranegoDnia`="+controller.kolor_zaznaczonego_dnia+" " +
+			case 0: model.baza.query2("UPDATE `user` SET `waznosc_zdarzen`="+model.wybrana_liczba_dni+"," +
+		        			"`kolorWeekendu`="+model.kolor_dni_wolnych+"," +
+		        			"`kolorDnia`="+model.kolor_aktualnego_dnia+"," +
+		        			"`kolorWybranegoDnia`="+model.kolor_zaznaczonego_dnia+" " +
 		        					"WHERE `ID` = "+model.baza.identyfikator);
-		        	controller.dni_waznosci = controller.wybrana_liczba_dni;
+					model.dni_waznosci = model.wybrana_liczba_dni;
 		        	view.settingsFrame.hide();
 					break;
-			case 1: controller.dni_waznosci = controller.wybrana_liczba_dni;
+			case 1: model.dni_waznosci = model.wybrana_liczba_dni;
         			view.settingsFrame.hide();
 					break;
 			}
@@ -137,21 +136,21 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
         {
         	// Przywrocenie ustawien - tylko graficznie
         	
-           	if(controller.kolor_dni_wolnych2 == 1) view.settingsFrame.opcja_1.setSelected(true);
-        	else if(controller.kolor_dni_wolnych2 == 2) view.settingsFrame.opcja_2.setSelected(true);
-        	else if(controller.kolor_dni_wolnych2 == 3) view.settingsFrame.opcja_3.setSelected(true);
-        	else if(controller.kolor_dni_wolnych2 == 4) view.settingsFrame.opcja_4.setSelected(true);
+           	if(model.kolor_dni_wolnych2 == 1) view.settingsFrame.opcja_1.setSelected(true);
+        	else if(model.kolor_dni_wolnych2 == 2) view.settingsFrame.opcja_2.setSelected(true);
+        	else if(model.kolor_dni_wolnych2 == 3) view.settingsFrame.opcja_3.setSelected(true);
+        	else if(model.kolor_dni_wolnych2 == 4) view.settingsFrame.opcja_4.setSelected(true);
 
-        	if(controller.kolor_aktualnego_dnia2 == 1) view.settingsFrame.dzien_1.setSelected(true);
-        	else if(controller.kolor_aktualnego_dnia2 == 2) view.settingsFrame.dzien_2.setSelected(true);
-        	else if(controller.kolor_aktualnego_dnia2 == 3) view.settingsFrame.dzien_3.setSelected(true);
+        	if(model.kolor_aktualnego_dnia2 == 1) view.settingsFrame.dzien_1.setSelected(true);
+        	else if(model.kolor_aktualnego_dnia2 == 2) view.settingsFrame.dzien_2.setSelected(true);
+        	else if(model.kolor_aktualnego_dnia2 == 3) view.settingsFrame.dzien_3.setSelected(true);
         	
-        	if(controller.kolor_zaznaczonego_dnia2 == 1) view.settingsFrame.zaz_1.setSelected(true);
-        	else if(controller.kolor_zaznaczonego_dnia2 == 2) view.settingsFrame.zaz_2.setSelected(true);
-        	else if(controller.kolor_zaznaczonego_dnia2 == 3) view.settingsFrame.zaz_3.setSelected(true);
+        	if(model.kolor_zaznaczonego_dnia2 == 1) view.settingsFrame.zaz_1.setSelected(true);
+        	else if(model.kolor_zaznaczonego_dnia2 == 2) view.settingsFrame.zaz_2.setSelected(true);
+        	else if(model.kolor_zaznaczonego_dnia2 == 3) view.settingsFrame.zaz_3.setSelected(true);
         	
-	    	view.settingsFrame.dni.setText(controller.dni_waznosci+" miesiacach.");
-	    	view.settingsFrame.slider.setValue(controller.dni_waznosci);
+	    	view.settingsFrame.dni.setText(model.dni_waznosci+" miesiacach.");
+	    	view.settingsFrame.slider.setValue(model.dni_waznosci);
         	view.settingsFrame.hide();
         }
 	}
@@ -167,8 +166,8 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
 	    
 	    if (!source.getValueIsAdjusting())   // view.settingsFrame.opcja_1
 	    {
-	    	controller.wybrana_liczba_dni = (int)source.getValue();
-	    	view.settingsFrame.dni.setText(controller.wybrana_liczba_dni+" miesiacach.");
+	    	model.wybrana_liczba_dni = (int)source.getValue();
+	    	view.settingsFrame.dni.setText(model.wybrana_liczba_dni+" miesiacach.");
 	    }
 	}	
 }

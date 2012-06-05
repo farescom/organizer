@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
@@ -31,42 +33,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	 public void actionPerformed(ActionEvent e) {
 	  
 	  Object source = e.getSource(); 
-	  if (source == view.mainFrame.exit)  
-	  {
-		  System.exit(0);
-	  }
-	  else if (source == view.mainFrame.settings) 
-	  {
-	  	// Ustawienia
-	  	if (view.settingsFrame == null)
-	  		view.settingsFrame = new SettingsFrame("Ustawienia", 560, 370,
-	  				view.mainFrame.location_x + (view.mainFrame.size().width/2) - (560/2),
-	  				view.mainFrame.location_y + (view.mainFrame.size().height/2) - (370/2) + 20);
-	  	if (!view.settingsFrame.isShowing()) view.settingsFrame.show();
-	  }
-	  else if (source == view.mainFrame.exportOption) 
-	  {
-		  	// Export
-		  if (view.exportFrame == null)
-		  	view.exportFrame = new ExportFrame("Export", 560, 370,
-		  		view.mainFrame.location_x + (view.mainFrame.size().width/2) - (560/2),
-		  		view.mainFrame.location_y + (view.mainFrame.size().height/2) - (370/2) + 20);
-		  if (!view.exportFrame.isShowing()) view.exportFrame.show();
-	  }
-	  else if (source == view.mainFrame.importOption) 
-	  {
-		  	// Import
-          final JFileChooser fc = new JFileChooser();
-          int returnVal = fc.showOpenDialog(view.exportFrame);
-          if (returnVal == JFileChooser.APPROVE_OPTION)
-          {
-              File file = fc.getSelectedFile();
-              XML.fromXML(file, model.zdarzenia);
-			  model.mainFrame.tableMonth();
-			  view.mainFrame.refreshTableMonth();
-          }
-	  }
-	  else if (source == view.mainFrame.delete)  
+	  
+	  if (source == view.mainFrame.delete)  
       {
 		    int ile = 0;
 		    ArrayList<Zdarzenie> toDelete = new ArrayList<Zdarzenie>();
@@ -244,6 +212,183 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	  else if (source == view.mainFrame.buttonNotEditEvent)  
 	  {
 		  view.mainFrame.notEditEvent();
+	  }
+	  else if (source == view.calendar.comboYear)  
+	  {
+		  	JComboBox cb = (JComboBox)e.getSource();
+			String year = (String)cb.getSelectedItem();
+			 
+			Integer yearInt = new Integer(model.checkedYear);
+			if (!year.equals(yearInt.toString())){
+				model.checkedYear = Integer.parseInt(year);
+				view.calendar.refreshCalendar(model.checkedMonth, model.checkedYear);
+				
+				model.mainFrame.tableMonth();
+				View.mainFrame.refreshTableMonth();
+			}
+	  }
+	  else if (source == view.calendar.buttonNext)  
+	  {
+		 	if (model.checkedMonth == 12){ //Foward one year
+				model.checkedMonth = 1;
+				model.checkedYear += 1;
+			}
+			else{ //Foward one month
+				model.checkedMonth += 1;
+			}
+			
+			model.mainFrame.tableMonth();
+			View.mainFrame.refreshTableMonth();
+			view.calendar.refreshCalendar(model.checkedMonth, model.checkedYear);
+	  }
+	  else if (source == view.calendar.buttonPrev)  
+	  {
+		  	if (model.checkedMonth == 1){ //Back one year
+				model.checkedMonth = 12;
+				model.checkedYear -= 1;
+			}
+			else{ //Back one month
+				model.checkedMonth -= 1;
+			}
+			
+			model.mainFrame.tableMonth();
+			View.mainFrame.refreshTableMonth();
+			
+			view.calendar.refreshCalendar(model.checkedMonth, model.checkedYear);
+	  }
+	  else if (source == view.calendarFrame.comboYear)  
+	  {
+		  	JComboBox cb = (JComboBox)e.getSource();
+			String year = (String)cb.getSelectedItem();
+			
+			if(view.mainFrame.source == view.mainFrame.data_roz){
+				Integer yearInt = new Integer(model.mainFrame.startYear);
+				if (!year.equals(yearInt.toString())){
+					model.mainFrame.startYear = Integer.parseInt(year);
+					view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
+				}
+			}
+			else if(view.mainFrame.source == view.mainFrame.data_zak){
+				Integer yearInt = new Integer(model.mainFrame.finishYear);
+				if (!year.equals(yearInt.toString())){
+					model.mainFrame.finishYear = Integer.parseInt(year);
+					view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
+				}
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
+				Integer yearInt = new Integer(model.mainFrame.alarmYear);
+				if (!year.equals(yearInt.toString())){
+					model.checkedYear = Integer.parseInt(year);
+					view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
+				}
+			}
+	  }
+	  else if (source == view.calendarFrame.buttonNext)  
+	  {
+		  	if(view.mainFrame.source == view.mainFrame.data_roz){
+				if (model.mainFrame.startMonth == 12){ //Foward one year
+					model.mainFrame.startMonth = 1;
+					model.mainFrame.startYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.startMonth += 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
+			}
+			else if(view.mainFrame.source == view.mainFrame.data_zak){
+				if (model.mainFrame.finishMonth == 12){ //Foward one year
+					model.mainFrame.finishMonth = 1;
+					model.mainFrame.finishYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.finishMonth += 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
+				if (model.mainFrame.alarmMonth == 12){ //Foward one year
+					model.mainFrame.alarmMonth = 1;
+					model.mainFrame.alarmYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.alarmMonth += 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
+			}
+	  }
+	  else if (source == view.calendarFrame.buttonPrev)  
+	  {
+		  if(view.mainFrame.source == view.mainFrame.data_roz){
+				if (model.mainFrame.startMonth == 1){ //Back one year
+					model.mainFrame.startMonth = 12;
+					model.mainFrame.startYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.startMonth -= 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.startMonth, model.mainFrame.startYear);
+			}
+			else if(view.mainFrame.source == view.mainFrame.data_zak){
+				if (model.mainFrame.finishMonth == 1){ //Back one year
+					model.mainFrame.finishMonth = 12;
+					model.mainFrame.finishYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.finishMonth -= 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.finishMonth, model.mainFrame.finishYear);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
+				if (model.mainFrame.alarmMonth == 1){ //Back one year
+					model.mainFrame.alarmMonth = 12;
+					model.mainFrame.alarmYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.alarmMonth -= 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
+			}
+	  }
+	  else if (source == view.mainFrame.exit)  
+	  {
+		  System.exit(0);
+	  }
+	  else if (source == view.mainFrame.settings) 
+	  {
+	  	// Ustawienia
+	  	if (view.settingsFrame == null)
+	  		view.settingsFrame = new SettingsFrame("Ustawienia", 560, 370,
+	  				view.mainFrame.location_x + (view.mainFrame.size().width/2) - (560/2),
+	  				view.mainFrame.location_y + (view.mainFrame.size().height/2) - (370/2) + 20);
+	  	if (!view.settingsFrame.isShowing()) view.settingsFrame.show();
+	  }
+	  else if (source == view.mainFrame.exportOption) 
+	  {
+		  	// Export
+		  if (view.exportFrame == null)
+		  	view.exportFrame = new ExportFrame("Export", 560, 370,
+		  		view.mainFrame.location_x + (view.mainFrame.size().width/2) - (560/2),
+		  		view.mainFrame.location_y + (view.mainFrame.size().height/2) - (370/2) + 20);
+		  if (!view.exportFrame.isShowing()) view.exportFrame.show();
+	  }
+	  else if (source == view.mainFrame.importOption) 
+	  {
+		  	// Import
+          final JFileChooser fc = new JFileChooser();
+          int returnVal = fc.showOpenDialog(view.exportFrame);
+          if (returnVal == JFileChooser.APPROVE_OPTION)
+          {
+              File file = fc.getSelectedFile();
+              XML.fromXML(file, model.zdarzenia);
+			  model.mainFrame.tableMonth();
+			  view.mainFrame.refreshTableMonth();
+          }
 	  }
 	 }
 	 

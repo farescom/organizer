@@ -275,7 +275,7 @@ public class MainFrameModel {
 				
 				ta.setBackground(new Color(184, 207, 229));
 				Model.checkedDay = day;
-				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
+				MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + Model.months[Model.checkedMonth] + " Event");
 				tableDay();
 				View.mainFrame.refreshTableDay();
 				MainFrame.calendar.setVisible(false);
@@ -291,7 +291,7 @@ public class MainFrameModel {
 				if(Model.checkedDay != day)
 				{
 					Model.checkedDay = day;
-					MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + View.months[Model.checkedMonth] + " Event");
+					MainFrame.tabbedPane.setTitleAt(1, Model.checkedDay + " " + Model.months[Model.checkedMonth] + " Event");
 					tableDay();
 					View.mainFrame.refreshTableDay();
 				}
