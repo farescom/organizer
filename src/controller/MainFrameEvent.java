@@ -184,15 +184,15 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  			JOptionPane.showMessageDialog(null, "You typed bad hours for alarm");
 		  		}
 		  		else if(currentDate.compareTo(new Date(startYear, startMonth, startDay)) == 1){
-		  			JOptionPane.showMessageDialog(null, "Data of start is too early");
+		  			JOptionPane.showMessageDialog(null, "Date of start is too early");
 		  		}
 		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
 		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
-		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
+		  			JOptionPane.showMessageDialog(null, "Date of alarm is too late");
 		  		}
 		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((alarmDate.compareTo(currentDate) == -1) || (alarmDate.compareTo(currentDate) == 0 && Integer.parseInt(hourAlarm) < cal.get(GregorianCalendar.HOUR_OF_DAY))
 		  				|| (alarmDate.compareTo(currentDate) == 0 && Integer.parseInt(hourAlarm) == cal.get(GregorianCalendar.HOUR_OF_DAY) && Integer.parseInt(minuteAlarm) < cal.get(GregorianCalendar.MINUTE)))){
-		  			JOptionPane.showMessageDialog(null, "Data of alarm is too early");
+		  			JOptionPane.showMessageDialog(null, "Date of alarm is too early");
 		  		}
 		  		else{
 		  			if(view.mainFrame.buttonAddEvent.getText() == "Add Event"){
