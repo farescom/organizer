@@ -1,18 +1,11 @@
-import java.applet.AudioClip;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-
-import model.Evolution;
 import model.Model;
-import model.XML;
-import model.Zdarzenie;
 import controller.Controller;
 import view.View;
 
+<<<<<<< HEAD
+=======
 
+>>>>>>> origin/master
 /**
  * Glowna klasa programu
  * @author Tomasz Adrianowski
@@ -31,8 +24,12 @@ public class Organizer
     
 	public static void main(String[] args)
 	{
-		model      = new Model();
-	    view       = new View(model);
-	    controller = new Controller(model, view);
+		if (!(args[0].equals("exit")))
+		{
+		   System.out.print(args[0]);
+		   model      = new Model();
+	       view       = new View(model);
+	       controller = new Controller(model, view);
+		}
 	}
 }
