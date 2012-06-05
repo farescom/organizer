@@ -91,7 +91,7 @@ public class XML {
 	/**
 	* Metoda zapisuje kolekcje zdarzen do pliku XML
 	* @param zdarzenia - kolekcja zdarzen, ktore maja zostac zapisane do pliku XML
-	* @param file_name - obiekt typu File zawierajacy w sobie m.in. sciezke do miejsca
+	* @param file - obiekt typu File zawierajacy w sobie m.in. sciezke do miejsca
 	* w ktorym ma zostac zapisany plik XML.
 	*/
 	public static void toXML(ArrayList <Zdarzenie> zdarzenia, File file)

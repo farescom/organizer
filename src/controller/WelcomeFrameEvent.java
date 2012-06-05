@@ -26,8 +26,8 @@ public class WelcomeFrameEvent implements ActionListener{
 	public WelcomeFrameEvent(){}
 
 	/**
-	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
-	 * @param e - dostêp do konkretnego zdarzenia
+	 * Metoda odpowiadajaca za obs³uge zdarzeñ wywo³anych za pomoca przyciskow
+	 * @param e - dostep do konkretnego zdarzenia
 	 */
 	public void actionPerformed(ActionEvent e){
 		
@@ -105,7 +105,7 @@ public class WelcomeFrameEvent implements ActionListener{
         				view.welcomeFrame.dispose();
         				model.mainFrame = new MainFrameModel();
         				
-        				// Uruchumienie w¹tka alarmów
+        				// Uruchumienie watka alarmow
             			Controller.panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
             			Controller.panWatek.start();
             			
@@ -155,7 +155,7 @@ public class WelcomeFrameEvent implements ActionListener{
         	view.welcomeFrame.dispose();
         	model.mainFrame = new MainFrameModel();
     		
-			// Uruchumienie w¹tka alarmów
+			// Uruchumienie watka alarmow
 			PanWatek panWatek = new PanWatek("Alarmy", 1, model.zdarzenia);
 			panWatek.start();
 			

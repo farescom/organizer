@@ -11,7 +11,7 @@ import view.*;
 import model.*;
 
 /**
-* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodz¹ce z okna eksportowania
+* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodzace z okna eksportowania
 * danych aplikacji "ExportFrame"
 */ 
 public class ExportFrameEvent implements ActionListener
@@ -27,8 +27,8 @@ public class ExportFrameEvent implements ActionListener
  public ExportFrameEvent(){}
 
    /**
-	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
-	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	* Metoda odpowiadajaca za obsluge zdarzen wywolanych za pomoca przyciskow
+	* @param e - objekt klasy ActionEvent umozliwiaj¹cy dostep do konkretnego zdarzenia
 	*/
 	public void actionPerformed(ActionEvent e)
 	{

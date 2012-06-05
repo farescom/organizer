@@ -15,7 +15,7 @@ import view.*;
 import model.*;
 
 /**
-* Klasa odpowiadaj¹ca za obs³ugê zdarzeñ wywo³anych z poziomu ramki g³ównej programu (MainFrame)
+* Klasa odpowiadajaca za obsluge zdarzen wywolanych z poziomu ramki glownej programu (MainFrame)
 */ 
 public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener, ItemListener{
 
@@ -25,8 +25,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	 public MainFrameEvent(){}
 	
 	 /**
-	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
-	 * @param e - dostêp do konkretnego zdarzenia
+	 * Metoda odpowiadajaca za obsluge zdarzen wywolanych za pomoca przyciskow
+	 * @param e - dostep do konkretnego zdarzenia
 	 */
 	 public void actionPerformed(ActionEvent e) {
 	  
@@ -162,6 +162,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		int minuteActual = cal.get(GregorianCalendar.MINUTE);
 		  		Date currentDate = new Date(model.currentYear, model.currentMonth, model.currentDay);
 		  		
+		  	try{	
 		  		if(Integer.parseInt(hour)<0 || Integer.parseInt(hour)>23 || Integer.parseInt(minute)<0 || Integer.parseInt(minute)>59){
 		  			JOptionPane.showMessageDialog(null, "You typed bad hours for start");
 		  		}
@@ -230,6 +231,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  				}
 		  			}
 		  		}
+		  	}
+		  	catch(NumberFormatException exception){
+		  		JOptionPane.showMessageDialog(null, "You must give the number");
+		  	}
 		 }
 	  	else
 		{
@@ -244,8 +249,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	 
 
 	 /**
-	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ obiektów klas JTabbedPane albo JSpinner
-	 * @param e - dostêp do konkretnego zdarzenia
+	 * Metoda odpowiadajaca za obsluge zdarzen wywolanych za pomoca obiektow klas JTabbedPane albo JSpinner
+	 * @param e - dostep do konkretnego zdarzenia
 	 */
 	public void stateChanged(ChangeEvent e) {
 		
@@ -297,8 +302,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	}
 
 	/**
-	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ wciœniêcia klawisza myszy
-	 * @param e - dostêp do konkretnego zdarzenia
+	 * Metoda odpowiadajaca za obsluge zdarzen wywolanych za pomoca wciœniecia klawisza myszy
+	 * @param e - dostep do konkretnego zdarzenia
 	 */
 	public void mousePressed(MouseEvent e) {
 			view.mainFrame.source = e.getSource();
@@ -320,8 +325,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	}
 	
 	/**
-	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ obiektów klasy JCheckBox
-	 * @param e - dostêp do konkretnego zdarzenia
+	 * Metoda odpowiadajaca za obsluge zdarzen wywolanych za pomoca obiektow klasy JCheckBox
+	 * @param e - dostep do konkretnego zdarzenia
 	 */
 	public void itemStateChanged(ItemEvent e) {
         
@@ -356,8 +361,8 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	}
 	
 	/**
-	 * Metoda odpowiadaj¹ca za ustawianie odpowiednich parametrów w momencie dodania zdarzenia
-	 * b¹dŸ jego modyfikacji
+	 * Metoda odpowiadajaca za ustawianie odpowiednich parametrow w momencie dodania zdarzenia
+	 * badz jego modyfikacji
 	 */
 	public void addEvent(){
 		model.mainFrame.tableDay();

@@ -12,7 +12,7 @@ import view.*;
 import model.*;
 
 /**
-* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodz¹ce z okna SettingsFrame
+* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodzace z okna SettingsFrame
 */ 
 public class SettingsFrameEvent implements ActionListener, ChangeListener
 {
@@ -27,8 +27,8 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
  //public SettingsFrameEvent(Controller controller){this.controller = controller;}
 
    /**
-	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
-	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	* Metoda odpowiadajaca za obs³uge zdarzeñ wywo³anych za pomoca przyciskow
+	* @param e - objekt klasy ActionEvent umo¿liwiajacy dostep do konkretnego zdarzenia
 	*/
 	public void actionPerformed(ActionEvent e)
 	{
@@ -38,9 +38,9 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
         else if(source == view.settingsFrame.opcja_3)  	controller.kolor_dni_wolnych = 3;
         else if(source == view.settingsFrame.opcja_4)  
         {
-    	  	// Paleta kolorów
+    	  	// Paleta kolorow
     	  	if (view.colorFrame == null)
-    	  		view.colorFrame = new ColorFrame("Paleta kolorów", 465, 420,
+    	  		view.colorFrame = new ColorFrame("Pallete of colors", 465, 420,
     	  				view.settingsFrame.location_x + (view.settingsFrame.size().width/2) - (465/2),
     	  				view.settingsFrame.location_y + (view.settingsFrame.size().height/2) - (420/2) + 20);
     	  	if (!view.colorFrame.isShowing()) view.colorFrame.show();
@@ -150,16 +150,16 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
         	else if(controller.kolor_zaznaczonego_dnia2 == 2) view.settingsFrame.zaz_2.setSelected(true);
         	else if(controller.kolor_zaznaczonego_dnia2 == 3) view.settingsFrame.zaz_3.setSelected(true);
         	
-	    	view.settingsFrame.dni.setText(controller.dni_waznosci+" miesi¹cach.");
+	    	view.settingsFrame.dni.setText(controller.dni_waznosci+" miesiacach.");
 	    	view.settingsFrame.slider.setValue(controller.dni_waznosci);
         	view.settingsFrame.hide();
         }
 	}
 	
    /**
-	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych wykonaniem pewnych zmian
-	* w komponentach np. przesuniêciem suwaka.
-	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	* Metoda odpowiadajaca za obs³uge zdarzeñ wywo³anych wykonaniem pewnych zmian
+	* w komponentach np. przesunieciem suwaka.
+	* @param e - objekt klasy ActionEvent umo¿liwiajacy dostep do konkretnego zdarzenia
 	*/
 	public void stateChanged(ChangeEvent e)
 	{
@@ -168,7 +168,7 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
 	    if (!source.getValueIsAdjusting())   // view.settingsFrame.opcja_1
 	    {
 	    	controller.wybrana_liczba_dni = (int)source.getValue();
-	    	view.settingsFrame.dni.setText(controller.wybrana_liczba_dni+" miesi¹cach.");
+	    	view.settingsFrame.dni.setText(controller.wybrana_liczba_dni+" miesiacach.");
 	    }
 	}	
 }

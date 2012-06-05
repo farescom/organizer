@@ -2,8 +2,12 @@ import model.Model;
 import controller.Controller;
 import view.View;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 /**
- * G³ówna klasa programu
+ * Glowna klasa programu
  * @author Tomasz Adrianowski
  * @author Sliman Jakub El-Fara 
  */
@@ -14,8 +18,8 @@ public class Organizer
     static Controller controller;
     
 	/**
-	 * G³ówna metoda klasy Organizer
-	 * @param args tablica argumentów wywo³ania programu
+	 * Glowna metoda klasy Organizer
+	 * @param args tablica argumentow wywolania programu
 	 */
     
 	public static void main(String[] args)

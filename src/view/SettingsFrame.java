@@ -15,8 +15,8 @@ import java.awt.Color;
 import model.Model;
 
 /**
-* Klasa reprezentuj¹ca ramkê "Ustawieñ".
-* W tej ramce u¿ytkownik mo¿e zmieniæ wiele ustawieñ zwi¹zanych z trybem dzia³ania programu.
+* Klasa reprezentuj¹ca ramkê "Ustawien".
+* W tej ramce uzytkownik moze zmienic wiele ustawien zwi¹zanych z trybem dzia³ania programu.
 * W przypadku wyboru opcji "zapisz" wszystkie zmiany s¹ zachowywane w aplikacji i w zdalnej
 * bazie danych.
 */ 
@@ -53,7 +53,7 @@ public class SettingsFrame extends JFrame
         location_x = x;
         location_y = y;
         
-        // Górna czêœæ
+        // Górna czêsc
         setLayout(new GridLayout(7,1));
         	panel_0 = new JPanel(); panel_0.setLayout(new FlowLayout(FlowLayout.LEFT));
         	panel_1 = new JPanel(); panel_1.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -75,7 +75,7 @@ public class SettingsFrame extends JFrame
         
         kolor = new JLabel("   Weekendy:             ");
         panel_1.add(kolor);
-        	opcja_1 = new JRadioButton("Domyœlny");  		opcja_1.setActionCommand("Domyœlny");
+        	opcja_1 = new JRadioButton("Domyslny");  		opcja_1.setActionCommand("Domyslny");
         	opcja_2 = new JRadioButton("Bia³y");			opcja_2.setActionCommand("Bia³y");
         	opcja_3 = new JRadioButton("Jasno niebieski");	opcja_3.setActionCommand("Jasno niebieski");
         	opcja_4 = new JRadioButton("inny (z palety)");				opcja_4.setActionCommand("inny");
@@ -95,8 +95,8 @@ public class SettingsFrame extends JFrame
         	else if(model.baza.kolor_1 == 3) opcja_3.setSelected(true);
         	else if(model.baza.kolor_1 == 4) opcja_4.setSelected(true);
         	
-        panel_2.add(new JLabel("   Aktualny dzieñ:      "));
-        	dzien_1 = new JRadioButton("Domyœlny");  		dzien_1.setActionCommand("Domyœlny");
+        panel_2.add(new JLabel("   Aktualny dzien:      "));
+        	dzien_1 = new JRadioButton("Domyslny");  		dzien_1.setActionCommand("Domyslny");
         	dzien_1.setSelected(true);
         	dzien_2 = new JRadioButton("Bia³y");			dzien_2.setActionCommand("Bia³y");
         	dzien_3 = new JRadioButton("Jasno niebieski");	dzien_3.setActionCommand("Jasno niebieski");
@@ -113,8 +113,8 @@ public class SettingsFrame extends JFrame
         	else if(model.baza.kolor_2 == 2) dzien_2.setSelected(true);
         	else if(model.baza.kolor_2 == 3) dzien_3.setSelected(true);
         	
-        panel_3.add(new JLabel("   Zaznaczony dzieñ: "));
-        	zaz_1 = new JRadioButton("Domyœlny");  			zaz_1.setActionCommand("Domyœlny");
+        panel_3.add(new JLabel("   Zaznaczony dzien: "));
+        	zaz_1 = new JRadioButton("Domyslny");  			zaz_1.setActionCommand("Domyslny");
         	
         	zaz_2 = new JRadioButton("Bia³y");				zaz_2.setActionCommand("Bia³y");
         	zaz_3 = new JRadioButton("Jasno niebieski");	zaz_3.setActionCommand("Jasno niebieski");
@@ -131,7 +131,7 @@ public class SettingsFrame extends JFrame
         	else if(model.baza.kolor_3 == 2) zaz_2.setSelected(true);
         	else if(model.baza.kolor_3 == 3) zaz_3.setSelected(true);
         	
-        panel_4.add(new JLabel("Automatyczne usuwanie wiadomoœci"));
+        panel_4.add(new JLabel("Automatyczne usuwanie wiadomosci"));
         panel_4.setBackground(Color.LIGHT_GRAY);
         
         // Automatyczne usuwanie

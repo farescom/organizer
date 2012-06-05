@@ -8,12 +8,12 @@ import javax.swing.JOptionPane;
 import controller.PanWatek;
 
 /**
-* Glowna klasa modelu, odpowiedzialna miêdzy innymi za tworzenie obiektów klas warstwy danych
+* Glowna klasa modelu, odpowiedzialna miedzy innymi za tworzenie obiektów klas warstwy danych
 * Klasa zawiera w sobie wszystkie klasy modelu
 */ 
 public class Model {
 
-	// Wybrany dzien na kalendarzu
+	// Aktualny dzien na kalendarzu
 	private static GregorianCalendar cal = new GregorianCalendar(); //Create calendar
 	public static int currentDay = cal.get(GregorianCalendar.DAY_OF_MONTH);
 	public static int currentMonth = cal.get(GregorianCalendar.MONTH)+1;
@@ -24,8 +24,10 @@ public class Model {
 	public static int checkedMonth = currentMonth;
 	public static int checkedYear = currentYear;
 	
+	// Okno informacyjne w momencie uruchomienia alarmu
 	public static JOptionPane alarmInformation;
 	
+	// Podstawowe skladowe wykorzysytwane w programie
 	public static int guest = 0;
 	public Database baza;
 	public XML xml;
@@ -33,7 +35,7 @@ public class Model {
 	public MainFrameModel mainFrame;
 	
 	/**
-	* Kontruktor domyœlny klasy. Tworzy obiekt klasy Database.
+	* Kontruktor domyslny klasy. Tworzy obiekt klasy Database.
 	*/ 
 	public Model()
 	{

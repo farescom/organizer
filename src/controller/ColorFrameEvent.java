@@ -5,7 +5,7 @@ import view.*;
 import model.*;
 
 /**
-* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodz¹ce z okna wyboru koloru
+* Klasa zewnetrzna obslugujaca wszystkie zdarzenia pochodzace z okna wyboru koloru
 * z palety "ColorFrame"
 */ 
 public class ColorFrameEvent implements ActionListener
@@ -20,8 +20,8 @@ public class ColorFrameEvent implements ActionListener
  public ColorFrameEvent(){}
 
  /**
-	* Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
-	* @param e - objekt klasy ActionEvent umo¿liwiaj¹cy dostêp do konkretnego zdarzenia
+	* Metoda odpowiadajaca za obsluge zdarzen wywolanych za pomoc¹ przyciskow
+	* @param e - objekt klasy ActionEvent umozliwiajacy dostêp do konkretnego zdarzenia
 	*/
 	public void actionPerformed(ActionEvent e)
 	{

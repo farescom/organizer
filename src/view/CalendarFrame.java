@@ -73,7 +73,7 @@ public class CalendarFrame extends JFrame {
     } 
 	
 	/**
-	* Klasa wewnêtrzna odpowiadajaca za wyswietlenie kalendarza w ramce kalendarza (w CalendarFrame)
+	* Klasa wewnetrzna odpowiadajaca za wyswietlenie kalendarza w ramce kalendarza (w CalendarFrame)
 	*/ 
 	static class CalendarProgram{
 		
@@ -98,7 +98,7 @@ public class CalendarFrame extends JFrame {
 		
 		/**
 		* Metoda odpowiadajaca za umieszczenie elementow w ramce kalendarza (w CalendarFrame)
-		* @return JPanel - zwraca panel kalendarza, który bêdzie wstawiony do ramki kalendarza (CalendarFrame)
+		* @return JPanel - zwraca panel kalendarza, ktory bedzie wstawiony do ramki kalendarza (CalendarFrame)
 		*/ 
 		public JPanel createProgram(){
 			
@@ -219,7 +219,7 @@ public class CalendarFrame extends JFrame {
 		}
 		
 		/**
-		* Klasa wewnêtrzna, która okreœla styl renderowania komórek tabeli w kalendarzu w ramce kalendarza (w CalendarFrame)
+		* Klasa wewnetrzna, ktora okreœla styl renderowania komorek tabeli w kalendarzu w ramce kalendarza (w CalendarFrame)
 		*/ 
 		static class tableCalendarRenderer extends DefaultTableCellRenderer{
 			public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
@@ -273,7 +273,7 @@ public class CalendarFrame extends JFrame {
 		}
 
 		/**
-		* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c wstecz) dla kalendarza
+		* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac wstecz) dla kalendarza
 		* w ramce kalendarza (w CalendarFrame)
 		*/
 		static class buttonPrev_Action implements ActionListener{
@@ -315,7 +315,7 @@ public class CalendarFrame extends JFrame {
 		}
 		
 		/**
-		* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c dalej) dla kalendarza
+		* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac dalej) dla kalendarza
 		* w ramce kalendarza (w CalendarFrame)
 		*/
 		static class buttonNext_Action implements ActionListener{
@@ -358,7 +358,7 @@ public class CalendarFrame extends JFrame {
 		}
 		
 		/**
-		* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru roku dla kalendarza
+		* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru roku dla kalendarza
 		* w ramce kalendarza (w CalendarFrame)
 		*/
 		static class comboYear_Action implements ActionListener{

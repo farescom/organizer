@@ -3,7 +3,7 @@ package model;
 import java.sql.Date;
 
 /**
-* Klasa reprezentuj¹ca zdarzenie
+* Klasa reprezentujaca zdarzenie
 */
 public class Zdarzenie
 {

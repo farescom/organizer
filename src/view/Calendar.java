@@ -16,7 +16,7 @@ import view.*;
 import controller.Controller;
 
 /**
-* Klasa odpowiadajaca za wyswietlenie kalendarza "œciennego" w glownej ramce programu (w MainFrame)
+* Klasa odpowiadajaca za wyswietlenie kalendarza "sciennego" w glownej ramce programu (w MainFrame)
 */ 
 public class Calendar{
 	
@@ -32,8 +32,8 @@ public class Calendar{
 	public static JPanel panelCalendar, panelTop, panelBottom, panelMonth;
 	
 	/**
-	* Metoda odpowiadajaca za wyswietlenie kalendarza "œciennego" w glownej ramce programu (w MainFrame)
-	* @return JPanel - zwraca panel kalendarza, który bêdzie wstawiony do glownego okna (MainFrame)
+	* Metoda odpowiadajaca za wyswietlenie kalendarza "sciennego" w glownej ramce programu (w MainFrame)
+	* @return JPanel - zwraca panel kalendarza, ktory bedzie wstawiony do glownego okna (MainFrame)
 	*/ 
 	public JPanel createProgram(){
 		
@@ -108,7 +108,7 @@ public class Calendar{
 	}
 	
 	/**
-	* Metoda odpowiadajaca za wyswietlenie kalendarza "œciennego" po wykonaniu operacji na nim
+	* Metoda odpowiadajaca za wyswietlenie kalendarza "sciennego" po wykonaniu operacji na nim
 	* (odswiezenie kalendarza)
 	* @param month - wybrany miesiac na kalendarzu
 	* @param year - wybrany rok na kalendarzu
@@ -152,7 +152,7 @@ public class Calendar{
 	}
 	
 	/**
-	* Klasa wewnêtrzna, która okreœla styl renderowania komórek tabeli w kalendarzu "œciennym"
+	* Klasa wewnetrzna, ktora okresla styl renderowania komorek tabeli w kalendarzu "sciennym"
 	*/ 
 	static class tableCalendarRenderer extends DefaultTableCellRenderer{
 		public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
@@ -191,7 +191,7 @@ public class Calendar{
 	}
 	
 	/**
-	* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c wstecz) dla kalendarza "œciennego"
+	* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac wstecz) dla kalendarza "sciennego"
 	*/
 	static class buttonPrev_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
@@ -213,7 +213,7 @@ public class Calendar{
 	}
 	
 	/**
-	* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c dalej) dla kalendarza "œciennego"
+	* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru miesiaca (1 miesiac dalej) dla kalendarza "sciennego"
 	*/ 
 	static class buttonNext_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
@@ -234,7 +234,7 @@ public class Calendar{
 	}
 	
 	/**
-	* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru roku dla kalendarza "œciennego"
+	* Klasa wewnetrzna, ktora obsluguje zdarzenia dla przycisku wyboru roku dla kalendarza "sciennego"
 	*/ 
 	static class comboYear_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){

@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
-* Klasa odpowiadajaca za utworzenie ramki, za pomoc¹ której mo¿na dokonaæ wyboru koloru z palety.
+* Klasa odpowiadajaca za utworzenie ramki, za pomoc¹ ktorej mo¿na dokonaæ wyboru koloru z palety.
 */ 
 public class ColorFrame extends JFrame
 {
