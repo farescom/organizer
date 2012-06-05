@@ -251,8 +251,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				model.checkedMonth -= 1;
 			}
 			
+		  	System.out.println("Month: "+model.checkedMonth);
+		  	
 			model.mainFrame.tableMonth();
-			View.mainFrame.refreshTableMonth();
+			view.mainFrame.refreshTableMonth();
 			
 			view.calendar.refreshCalendar(model.checkedMonth, model.checkedYear);
 	  }

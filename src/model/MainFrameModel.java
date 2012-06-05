@@ -68,7 +68,8 @@ public class MainFrameModel {
 		
 		for(int i=0; i<Model.zdarzenia.size(); i++){
 	  		  day = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(8, 10));
-	  		  if(Integer.parseInt(day) == Model.checkedDay){
+	  		  month = new String(Model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
+	  		  if(Integer.parseInt(month) == Model.checkedMonth && Integer.parseInt(day) == Model.checkedDay){
 	  			  ileDay++;
 	      		  dayEvent.add(Model.zdarzenia.get(i));
 	      	  }

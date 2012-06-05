@@ -81,7 +81,7 @@ public class WelcomeFrameEvent implements ActionListener{
             	}
         	}
         	else{
-        		view.welcomeFrame.registerFrame.show_result("Connection with database is unavailable! Try again later!");
+        		view.welcomeFrame.registerFrame.show_result("Connection with database is unavailable!");
         	}
         	
         }
@@ -133,7 +133,7 @@ public class WelcomeFrameEvent implements ActionListener{
             	}
         	}
         	else{
-        		view.welcomeFrame.registerFrame.show_result("Connection with database is unavailable! Try again later!");
+        		view.welcomeFrame.loginFrame.show_result("Connection with database is unavailable!");
         	}
         	
         }

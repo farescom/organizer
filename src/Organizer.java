@@ -20,6 +20,7 @@ public class Organizer
     
 	public static void main(String[] args)
 	{
+<<<<<<< HEAD
 		if (args.length == 0)
 		{
 		   model      = new Model();
@@ -27,8 +28,10 @@ public class Organizer
 		   controller = new Controller(model, view);
 		}
 		else if (!(args[0].equals("exit")))
+=======
+		if ((args.length > 0 && !(args[0].equals("exit"))) || args.length == 0)
+>>>>>>> origin/master
 		{
-		   System.out.print(args[0]);
 		   model      = new Model();
 	       view       = new View(model);
 	       controller = new Controller(model, view);
