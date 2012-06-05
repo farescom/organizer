@@ -80,9 +80,6 @@ public class MainFrame extends JFrame
 		tabbedPane.addTab("Calendar", null, null, "Show calendar");
 		tabbedPane.addTab(" "+model.checkedDay + " " + model.months[model.checkedMonth] + " Event", null, null, "Show events");
 		tabbedPane.addTab("Add Event", null, null, "Add event");
-		tabbedPane.setMnemonicAt(0, KeyEvent.VK_1);
-		tabbedPane.setMnemonicAt(1, KeyEvent.VK_2);
-		tabbedPane.setMnemonicAt(2, KeyEvent.VK_3);
 		tabbedPane.addChangeListener(Controller.mainFrameEvent);
 		tab.add(tabbedPane);
 		
