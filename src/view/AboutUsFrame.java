@@ -3,7 +3,6 @@ package view;
 import java.awt.Button;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -11,7 +10,7 @@ import javax.swing.JPanel;
 import model.Model;
 
 /**
-* Klasa odpowiadajaca za utworzenie ramki powitalnej
+* Klasa reprezentuj¹ca ramkê "O nas", w której s¹ wyœwietlane informacje o twórcach programu.
 */ 
 public class AboutUsFrame extends JFrame
 {
@@ -21,13 +20,16 @@ public class AboutUsFrame extends JFrame
 	ImagePanel zdjecie_1, zdjecie_2;
 	Button button1, button2, button3, button4;
 	JLabel tekst, tworcy;
-	
 	public static Model model;
 	
-	//public AboutUsFrameEvent aboutUsFrameEvent;
-	
+
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna powitalnego
+	* Konstruktor klasy odpowiadajacy za utworzenie okna "O nas"
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
 	*/ 
 	public AboutUsFrame(String tytul, int SizeX, int SizeY, int x, int y) 
     {  
@@ -46,12 +48,13 @@ public class AboutUsFrame extends JFrame
         	tekst = new JLabel();
         	tworcy = new JLabel();
         	
-        	tekst.setText("<html><br>Program ffsdk jdfkl jdklfj klsdfj klsdjfl sdkf Program ffsdk ffsdk jdfkl jdklfj klsdfj klsdjfl sdkf" +
-        			"<br>Program ffsdk jdfkl jdklfj klsdfj klsdjfl sdkf Program ffsdk jdfkl ffsdk jdklfj klsdfj klsdjfl sdkf" +
-        			"<br>Program ffsdk jdfkl jdklfj klsdfj klsdjfl sdkf Program ffsdk jdfkl ffsdk jdklfj klsdfj klsdjfl sdkf" +
-        			"<br>Program ffsdk jdfkl jdklfj klsdfj klsdjfl sdkf Program ffsdk jdfkl ffsdk jdklfj klsdfj klsdjfl sdkf" +
-        			"<br>Program ffsdk jdfkl jdklfj klsdfj klsdjfl sdkf Program ffsdk jdfkl ffsdk jdklfj klsdfj klsdjfl sdkf" +
-        			"<br>Second line</html>");
+        	tekst.setText("<html><br>SLIMTOM Organizer" +
+        			"<br>Program zosta³ zrealizowany w ramach zajêæ laboratoryjnych z przedmiotu \"Programowanie" +
+        			"<br>Komponentowe\".     G³ównym celem programu jest pomoc u¿ytkownikowi w organizacji czasu" +
+        			"<br>przeznaczonego na wykonanie ró¿nych zadañ w odpowiednim czasie.   Dzia³a on na podobnej" +
+        			"<br>zasadzie jak Evolution, czy Outlook. Podstawow¹ zalet¹ programu jest struktura programu" +
+        			"<br>w której warstwa danych jest umiejscowiona na zdalnym serwerze, dziêki czemu u¿ytkownik" +
+        			"<br>ma dostêp do aplikacji z ka¿dego miejsca na Œwiecie.");
         	tworcy.setText("<html><br>Tomasz Adrianowski" +
         					   "<br>tomaszadrianowski@gmail.com" +
         					   "<br>tel. 796 343 178" +
@@ -82,13 +85,5 @@ public class AboutUsFrame extends JFrame
         		panel_dolny.add(panel_3);
         		//	panel_3.add(new Button("3"));
         add(panel_dolny);
-        
-        
-        // Tworzenie zdjecia
-		//zdjecie = new ImagePanel("jakub.jpg", 10, SizeX, SizeY);
-		//setContentPane(zdjecie);
-        
-        // Tworzenie menu
     }
-	
 }

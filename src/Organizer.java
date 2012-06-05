@@ -39,35 +39,5 @@ public class Organizer
 		model      = new Model();
 	    view       = new View(model);
 	    controller = new Controller(model, view);
-		
-	    /*
-		ArrayList <Zdarzenie> zdarzenia = new ArrayList <Zdarzenie>();
-		for (int i = 0; i < 3; i++)//sd
-		{
-			zdarzenia.add(new Zdarzenie(i, "Opis Zdarzenia nr "+i, 1,
-					"2012-05-12 12:00:00", "2012-05-12 12:00:00", "polska", 0, 0));
-		}
-		
-		Evolution evo = new Evolution();
-		evo.zapiszCSV("pliczek", zdarzenia);
-		*/
-	    
-
-	//Przyklad wykorzystania XML
-	    /*
-	    ArrayList <Zdarzenie> zdarzenia = new ArrayList <Zdarzenie>();
-	    ArrayList <Zdarzenie> zdarzenia2 = new ArrayList <Zdarzenie>();
-		for (int i = 0; i < 3; i++)
-		{
-			zdarzenia.add(new Zdarzenie(i, "Opis Zdarzenia nr "+i, 1,
-					"2012-05-12 12:00:00", "2012-05-12 12:00:00", "polska", 0, 0));
-		}
-	
-		String plik = "plik.xml";
-		XML.toXML(zdarzenia, plik);
-	
-		XML.fromXML(plik, zdarzenia2);//55
-		*/
-	    
 	}
 }

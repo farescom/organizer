@@ -9,7 +9,8 @@ import model.Model;
 import controller.Controller;
 
 /**
-* Klasa odpowiadajaca za utworzenie ramki powitalnej
+* Klasa odpowiadajaca za utworzenie ramki powitalnej wyœwietlanej na samym pocz¹tku dzia³ania
+* programu.
 */ 
 public class WelcomeFrame extends JFrame
 {	
@@ -22,11 +23,15 @@ public class WelcomeFrame extends JFrame
 	public int loginFlags = 0, registerFlags = 0;
 	public int location_x;
 	public int location_y;
-	
 	public static Model model;
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna powitalnego
+	* Konstruktor klasy WelcomeFrame odpowiedzialny za utworzenie okna powitalnego.
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
 	*/ 
 	public WelcomeFrame(String tytul, int SizeX, int SizeY, int x, int y) 
     {  
@@ -62,7 +67,8 @@ public class WelcomeFrame extends JFrame
     }
 	
 	/**
-	* Klasa wewnetrzna odpowiadajaca za utworzenie okna wewnetrznego
+	* Klasa wewnetrzna klasy WelcomeFrame
+	* Jest odpowiedzialna za utworzenie okna wewnetrznego
 	*/ 
 	public class WelcomeInternalFrame extends JInternalFrame
 	{
@@ -74,8 +80,16 @@ public class WelcomeFrame extends JFrame
 		public JPanel panel, panel_top, panel_middle, panel_bottom;
 		public JButton submitB, exitB, loginAsGuest;
 		
+		/**
+		* Konstruktor domyœlny klasy WelcomeInternalFrame.
+		*/ 
 		public WelcomeInternalFrame(){}
 		
+		/**
+		* Konstruktor klasy WelcomeInternalFrame.
+		* @param text parametr okresla tytul okna wewnetrzneog jak rowniez wyswietlany
+		* 		 napis na jednym z przyciskow.
+		*/ 
 		public WelcomeInternalFrame(String text)
     	{
 			login = new JLabel("Login: ");

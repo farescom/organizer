@@ -8,6 +8,9 @@ import javax.swing.JColorChooser;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+/**
+* Klasa odpowiadajaca za utworzenie ramki, za pomoc¹ której mo¿na dokonaæ wyboru koloru z palety.
+*/ 
 public class ColorFrame extends JFrame
 {
 	private static final long serialVersionUID = 1L;
@@ -17,6 +20,14 @@ public class ColorFrame extends JFrame
 	public JButton zatwierdz, anuluj;
 	public static Model model;
 	
+	/**
+	* Konstruktor klasy odpowiadajacy za utworzenie okna wyboru koloru z palety
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
+	*/ 
 	public ColorFrame(String tytul, int SizeX, int SizeY, int x, int y)
     {  
         super(tytul);  
