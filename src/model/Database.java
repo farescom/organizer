@@ -8,8 +8,8 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
-* Klasa odpowiedzialna za komunikacjê z baz¹ danych. Obiekt tej klasy reprezentuje fizyczn¹
-* bazê danych i udostêpnia podstawowe metody komunikacji z ni¹: get, set, modify, delete ...
+* Klasa odpowiedzialna za komunikacje z baza danych. Obiekt tej klasy reprezentuje fizyczna
+* baze danych i udostepnia podstawowe metody komunikacji z nia: get, set, modify, delete ...
 */
 public class Database
 {	
@@ -28,7 +28,7 @@ public class Database
     public int nextID;
 	 
 	 /**
-	 * Kontruktor domyœlny tworzy obiekt klasy Database z domyœlnymi ustawieniami
+	 * Konstruktor domyslny tworzy obiekt klasy Database z domyslnymi ustawieniami
 	 */
 	public Database ()
 	{
@@ -39,7 +39,7 @@ public class Database
 	}
 	 
 	 /**
-	 * Kontruktor tworzy obiekt klasy Database z ustawieniami podanymi jako argumenty
+	 * Konstruktor tworzy obiekt klasy Database z ustawieniami podanymi jako argumenty
 	 * @param driver nazwa sterownika bazy
 	 * @param sql_server_address adres serwera bazy danych
 	 * @param user nazwa uzytkownika bazy
@@ -54,8 +54,8 @@ public class Database
 	}
 	 
 	 /**
-	 * Metoda tworzy po³¹czenie z baz¹ danych
-	 * @return wartosc "true" w przypadku gdy po³¹czenie odby³o siê z powodzeniem
+	 * Metoda tworzy polaczenie z baza danych
+	 * @return wartosc "true" w przypadku gdy polaczenie odbylo sie z powodzeniem
 	 * 		   w kazdym innym przypadku "false".
 	 */
 	 public boolean connection()
@@ -84,7 +84,7 @@ public class Database
 	 /**
 	 * Metoda wykonuje przekazane polecenie i zwraca wyniki do listy podanej w drugim parametrze
 	 * @param zapytanie zapytanie napisane w jezyku sql
-	 * @param zdarzenia referencja do obiektu klasy ArrayList, do którego zostan¹ dopisane zwrócone wyniki
+	 * @param zdarzenia referencja do obiektu klasy ArrayList, do ktorego zostana dopisane zwrocone wyniki
 	 */
 	 public int get(String zapytanie, ArrayList <Zdarzenie> zdarzenia)
 		{
@@ -117,9 +117,9 @@ public class Database
 	 /**
 	 * Metoda pobiera z tabeli zdarzenia w bazie danych krotki odpowiadajace przekazanemu
 	 * w pierwszym parametrze identyfikatorze. 
-	 * Je¿eli jest to wartoœæ -1 funkcja pobiera ca³¹ zawartoœæ tabeli
-	 * @param numer numer id, dla którego ma zostaæ pobrana krotka z bazy danych
-	 * @param zdarzenia referencja do obiektu klasy ArrayList, do którego zostan¹ dopisane zwrócone wyniki
+	 * Je¿eli jest to wartosc -1 funkcja pobiera cala zawartosc tabeli
+	 * @param numer numer id, dla ktorego ma zostac pobrana krotka z bazy danych
+	 * @param zdarzenia referencja do obiektu klasy ArrayList, do ktorego zostana dopisane zwrocone wyniki
 	 */
 		public int get(int numer, ArrayList <Zdarzenie> zdarzenia)
 		{
@@ -153,14 +153,14 @@ public class Database
 	 
 	 /**
 	 * Metoda do aktualizacji krotek w bazie danych
-	 * podanie na jakimœ polu wartoœci (null - dla obiektów, lub -1 dla typów prostych)
-	 * oznacza, ¿e dana pozycja ma nie byæ zmieniana.
+	 * podanie na jakims polu wartosci (null - dla obiektow, lub -1 dla typow prostych)
+	 * oznacza, ¿e dana pozycja ma nie byc zmieniana.
 	 * @param id identyfikator zdarzenia, ktore ma zostac zmodifikowane
 	 * @param opis opis zdarzenia
 	 * @param czy_okres flaga oznaczajaca, ze zdarzenie jest
-	 * - punktem w czasie (wartosc 0) np. czas rozpoczêcia zajêæ
-	 * - okresem w czasie (wartosc 1) np. okres trwania zajêæ (od-do)
-	 * @param data_rozpoczecia data rozpoczêcia danego zdarzenia
+	 * - punktem w czasie (wartosc 0) np. czas rozpoczecia zajec
+	 * - okresem w czasie (wartosc 1) np. okres trwania zajec (od-do)
+	 * @param data_rozpoczecia data rozpoczecia danego zdarzenia
 	 * @param data_zakonczenia data zakonczenia danego zdarzenia
 	 * @param miejsce miejsce zdarzenia
 	 * @param waznosc okresla czy dane zdarzenia ma ustawiony alarm i czas, w ktorym alarm sie wlacza
@@ -198,8 +198,8 @@ public class Database
 	 
 	 /**
 		 * Metoda do aktualizacji krotek w bazie danych
-		 * podanie na jakimœ polu wartoœci (null - dla obiektów, lub -1 dla typów prostych)
-		 * oznacza, ¿e dana pozycja ma nie byæ zmieniana.
+		 * podanie na jakims polu wartosci (null - dla obiektow, lub -1 dla typow prostych)
+		 * oznacza, ¿e dana pozycja ma nie byc zmieniana.
 		 * @param id identyfikator zdarzenia, ktore ma zostac zmodyfikowane
 		 * @param zdarzenie referencja do obiektu klasy Zdarzenie zawierajacego dane do modyfikacji
 		 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
@@ -235,9 +235,9 @@ public class Database
 	 * Metoda do dodawania krotek
 	 * @param opis opis zdarzenia
 	 * @param czy_okres flaga oznaczajaca, ze zdarzenie jest
-	 * - punktem w czasie (wartosc 0) np. czas rozpoczêcia zajêæ
-	 * - okresem w czasie (wartosc 1) np. okres trwania zajêæ (od-do)
-	 * @param data_rozpoczecia data rozpoczêcia danego zdarzenia
+	 * - punktem w czasie (wartosc 0) np. czas rozpoczecia zajec
+	 * - okresem w czasie (wartosc 1) np. okres trwania zajec (od-do)
+	 * @param data_rozpoczecia data rozpoczecia danego zdarzenia
 	 * @param data_zakonczenia data zakonczenia danego zdarzenia
 	 * @param miejsce miejsce zdarzenia
 	 * @param waznosc okresla czy dane zdarzenia ma ustawiony alarm i czas, w ktorym alarm sie wlacza

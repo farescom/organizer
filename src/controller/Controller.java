@@ -36,7 +36,7 @@ public class Controller
 	
 	/**
 	 * Konstruktor klasy Controller.
-	 * Inicjalizuje niektóre sk³adowe statyczne klas, bed¹cych sk³adowymi klasy Controller
+	 * Inicjalizuje niektore sk³adowe statyczne klas, bed¹cych skladowymi klasy Controller
 	 * @param _model referencja do g³ównej klasy warstwy danych "Model"
 	 * @param _view referencja do g³ównej klasy warstwy danych "View"
 	 */ 	

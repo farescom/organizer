@@ -21,7 +21,7 @@ import model.Model;
 import model.Zdarzenie;
 
 /**
-* Klasa odpowiadaj¹ca za obs³ugê w¹tku, który bêdzie odpowiedzialny za uruchamianie alarmów
+* Klasa odpowiadajaca za obs³uge watku, ktory bedzie odpowiedzialny za uruchamianie alarmow
 */
 public class PanWatek extends Thread
 {
@@ -36,10 +36,10 @@ public class PanWatek extends Thread
 	public static Model model;
 	
 	/**
-	* Konstruktor klasy PanWatek inicjalizuj¹cy swoje sk³adowe
-	* @param nazwa - nazwa w¹tku
-	* @param minuty - d³ugoœæ trwania alarmu
-	* @param zdarzenia - lista zdarzeñ, która bêdzie sprawdzana w celu uruchomienia alarmu, dla konkretnego zdarzenia
+	* Konstruktor klasy PanWatek inicjalizujacy swoje sk³adowe
+	* @param nazwa - nazwa watku
+	* @param minuty - d³ugos trwania alarmu
+	* @param zdarzenia - lista zdarzeñ, ktora bedzie sprawdzana w celu uruchomienia alarmu, dla konkretnego zdarzenia
 	*/ 
 	public PanWatek(String nazwa, int minuty, ArrayList<Zdarzenie> zdarzenia)
 	{
@@ -49,7 +49,7 @@ public class PanWatek extends Thread
 	}
 	
 	/**
-	* Metoda odpowiadaj¹ca za uruchomienie nowego w¹tku dla klasy PanWatek
+	* Metoda odpowiadajaca za uruchomienie nowego watku dla klasy PanWatek
 	*/
 	public void run()
 	{
@@ -95,7 +95,7 @@ public class PanWatek extends Thread
 			System.out.println(roznica + ": " + model.zdarzenia.get(i).waznosc);
 			if (roznica == model.zdarzenia.get(i).waznosc)
 			{
-				// Alarm dŸwiêkowy / Alarm kolorowy
+				// Alarm dŸwiekowy / Alarm kolorowy
 					clip.play();
 					
 					if(model.alarmInformation == null){
@@ -134,8 +134,8 @@ public class PanWatek extends Thread
 	}
 	
 	/**
-	* Metoda odpowiadaj¹ca za wyœwietlenie informacji o nadchodz¹cym zdarzeniu w nowym w¹tku
-	* @param final i - indeks okreœlaj¹cy, dla którego zdarzenia z listy zdarzeñ wyœwietlane jest przypomnienie
+	* Metoda odpowiadajaca za wyswietlenie informacji o nadchodzacym zdarzeniu w nowym watku
+	* @param i - indeks okreslajacy, dla ktorego zdarzenia z listy zdarzeñ wyswietlane jest przypomnienie
 	*/
 	public void messageThread(final int i){
 		EventQueue.invokeLater( new Runnable()

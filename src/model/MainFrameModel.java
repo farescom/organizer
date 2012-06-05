@@ -23,7 +23,7 @@ import view.View;
 import controller.Controller;
 
 /**
-* Klasa odpowiadaj¹ca za warstwê modelu g³ównego okna aplikacjiz
+* Klasa odpowiadajaca za warstwe modelu g³ownego okna aplikacjiz
 * Definicja zmiennych, inicjalizacja zmiennych
 */
 public class MainFrameModel {
@@ -50,7 +50,7 @@ public class MainFrameModel {
 	
 	/**
 	* Konstruktor klasy MainFrameModel odpowiadajacy za uruchomienie metod odpowiedzialnych za wygenerowanie
-	* modelu dla tabel przechowuj¹cych zdarzenia z danego dnia b¹dŸ z danego miesi¹ca.
+	* modelu dla tabel przechowujacych zdarzenia z danego dnia badŸ z danego miesiaca.
 	*/ 
 	public MainFrameModel()
 	{
@@ -59,7 +59,7 @@ public class MainFrameModel {
 	}
 	
 	/**
-	* Metoda odpowiadajaca za wygenerowanie modelu i zawartoœci tabeli przechowuj¹cej wydarzenia z danego dnia
+	* Metoda odpowiadajaca za wygenerowanie modelu i zawartosci tabeli przechowujacej wydarzenia z danego dnia
 	*/
 	public void tableDay(){
 		
@@ -130,7 +130,7 @@ public class MainFrameModel {
 	}
 	
 	/**
-	* Metoda odpowiadajaca za wygenerowanie modelu i zawartoœci tabeli przechowuj¹cej wydarzenia z danego miesi¹ca
+	* Metoda odpowiadajaca za wygenerowanie modelu i zawartosci tabeli przechowujacej wydarzenia z danego miesiaca
 	*/
 	public void tableMonth(){
 		
@@ -259,8 +259,8 @@ public class MainFrameModel {
 	}
 	
 	/**
-	* Klasa odpowiadaj¹ca za sposób w jakim s¹ wyœwietlane dane w danej komórce tabeli przechowuj¹cej
-	* zdarzenia z danego miesi¹ca
+	* Klasa odpowiadajaca za sposob w jakim sa wyswietlane dane w danej komorce tabeli przechowujacej
+	* zdarzenia z danego miesiaca
 	*/
 	class TableMonthRenderer extends DefaultTableCellRenderer{
 		public Integer day = 0;
@@ -312,7 +312,7 @@ public class MainFrameModel {
 	}
 	
 	/**
-	* Klasa odpowiadaj¹ca za sposób w jakim s¹ wyœwietlane dane w danej komórce tabeli przechowuj¹cej
+	* Klasa odpowiadajaca za sposob w jakim sa wyswietlane dane w danej komorce tabeli przechowujacej
 	* zdarzenia z danego dnia
 	*/
 	class MultiLineCellRenderer implements TableCellRenderer {

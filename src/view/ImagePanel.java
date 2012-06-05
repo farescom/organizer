@@ -5,8 +5,8 @@ import javax.swing.*;
 import model.Model;
 
 /**
-* Klasa rozszerzaj¹ca JPanel. Umo¿liwia utworzenie Panelu wype³nionego zdjêciem "w tle".
-* Rysowanie zdjêcia odbywa siê poprzez nadpisanie metody paintComponent
+* Klasa rozszerzajaca JPanel. Umozliwia utworzenie Panelu wypelnionego zdjeciem "w tle".
+* Rysowanie zdjecia odbywa sie poprzez nadpisanie metody paintComponent
 */ 
 public class ImagePanel extends JPanel
 {
@@ -21,7 +21,7 @@ public class ImagePanel extends JPanel
 	public static Model model;
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie panelu ze zdjêciem
+	* Konstruktor klasy odpowiadajacy za utworzenie panelu ze zdjeciem
 	* @param nazwa nazwa panelu
 	* @param odstep odstep zdjecia od krancow panelu
 	* @param SizeX szerokosc panelu
@@ -39,7 +39,7 @@ public class ImagePanel extends JPanel
 	}
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie panelu ze zdjêciem
+	* Konstruktor klasy odpowiadajacy za utworzenie panelu ze zdjeciem
 	* @param odstep odstep zdjecia od krancow panelu
 	* @param SizeX szerokosc panelu
 	* @param SizeY wysokosc panelu

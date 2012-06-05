@@ -9,7 +9,7 @@ import model.Model;
 import controller.Controller;
 
 /**
-* Klasa odpowiadajaca za utworzenie ramki powitalnej wyœwietlanej na samym pocz¹tku dzia³ania
+* Klasa odpowiadajaca za utworzenie ramki powitalnej wyswietlanej na samym poczatku dzialania
 * programu.
 */ 
 public class WelcomeFrame extends JFrame
@@ -56,7 +56,7 @@ public class WelcomeFrame extends JFrame
          		login.addActionListener(Controller.welcomeFrameEvent);
          		about = new JMenuItem("O programie", KeyEvent.VK_F3);
          		about.addActionListener(Controller.welcomeFrameEvent);
-	         	exit = new JMenuItem("Wyjœcie", KeyEvent.VK_F3);
+	         	exit = new JMenuItem("Wyjscie", KeyEvent.VK_F3);
 	         	exit.addActionListener(Controller.welcomeFrameEvent);
 	   	     menu.add(register);
 		     menu.add(login);
@@ -81,7 +81,7 @@ public class WelcomeFrame extends JFrame
 		public JButton submitB, exitB, loginAsGuest;
 		
 		/**
-		* Konstruktor domyœlny klasy WelcomeInternalFrame.
+		* Konstruktor domyslny klasy WelcomeInternalFrame.
 		*/ 
 		public WelcomeInternalFrame(){}
 		

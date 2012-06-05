@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 import model.Model;
 
 /**
-* Klasa reprezentuj¹ca ramkê "O nas", w której s¹ wyœwietlane informacje o twórcach programu.
+* Klasa reprezentujaca ramke "O nas", w ktorej sa wyswietlane informacje o tworcach programu.
 */ 
 public class AboutUsFrame extends JFrame
 {
@@ -41,7 +41,7 @@ public class AboutUsFrame extends JFrame
         setResizable(false);
         setVisible(true);
         
-        // Górna czêœæ
+        // Gorna czesæ
         setLayout(new GridLayout(2,1));
         	panel_gorny = new JPanel();
         	panel_gorny.setLayout(new FlowLayout());
@@ -49,12 +49,12 @@ public class AboutUsFrame extends JFrame
         	tworcy = new JLabel();
         	
         	tekst.setText("<html><br>SLIMTOM Organizer" +
-        			"<br>Program zosta³ zrealizowany w ramach zajêæ laboratoryjnych z przedmiotu \"Programowanie" +
-        			"<br>Komponentowe\".     G³ównym celem programu jest pomoc u¿ytkownikowi w organizacji czasu" +
-        			"<br>przeznaczonego na wykonanie ró¿nych zadañ w odpowiednim czasie.   Dzia³a on na podobnej" +
-        			"<br>zasadzie jak Evolution, czy Outlook. Podstawow¹ zalet¹ programu jest struktura programu" +
-        			"<br>w której warstwa danych jest umiejscowiona na zdalnym serwerze, dziêki czemu u¿ytkownik" +
-        			"<br>ma dostêp do aplikacji z ka¿dego miejsca na Œwiecie.");
+        			"<br>Program zosta³ zrealizowany w ramach zajeæ laboratoryjnych z przedmiotu \"Programowanie" +
+        			"<br>Komponentowe\".     G³ownym celem programu jest pomoc u¿ytkownikowi w organizacji czasu" +
+        			"<br>przeznaczonego na wykonanie ro¿nych zadañ w odpowiednim czasie.   Dzia³a on na podobnej" +
+        			"<br>zasadzie jak Evolution, czy Outlook. Podstawowa zaleta programu jest struktura programu" +
+        			"<br>w ktorej warstwa danych jest umiejscowiona na zdalnym serwerze, dzieki czemu u¿ytkownik" +
+        			"<br>ma dostep do aplikacji z ka¿dego miejsca na swiecie.");
         	tworcy.setText("<html><br>Tomasz Adrianowski" +
         					   "<br>tomaszadrianowski@gmail.com" +
         					   "<br>tel. 796 343 178" +

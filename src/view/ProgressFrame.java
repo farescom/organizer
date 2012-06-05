@@ -8,8 +8,8 @@ import javax.swing.JLabel;
 import java.awt.Button;
 
 /**
-* Klasa reprezentuj¹ca ramkê "postêpu", w której wyœwietlane s¹ informacje o procentowej
-* iloœci wczytanych danych programu do pamiêci.
+* Klasa reprezentuj¹ca ramke "postepu", w ktorej wyswietlane s¹ informacje o procentowej
+* ilosci wczytanych danych programu do pamieci.
 */ 
 public class ProgressFrame extends JFrame
 {
@@ -23,7 +23,7 @@ public class ProgressFrame extends JFrame
 	public static Model model;
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna wyœwietlaj¹cego informacje o 
+	* Konstruktor klasy odpowiadajacy za utworzenie okna wyswietlaj¹cego informacje o 
 	* uruchamianym programie (w postaci procentu).
 	* @param tytul tytul wyswietlany na gorze okna
 	* @param SizeX szerokosc okna

@@ -13,11 +13,11 @@ import model.Model;
 import controller.Controller;
 
 /**
-* Klasa reprezentuj¹ca ramkê okna g³ównego.
-* W tej ramce u¿ytkownik ma dostêp do:
+* Klasa reprezentujaca ramke okna glownego.
+* W tej ramce u¿ytkownik ma dostep do:
 * - graficznego kalendarza,
-* - aktualnych zdarzeñ,
-* - panelu zarz¹dzania zdarzeniami.
+* - aktualnych zdarzen,
+* - panelu zarzadzania zdarzeniami.
 */ 
 public class MainFrame extends JFrame
 {
@@ -52,12 +52,12 @@ public class MainFrame extends JFrame
 	public static Model model;
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna i wstawieniu do tego okna elementów.
+	* Konstruktor klasy odpowiadajacy za utworzenie okna i wstawieniu do tego okna elementow.
 	* @param tytul tytul wyswietlany na gorze okna
-	* @param SizeX szerokosc okna
-	* @param SizeY wysokosc okna
-	* @param x przesuniecie x okna od lewej krawedzi ekranu
-	* @param y przesuniecie y okna od gornej krawedzi ekranu
+	* @param x szerokosc okna
+	* @param y wysokosc okna
+	* @param locationX przesuniecie x okna od lewej krawedzi ekranu
+	* @param locationY przesuniecie y okna od gornej krawedzi ekranu
 	*/ 
  public MainFrame(String tytul, int x, int y, int locationX, int locationY)
     {  
@@ -163,8 +163,8 @@ public class MainFrame extends JFrame
  
  
  	/**
-	* Metoda odpowiadajaca za wyswietlenie panelu filtrów w glownym oknie aplikacji (MainFrame)
-	* @param c - ogranicznik dla layoutu GridBagLayout wykorzystywanym przy tworzeniu g³ównego okna aplikacji
+	* Metoda odpowiadajaca za wyswietlenie panelu filtrow w glownym oknie aplikacji (MainFrame)
+	* @param c - ogranicznik dla layoutu GridBagLayout wykorzystywanym przy tworzeniu glownego okna aplikacji
 	*/
  	public void addFilters(GridBagConstraints c){
  		
@@ -266,7 +266,7 @@ public class MainFrame extends JFrame
  
  	/**
 	* Metoda odpowiadajaca za wyswietlenie panelu dodawania zdarzen w glownym oknie aplikacji (MainFrame)
-	* @param c - ogranicznik dla layoutu GridBagLayout wykorzystywanym przy tworzeniu g³ównego okna aplikacji
+	* @param c - ogranicznik dla layoutu GridBagLayout wykorzystywanym przy tworzeniu glownego okna aplikacji
 	*/
  	public void addEvent(GridBagConstraints c)
  	{
@@ -372,7 +372,7 @@ public class MainFrame extends JFrame
  	}
  
  	/**
-	* Metoda odpowiadaj¹ca za odœwie¿enie panelu "currentEvent" wyœwietlaj¹cego zdarzenia z danego dnia
+	* Metoda odpowiadajaca za odswie¿enie panelu "currentEvent" wyswietlajacego zdarzenia z danego dnia
 	*/
  	public void refreshTableDay()
  	{
@@ -390,7 +390,7 @@ public class MainFrame extends JFrame
  	}
  	
  	/**
-	* Metoda odpowiadaj¹ca za odœwie¿enie panelu "nextEvent" wyœwietlaj¹cego zdarzenia z danego miesi¹ca
+	* Metoda odpowiadajaca za odswie¿enie panelu "nextEvent" wyswietlajacego zdarzenia z danego miesiaca
 	*/
  	public void refreshTableMonth()
  	{	
@@ -475,7 +475,7 @@ public class MainFrame extends JFrame
  	}
  	
  	/**
-	* Metoda odpowiadaj¹ca za zakoñczenie wyœwietlania panelu edycji zdarzeñ w g³ównym oknie aplikacji (MainFrame)
+	* Metoda odpowiadajaca za zakonczenie wyswietlania panelu edycji zdarzen w glownym oknie aplikacji (MainFrame)
 	*/
  	public void notEditEvent(){
  		

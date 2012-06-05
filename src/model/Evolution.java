@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Klasa zajmuj¹ca siê konwertowaniem zdarzeñ do standardowego formatu zgodnego np. z Evolution.
+ * Klasa zajmuj¹ca siê konwertowaniem zdarzen do standardowego formatu zgodnego np. z Evolution.
  * format: CSV.
  */
 public class Evolution
@@ -22,7 +22,7 @@ public class Evolution
 	public Evolution(){}
 	
 	/**
-	 * Metoda odpowiedzialna za zapisanie kolekcji zdarzeñ do odpowiedniego formatu CSV
+	 * Metoda odpowiedzialna za zapisanie kolekcji zdarzen do odpowiedniego formatu CSV
 	 * @param nazwa nazwa pliku, do ktorego maja zostac zapisane dane
 	 * @param zdarzenia kolekcja zdarzen zawierajaca wszystkie zdarzenia do zapisu
 	 */
@@ -82,7 +82,7 @@ public class Evolution
 	}
 	
 	/**
-	 * Metoda odpowiedzialna za zapisanie kolekcji zdarzeñ do odpowiedniego formatu CSV
+	 * Metoda odpowiedzialna za zapisanie kolekcji zdarzen do odpowiedniego formatu CSV
 	 * @param plik obiekt klasy File zawierajacy m.in. sciezke do miejsca, gdzie maja zostac
 	 * zapisane dane z kolekcji zdarzenia.
 	 * @param zdarzenia kolekcja zdarzen zawierajaca wszystkie zdarzenia do zapisu
