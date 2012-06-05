@@ -52,7 +52,7 @@ public class MainFrame extends JFrame
 	public static Model model;
 	
 	/**
-	* Konstruktor klasy odpowiadajacy za utworzenie okna
+	* Konstruktor klasy odpowiadajacy za utworzenie okna i wstawieniu do tego okna elementów.
 	* @param tytul tytul wyswietlany na gorze okna
 	* @param SizeX szerokosc okna
 	* @param SizeY wysokosc okna
@@ -162,6 +162,10 @@ public class MainFrame extends JFrame
     }
  
  
+ 	/**
+	* Metoda odpowiadajaca za wyswietlenie panelu filtrów w glownym oknie aplikacji (MainFrame)
+	* @param c - ogranicznik dla layoutu GridBagLayout wykorzystywanym przy tworzeniu g³ównego okna aplikacji
+	*/
  	public void addFilters(GridBagConstraints c){
  		
  		c.insets = new Insets(-3, 0, 0, 0);
@@ -260,6 +264,10 @@ public class MainFrame extends JFrame
 		c.insets = new Insets(1, 1, 1, 1);
  	}
  
+ 	/**
+	* Metoda odpowiadajaca za wyswietlenie panelu dodawania zdarzen w glownym oknie aplikacji (MainFrame)
+	* @param c - ogranicznik dla layoutu GridBagLayout wykorzystywanym przy tworzeniu g³ównego okna aplikacji
+	*/
  	public void addEvent(GridBagConstraints c)
  	{
  		GridLayout layout = new GridLayout(6, 1);
@@ -363,6 +371,9 @@ public class MainFrame extends JFrame
 		addEvent.add(flowPanel);
  	}
  
+ 	/**
+	* Metoda odpowiadaj¹ca za odœwie¿enie panelu "currentEvent" wyœwietlaj¹cego zdarzenia z danego dnia
+	*/
  	public void refreshTableDay()
  	{
  		options.remove(currentEvent);
@@ -378,6 +389,9 @@ public class MainFrame extends JFrame
 		this.validate();
  	}
  	
+ 	/**
+	* Metoda odpowiadaj¹ca za odœwie¿enie panelu "nextEvent" wyœwietlaj¹cego zdarzenia z danego miesi¹ca
+	*/
  	public void refreshTableMonth()
  	{	
  		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
@@ -390,6 +404,9 @@ public class MainFrame extends JFrame
 		this.validate();
  	}
  	
+ 	/**
+	* Metoda odpowiadajaca za wyswietlenie panelu edycji zdarzen w glownym oknie aplikacji (MainFrame)
+	*/
  	public void editEvent(){
  		
  		Zdarzenie editZdarzenie = new Zdarzenie(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay));
@@ -457,6 +474,9 @@ public class MainFrame extends JFrame
  		
  	}
  	
+ 	/**
+	* Metoda odpowiadaj¹ca za zakoñczenie wyœwietlania panelu edycji zdarzeñ w g³ównym oknie aplikacji (MainFrame)
+	*/
  	public void notEditEvent(){
  		
  		tabbedPane.setTitleAt(2, "Add Event");

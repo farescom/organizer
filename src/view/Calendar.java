@@ -15,6 +15,9 @@ import java.util.*;
 import view.*;
 import controller.Controller;
 
+/**
+* Klasa odpowiadajaca za wyswietlenie kalendarza "œciennego" w glownej ramce programu (w MainFrame)
+*/ 
 public class Calendar{
 	
 	public static Model model;
@@ -28,6 +31,9 @@ public class Calendar{
 	public static JScrollPane stableCalendar; //The scrollpane
 	public static JPanel panelCalendar, panelTop, panelBottom, panelMonth;
 	
+	/**
+	* Metoda odpowiadajaca za wyswietlenie kalendarza "œciennego" w glownej ramce programu (w MainFrame)
+	*/ 
 	public JPanel createProgram(){
 		
 		panelCalendar = new JPanel(new BorderLayout());
@@ -100,6 +106,12 @@ public class Calendar{
 		return panelCalendar;
 	}
 	
+	/**
+	* Metoda odpowiadajaca za wyswietlenie kalendarza "œciennego" po wykonaniu operacji na nim
+	* (odswiezenie kalendarza)
+	* @param month - wybrany miesiac na kalendarzu
+	* @param year - wybrany rok na kalendarzu
+	*/ 
 	public static void refreshCalendar(int month, int year){
 		//Variables
 		int nod, som; //Number Of Days, Start Of Month
@@ -137,7 +149,10 @@ public class Calendar{
 		//Apply renderers
 		tableCalendar.setDefaultRenderer(tableCalendar.getColumnClass(0), new tableCalendarRenderer());
 	}
-
+	
+	/**
+	* Klasa wewnêtrzna, która okreœla styl renderowania komórek tabeli w kalendarzu "œciennym"
+	*/ 
 	static class tableCalendarRenderer extends DefaultTableCellRenderer{
 		public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
 			super.getTableCellRendererComponent(table, value, selected, focused, row, column);
@@ -173,7 +188,10 @@ public class Calendar{
 			return this;  
 		}
 	}
-
+	
+	/**
+	* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c wstecz) dla kalendarza "œciennego"
+	*/
 	static class buttonPrev_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
 
@@ -192,6 +210,10 @@ public class Calendar{
 			
 		}
 	}
+	
+	/**
+	* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c dalej) dla kalendarza "œciennego"
+	*/ 
 	static class buttonNext_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
 			
@@ -209,6 +231,10 @@ public class Calendar{
 			
 		}
 	}
+	
+	/**
+	* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru roku dla kalendarza "œciennego"
+	*/ 
 	static class comboYear_Action implements ActionListener{
 		public void actionPerformed (ActionEvent e){
 			JComboBox cb = (JComboBox)e.getSource();

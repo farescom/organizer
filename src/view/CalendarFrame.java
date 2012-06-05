@@ -30,6 +30,10 @@ import view.Calendar.tableCalendarRenderer;
 
 import model.Model;
 
+/**
+* Klasa odpowiadajaca za wyswietlenie ramki kalendarza w momencie wyboru daty rozpoczecia zdarzenia
+* badz w momencie wyboru daty alarmu
+*/ 
 public class CalendarFrame extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -39,6 +43,15 @@ public class CalendarFrame extends JFrame {
 	
 	public static Model model;
 	
+	/**
+	* Konstruktor klasy CalendarFrame odpowiedzialny za utworzenie ramki kalendarza
+	* @param tytul tytul wyswietlany na gorze okna
+	* @param SizeX szerokosc okna
+	* @param SizeY wysokosc okna
+	* @param x przesuniecie x okna od lewej krawedzi ekranu
+	* @param y przesuniecie y okna od gornej krawedzi ekranu
+	* @param mainFrame obiekt typu MainFrame - dostep do skladowych klasy MainFrame
+	*/ 
 	public CalendarFrame(String tytul, int SizeX, int SizeY, int x, int y, MainFrame mainFrame)
     {  
         super(tytul);  
@@ -59,7 +72,9 @@ public class CalendarFrame extends JFrame {
 		add(calendar);
     } 
 	
-	
+	/**
+	* Klasa wewnêtrzna odpowiadajaca za wyswietlenie kalendarza w ramce kalendarza (w CalendarFrame)
+	*/ 
 	static class CalendarProgram{
 		
 		public static JLabel labelMonth, labelYear;
@@ -73,10 +88,17 @@ public class CalendarFrame extends JFrame {
 
 		static MainFrame mainFrame;
 		
+		/**
+		* Konstruktor klasy CalendarProgram odpowiedzialnej za umieszczenie elementow w ramce kalendarza (w CalendarFrame)
+		* @param _mainFrame obiekt typu MainFrame - dostep do skladowych klasy MainFrame
+		*/
 		public CalendarProgram(MainFrame _mainFrame){
 			this.mainFrame = _mainFrame;
 		}
 		
+		/**
+		* Metoda odpowiadajaca za umieszczenie elementow w ramce kalendarza (w CalendarFrame)
+		*/ 
 		public JPanel createProgram(){
 			
 			panelCalendar = new JPanel(new BorderLayout());
@@ -151,6 +173,12 @@ public class CalendarFrame extends JFrame {
 			return panelCalendar;
 		}
 		
+		/**
+		* Metoda odpowiadajaca za wyswietlenie kalendarza w ramce kalendarza (CalendarFrame) po wykonaniu operacji na nim
+		* (odswiezenie kalendarza)
+		* @param month - wybrany miesiac na kalendarzu
+		* @param year - wybrany rok na kalendarzu
+		*/ 
 		public static void refreshCalendar(int month, int year){
 			//Variables
 			int nod, som; //Number Of Days, Start Of Month
@@ -187,8 +215,11 @@ public class CalendarFrame extends JFrame {
 
 			//Apply renderers
 			tableCalendar.setDefaultRenderer(tableCalendar.getColumnClass(0), new tableCalendarRenderer());
-	;	}
-
+		}
+		
+		/**
+		* Klasa wewnêtrzna, która okreœla styl renderowania komórek tabeli w kalendarzu w ramce kalendarza (w CalendarFrame)
+		*/ 
 		static class tableCalendarRenderer extends DefaultTableCellRenderer{
 			public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
 				super.getTableCellRendererComponent(table, value, selected, focused, row, column);
@@ -240,6 +271,10 @@ public class CalendarFrame extends JFrame {
 			}
 		}
 
+		/**
+		* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c wstecz) dla kalendarza
+		* w ramce kalendarza (w CalendarFrame)
+		*/
 		static class buttonPrev_Action implements ActionListener{
 			public void actionPerformed (ActionEvent e){
 				if(mainFrame.source == mainFrame.data_roz){
@@ -277,6 +312,11 @@ public class CalendarFrame extends JFrame {
 				}
 			}
 		}
+		
+		/**
+		* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru miesi¹ca (1 miesi¹c dalej) dla kalendarza
+		* w ramce kalendarza (w CalendarFrame)
+		*/
 		static class buttonNext_Action implements ActionListener{
 			public void actionPerformed (ActionEvent e){
 				
@@ -315,6 +355,11 @@ public class CalendarFrame extends JFrame {
 				}
 			}
 		}
+		
+		/**
+		* Klasa wewnêtrzna, która obs³uguje zdarzenia dla przycisku wyboru roku dla kalendarza
+		* w ramce kalendarza (w CalendarFrame)
+		*/
 		static class comboYear_Action implements ActionListener{
 			public void actionPerformed (ActionEvent e){
 				JComboBox cb = (JComboBox)e.getSource();
