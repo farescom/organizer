@@ -2,10 +2,6 @@ import model.Model;
 import controller.Controller;
 import view.View;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 /**
  * Glowna klasa programu
  * @author Tomasz Adrianowski
@@ -24,7 +20,13 @@ public class Organizer
     
 	public static void main(String[] args)
 	{
-		if (!(args[0].equals("exit")))
+		if (args.length == 0)
+		{
+		   model      = new Model();
+		   view       = new View(model);
+		   controller = new Controller(model, view);
+		}
+		else if (!(args[0].equals("exit")))
 		{
 		   System.out.print(args[0]);
 		   model      = new Model();
