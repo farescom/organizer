@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFileChooser;
@@ -165,6 +166,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 					roznica = ((startDate.getTime()/60000)-(alarmDate.getTime()/60000));
 				}
 		  		
+		  		Calendar cal = new GregorianCalendar();
+		  		int hourActual = cal.get(GregorianCalendar.HOUR_OF_DAY);
+		  		int minuteActual = cal.get(GregorianCalendar.MINUTE);
+		  		Date currentDate = new Date(model.currentYear, model.currentMonth, model.currentDay);
 		  		
 		  		if(Integer.parseInt(hour)<0 || Integer.parseInt(hour)>23 || Integer.parseInt(minute)<0 || Integer.parseInt(minute)>59){
 		  			JOptionPane.showMessageDialog(null, "You typed bad hours for start");
@@ -172,16 +177,16 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		else if(view.mainFrame.panelAlarm.isVisible() == true && (Integer.parseInt(hourAlarm)<0 || Integer.parseInt(hourAlarm)>23 || Integer.parseInt(minuteAlarm)<0 || Integer.parseInt(minuteAlarm)>59)){
 		  			JOptionPane.showMessageDialog(null, "You typed bad hours for alarm");
 		  		}
-		  		else if(new Date(model.currentYear, model.currentMonth, model.currentDay).compareTo(new Date(startYear, startMonth, startDay)) == 1){
+		  		else if(currentDate.compareTo(new Date(startYear, startMonth, startDay)) == 1){
 		  			JOptionPane.showMessageDialog(null, "Data of start is too early");
 		  		}
 		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
 		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
 		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
 		  		}
-		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((startDate.compareTo(alarmDate) == 1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) < Integer.parseInt(hour))
-		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
-		  			JOptionPane.showMessageDialog(null, "Data of alarm is too late");
+		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((alarmDate.compareTo(currentDate) == -1) || (alarmDate.compareTo(currentDate) == 0 && Integer.parseInt(hourAlarm) < cal.get(GregorianCalendar.HOUR_OF_DAY))
+		  				|| (alarmDate.compareTo(currentDate) == 0 && Integer.parseInt(hourAlarm) == cal.get(GregorianCalendar.HOUR_OF_DAY) && Integer.parseInt(minuteAlarm) < cal.get(GregorianCalendar.MINUTE)))){
+		  			JOptionPane.showMessageDialog(null, "Data of alarm is too early");
 		  		}
 		  		else{
 		  			if(view.mainFrame.buttonAddEvent.getText() == "Add Event"){
