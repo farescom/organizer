@@ -29,6 +29,9 @@ import javax.swing.event.ListSelectionListener;
 import view.*;
 import model.*;
 
+/**
+* Klasa odpowiadaj¹ca za obs³ugê zdarzeñ wywo³anych z poziomu ramki g³ównej programu (MainFrame)
+*/ 
 public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener, ItemListener{
 
 	 public static View view;
@@ -36,7 +39,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	 
 	 public MainFrameEvent(){}
 	
-	 @Override
+	 /**
+	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
+	 * @param e - dostêp do konkretnego zdarzenia
+	 */
 	 public void actionPerformed(ActionEvent e) {
 	  
 	  Object source = e.getSource(); 
@@ -252,7 +258,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 	 }
 	 
 
-	@Override
+	 /**
+	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ obiektów klas JTabbedPane albo JSpinner
+	 * @param e - dostêp do konkretnego zdarzenia
+	 */
 	public void stateChanged(ChangeEvent e) {
 		
 		Object source = e.getSource();
@@ -302,6 +311,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		}
 	}
 
+	/**
+	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ wciœniêcia klawisza myszy
+	 * @param e - dostêp do konkretnego zdarzenia
+	 */
 	public void mousePressed(MouseEvent e) {
 			view.mainFrame.source = e.getSource();
 			if(view.mainFrame.source == view.mainFrame.data_roz){
@@ -321,6 +334,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			}
 	}
 	
+	/**
+	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ obiektów klasy JCheckBox
+	 * @param e - dostêp do konkretnego zdarzenia
+	 */
 	public void itemStateChanged(ItemEvent e) {
         
 		if(e.getItemSelectable() == view.mainFrame.filterDate){
@@ -353,6 +370,10 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		}
 	}
 	
+	/**
+	 * Metoda odpowiadaj¹ca za ustawianie odpowiednich parametrów w momencie dodania zdarzenia
+	 * b¹dŸ jego modyfikacji
+	 */
 	public void addEvent(){
 		model.mainFrame.tableDay();
 		view.mainFrame.refreshTableDay();

@@ -98,6 +98,7 @@ public class CalendarFrame extends JFrame {
 		
 		/**
 		* Metoda odpowiadajaca za umieszczenie elementow w ramce kalendarza (w CalendarFrame)
+		* @return JPanel - zwraca panel kalendarza, który bêdzie wstawiony do ramki kalendarza (CalendarFrame)
 		*/ 
 		public JPanel createProgram(){
 			

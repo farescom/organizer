@@ -20,6 +20,9 @@ import view.View;
 import model.Model;
 import model.Zdarzenie;
 
+/**
+* Klasa odpowiadaj¹ca za obs³ugê w¹tku, który bêdzie odpowiedzialny za uruchamianie alarmów
+*/
 public class PanWatek extends Thread
 {
 	String nazwa;
@@ -32,12 +35,22 @@ public class PanWatek extends Thread
 	public static View view;
 	public static Model model;
 	
+	/**
+	* Konstruktor klasy PanWatek inicjalizuj¹cy swoje sk³adowe
+	* @param nazwa - nazwa w¹tku
+	* @param minuty - d³ugoœæ trwania alarmu
+	* @param zdarzenia - lista zdarzeñ, która bêdzie sprawdzana w celu uruchomienia alarmu, dla konkretnego zdarzenia
+	*/ 
 	public PanWatek(String nazwa, int minuty, ArrayList<Zdarzenie> zdarzenia)
 	{
 		this.nazwa = nazwa;
 		this.minuty = minuty;
 		this.zdarzenia = zdarzenia;
 	}
+	
+	/**
+	* Metoda odpowiadaj¹ca za uruchomienie nowego w¹tku dla klasy PanWatek
+	*/
 	public void run()
 	{
 		f = new File ("src/resources/alarm.wav");
@@ -120,6 +133,10 @@ public class PanWatek extends Thread
 	  }
 	}
 	
+	/**
+	* Metoda odpowiadaj¹ca za wyœwietlenie informacji o nadchodz¹cym zdarzeniu w nowym w¹tku
+	* @param final i - indeks okreœlaj¹cy, dla którego zdarzenia z listy zdarzeñ wyœwietlane jest przypomnienie
+	*/
 	public void messageThread(final int i){
 		EventQueue.invokeLater( new Runnable()
 		{  

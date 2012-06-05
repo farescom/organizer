@@ -33,6 +33,7 @@ public class Calendar{
 	
 	/**
 	* Metoda odpowiadajaca za wyswietlenie kalendarza "œciennego" w glownej ramce programu (w MainFrame)
+	* @return JPanel - zwraca panel kalendarza, który bêdzie wstawiony do glownego okna (MainFrame)
 	*/ 
 	public JPanel createProgram(){
 		

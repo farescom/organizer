@@ -22,7 +22,10 @@ public class WelcomeFrameEvent implements ActionListener{
 	
 	public WelcomeFrameEvent(){}
 
-	@Override
+	/**
+	 * Metoda odpowiadajaca za obs³ugê zdarzeñ wywo³anych za pomoc¹ przycisków
+	 * @param e - dostêp do konkretnego zdarzenia
+	 */
 	public void actionPerformed(ActionEvent e) {
 		
 		Object source = e.getSource();  

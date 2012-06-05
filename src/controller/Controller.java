@@ -34,6 +34,12 @@ public class Controller
 		public static Color inny_kolor = Color.LIGHT_GRAY;
 		public static int wybrana_liczba_dni = 1;
 	
+	/**
+	 * Konstruktor klasy Controller.
+	 * Inicjalizuje niektóre sk³adowe statyczne klas, bed¹cych sk³adowymi klasy Controller
+	 * @param _model referencja do g³ównej klasy warstwy danych "Model"
+	 * @param _view referencja do g³ównej klasy warstwy danych "View"
+	 */ 	
 	public Controller(Model _model, View _view)
 	{
 		this.model = _model;
