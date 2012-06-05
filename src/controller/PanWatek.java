@@ -147,6 +147,7 @@ public class PanWatek extends Thread
 						"\n Describe: "+model.zdarzenia.get(i).opis+"\n Place: "+model.zdarzenia.get(i).miejsce);
 				model.zdarzenia.get(i).waznosc = -1;
 				if(model.guest == 0) model.baza.update(model.zdarzenia.get(i).id, model.zdarzenia.get(i));
+				model.alarmInformation = null;
             }  
         });
 	}

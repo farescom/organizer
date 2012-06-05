@@ -295,7 +295,7 @@ public class MainFrame extends JFrame
 		godzinaAlarmu = new JTextField(2);
 		minutaAlarmu = new JTextField(2);
 		buttonAddEvent = new JButton("Add Event");
-		buttonNotEditEvent = new JButton("Not Edit Event");
+		buttonNotEditEvent = new JButton("Do Not Edit Event");
 		
 		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 		JLabel describe = new JLabel("Describe: ");
