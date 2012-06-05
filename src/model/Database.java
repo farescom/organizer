@@ -366,8 +366,8 @@ public class Database
 						}
 						String datuneczka2 = rocznik+"-"+miesiacik+"-"+dzien;
 						System.out.println("* " + datuneczka2);
-						query2("DELETE FROM zdarzenia WHERE data_rozpoczecia < '"+datuneczka2+"'");
-						//query("DELETE FROM '"+table+"' WHERE data_rozpoczecia < '"+datuneczka2+"'");
+						//query2("DELETE FROM zdarzenia WHERE data_rozpoczecia < '"+datuneczka2+"'");
+						query2("DELETE FROM "+table+" WHERE data_rozpoczecia < '"+datuneczka2+"'");
 						//System.out.println(dni_waznosci + " | " + kolor_dni_wolnych2 + " | " + kolor_aktualnego_dnia2 + " | " + kolor_zaznaczonego_dnia2);
 						System.out.println(table);
 						System.out.println("Zostales zalogowany!");
