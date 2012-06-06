@@ -31,6 +31,8 @@ public class MainFrameModel {
 	public int startDay = 0, startMonth = 0, startYear = 0; 
 	public int finishDay = 0, finishMonth = 0, finishYear = 0;
 	public int alarmDay = 0, alarmMonth = 0, alarmYear = 0;
+	public int deleteStartDay = 0, deleteStartMonth = 0, deleteStartYear = 0;
+	public int deleteEndDay = 0, deleteEndMonth = 0, deleteEndYear = 0;
 	public static TableModel dataModelDay;
 	public static TableModel dataModelMonth;
 	
@@ -40,7 +42,7 @@ public class MainFrameModel {
 	public JTable tableDay;
 	public JTable tableMonth;
 	
-	String day, month, year, hour, minute;
+	String day, month, year, hour, minute, place, description;
 	public int rowSelectedMonth = 0, rowSelectedDay = 0;
 	int ileDay = 0, ileMonth = 0, ileMonthTemp = 0;
 	public ArrayList<Zdarzenie> monthEvent = new ArrayList<Zdarzenie>();
@@ -202,6 +204,44 @@ public class MainFrameModel {
   			monthEvent.addAll(monthEventTemp);
   			ileMonth = ileMonthTemp;
 		}
+	  	if(View.mainFrame.filterPlace.isSelected() == true && View.mainFrame.byPlace.getText().length() != 0){
+
+	  		monthEventTemp.removeAll(monthEventTemp);
+	  		ileMonthTemp = 0;
+	  		
+	  		for(int i=0; i<monthEvent.size(); i++){
+				  place = new String(monthEvent.get(i).miejsce);
+				  
+				  if(place.contains(View.mainFrame.byPlace.getText())){
+
+		  	    	  	  ileMonthTemp++;
+			      		  monthEventTemp.add(monthEvent.get(i));
+			      }
+			}
+
+	  		monthEvent.removeAll(monthEvent);
+  			monthEvent.addAll(monthEventTemp);
+  			ileMonth = ileMonthTemp;
+		}
+	  	if(View.mainFrame.filterDescription.isSelected() == true && View.mainFrame.byDescription.getText().length() != 0){
+
+	  		monthEventTemp.removeAll(monthEventTemp);
+	  		ileMonthTemp = 0;
+	  		
+	  		for(int i=0; i<monthEvent.size(); i++){
+				  description = new String(monthEvent.get(i).opis);
+				  
+				  if(description.contains(View.mainFrame.byDescription.getText())){
+
+		  	    	  	  ileMonthTemp++;
+			      		  monthEventTemp.add(monthEvent.get(i));
+			      }
+			}
+
+	  		monthEvent.removeAll(monthEvent);
+  			monthEvent.addAll(monthEventTemp);
+  			ileMonth = ileMonthTemp;
+		}
 		
 	  	class comparator implements Comparator<Zdarzenie>{
 
@@ -227,7 +267,7 @@ public class MainFrameModel {
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-			private String[] columnNames = {"Day", "Hour", "Event", "Place"};
+			private String[] columnNames = {"Day", "Hour", "Description", "Place"};
 			  
 	          public String getColumnName(int col)
 	          {

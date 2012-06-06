@@ -8,6 +8,8 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.Date;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import model.Model;
 import controller.Controller;
@@ -30,19 +32,23 @@ public class MainFrame extends JFrame
 	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm, filtersPanel;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent;
+	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent, deleteDate;
 	public static JComboBox przypomnienie;
 	public static JTextArea opis;
-	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu;
+	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu, byPlace, byDescription;
 	public static JSpinner fromDate, toDate, fromHour, fromMinute, toHour, toMinute;
 	public SpinnerModel spinnerModel;
 	public static String data_rozpoczecia, data_zakonczenia, data_alarmu;
 	public static JLabel lblDataRozpoczecia = new JLabel(), lblDataZakonczenia = new JLabel(), lblDataAlarmu = new JLabel();
+	public static JLabel lblDataStartDelete = new JLabel(), lblDataEndDelete = new JLabel();
 	public static JTabbedPane tabbedPane;
 	public static ImagePanel data_roz = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel data_zak = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel dataAlarmu = new ImagePanel(0, 16, 16, "data.png");
-	public static JCheckBox filterDate = new JCheckBox(), filterHour  = new JCheckBox();
+	public static ImagePanel dataStartDelete = new ImagePanel(0, 16, 16, "data.png");
+	public static ImagePanel dataEndDelete = new ImagePanel(0, 16, 16, "data.png");
+	public static JCheckBox filterDate = new JCheckBox(), filterHour  = new JCheckBox(), filterPlace = new JCheckBox();
+	public static JCheckBox filterDescription = new JCheckBox(), filterDelete = new JCheckBox();
 	public Object source = null;
 	GridBagConstraints c = new GridBagConstraints();
 	
@@ -108,15 +114,34 @@ public class MainFrame extends JFrame
 		
 		c.gridx = 0;
 		c.gridy = 2;
-		tasks = new JPanel();
+		tasks = new JPanel(new GridLayout(2, 1));
 		tasks.setBorder(BorderFactory.createTitledBorder("Tasks"));
+		
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		delete = new JButton("Delete");
 		edit = new JButton("Edit");
 		edit.setEnabled(false);
 		delete.setEnabled(false);
+		flowPanel.add(edit);
+		flowPanel.add(delete);
+		tasks.add(flowPanel);
 		
-		tasks.add(edit);
-		tasks.add(delete);
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		/*filterDelete = new JCheckBox();
+		filterDelete.addItemListener(Controller.mainFrameEvent);
+		flowPanel.add(filterDelete);*/
+		flowPanel.add(new JLabel("Delete events from "));
+		flowPanel.add(dataStartDelete);
+		flowPanel.add(lblDataStartDelete);
+		flowPanel.add(new JLabel(" to "));
+		flowPanel.add(dataEndDelete);
+		flowPanel.add(lblDataEndDelete);
+		dataStartDelete.addMouseListener(Controller.mainFrameEvent);
+		dataEndDelete.addMouseListener(Controller.mainFrameEvent);
+		deleteDate = new JButton("Delete");
+		flowPanel.add(deleteDate);
+		deleteDate.addActionListener(Controller.mainFrameEvent);
+		tasks.add(flowPanel);
 		
 		edit.addActionListener(Controller.mainFrameEvent);
 		delete.addActionListener(Controller.mainFrameEvent);
@@ -173,6 +198,14 @@ public class MainFrame extends JFrame
 			
 			c.gridx = 0;
 			c.gridy = 0;
+			c.gridwidth = 2;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("Show events:"));
+			filters.add(flowPanel, c);
+		
+			c.gridwidth = 1;
+			c.gridx = 0;
+			c.gridy = 1;
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			filterDate = new JCheckBox();
 			filterDate.addItemListener(Controller.mainFrameEvent);
@@ -187,14 +220,29 @@ public class MainFrame extends JFrame
 			flowPanel.add(filterHour);
 			filters.add(flowPanel, c);
 			
+			c.gridx = 0;
+			c.gridy = 4;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			filterPlace = new JCheckBox();
+			filterPlace.addItemListener(Controller.mainFrameEvent);
+			flowPanel.add(filterPlace);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 0;
+			c.gridy = 5;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			filterDescription = new JCheckBox();
+			filterDescription.addItemListener(Controller.mainFrameEvent);
+			flowPanel.add(filterDescription);
+			filters.add(flowPanel, c);
 			
 			
 			c.gridx = 1;
-			c.gridy = 0;
+			c.gridy = 1;
 			GregorianCalendar cal = new GregorianCalendar(model.currentYear, model.currentMonth-1, 1);
 			int nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Show events from "));
+			flowPanel.add(new JLabel("From "));
 			spinnerModel = new SpinnerNumberModel(model.currentDay, 0, nod, 1);  
 				fromDate = new JSpinner(spinnerModel);
 				((JSpinner.DefaultEditor)fromDate.getEditor()).getTextField().setEditable(false);
@@ -214,12 +262,6 @@ public class MainFrame extends JFrame
 			c.gridx = 1;
 			c.gridy = 2;
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-			flowPanel.add(new JLabel("Show events: "));
-			filters.add(flowPanel, c);
-			
-			c.gridx = 1;
-			c.gridy = 3;
-			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			flowPanel.add(new JLabel("From: "));
 			flowPanel.add(new JLabel("Hour: "));
 				spinnerModel = new SpinnerNumberModel(12, 0, 23, 1);  
@@ -238,7 +280,7 @@ public class MainFrame extends JFrame
 			filters.add(flowPanel, c);
 			
 			c.gridx = 1;
-			c.gridy = 4;
+			c.gridy = 3;
 			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 			flowPanel.add(new JLabel("To: "));
 			flowPanel.add(new JLabel("     Hour: "));
@@ -256,6 +298,27 @@ public class MainFrame extends JFrame
 				toMinute.setEnabled(false);
 			flowPanel.add(toMinute);
 			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 4;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("By place: "));
+			byPlace = new JTextField(10);
+			byPlace.setEnabled(false);
+			byPlace.getDocument().addDocumentListener(Controller.mainFrameEvent);
+			flowPanel.add(byPlace);
+			filters.add(flowPanel, c);
+			
+			c.gridx = 1;
+			c.gridy = 5;
+			flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+			flowPanel.add(new JLabel("By description: "));
+			byDescription = new JTextField(15);
+			byDescription.setEnabled(false);
+			byDescription.getDocument().addDocumentListener(Controller.mainFrameEvent);
+			flowPanel.add(byDescription);
+			filters.add(flowPanel, c);
+			
 		filtersPanel.add(filters);
 		c.insets = new Insets(1, 1, 1, 1);
  	}
@@ -294,7 +357,7 @@ public class MainFrame extends JFrame
 		buttonNotEditEvent = new JButton("Do Not Edit Event");
 		
 		flowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-		JLabel describe = new JLabel("Describe: ");
+		JLabel describe = new JLabel("Description: ");
 		flowPanel.setAlignmentY(TOP_ALIGNMENT);
 		flowPanel.add(describe);
 		flowPanel.add(textAreaPane);
