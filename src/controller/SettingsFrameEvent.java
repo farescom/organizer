@@ -152,6 +152,8 @@ public class SettingsFrameEvent implements ActionListener, ChangeListener
 	    	view.settingsFrame.dni.setText(model.dni_waznosci+" miesiacach.");
 	    	view.settingsFrame.slider.setValue(model.dni_waznosci);
         	view.settingsFrame.hide();
+        	
+        	//model.baza.deleteAll("2012-06-2", "2012-06-10");
         }
 	}
 	
