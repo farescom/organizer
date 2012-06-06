@@ -31,6 +31,8 @@ public class MainFrameModel {
 	public int startDay = 0, startMonth = 0, startYear = 0; 
 	public int finishDay = 0, finishMonth = 0, finishYear = 0;
 	public int alarmDay = 0, alarmMonth = 0, alarmYear = 0;
+	public int deleteStartDay = 0, deleteStartMonth = 0, deleteStartYear = 0;
+	public int deleteEndDay = 0, deleteEndMonth = 0, deleteEndYear = 0;
 	public static TableModel dataModelDay;
 	public static TableModel dataModelMonth;
 	

@@ -284,8 +284,22 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
 				Integer yearInt = new Integer(model.mainFrame.alarmYear);
 				if (!year.equals(yearInt.toString())){
-					model.checkedYear = Integer.parseInt(year);
+					model.mainFrame.alarmYear = Integer.parseInt(year);
 					view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
+				}
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataStartDelete){
+				Integer yearInt = new Integer(model.mainFrame.deleteStartYear);
+				if (!year.equals(yearInt.toString())){
+					model.mainFrame.deleteStartYear = Integer.parseInt(year);
+					view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.deleteStartMonth, model.mainFrame.deleteStartYear);
+				}
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataEndDelete){
+				Integer yearInt = new Integer(model.mainFrame.deleteEndYear);
+				if (!year.equals(yearInt.toString())){
+					model.mainFrame.deleteEndYear = Integer.parseInt(year);
+					view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.deleteEndMonth, model.mainFrame.deleteEndYear);
 				}
 			}
 	  }
@@ -324,6 +338,28 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				
 				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
 			}
+			else if(view.mainFrame.source == view.mainFrame.dataStartDelete){
+				if (model.mainFrame.deleteStartMonth == 12){ //Foward one year
+					model.mainFrame.deleteStartMonth = 1;
+					model.mainFrame.deleteStartYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.deleteStartMonth += 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.deleteStartMonth, model.mainFrame.deleteStartYear);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataEndDelete){
+				if (model.mainFrame.deleteEndMonth == 12){ //Foward one year
+					model.mainFrame.deleteEndMonth = 1;
+					model.mainFrame.deleteEndYear += 1;
+				}
+				else{ //Foward one month
+					model.mainFrame.deleteEndMonth += 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.deleteEndMonth, model.mainFrame.deleteEndYear);
+			}
 	  }
 	  else if (source == view.calendarFrame.buttonPrev)  
 	  {
@@ -360,6 +396,28 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 				
 				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.alarmMonth, model.mainFrame.alarmYear);
 			}
+			else if(view.mainFrame.source == view.mainFrame.dataStartDelete){
+				if (model.mainFrame.deleteStartMonth == 1){ //Back one year
+					model.mainFrame.deleteStartMonth = 12;
+					model.mainFrame.deleteStartYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.deleteStartMonth -= 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.deleteStartMonth, model.mainFrame.deleteStartYear);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataEndDelete){
+				if (model.mainFrame.deleteEndMonth == 1){ //Back one year
+					model.mainFrame.deleteEndMonth = 12;
+					model.mainFrame.deleteEndYear -= 1;
+				}
+				else{ //Back one month
+					model.mainFrame.deleteEndMonth -= 1;
+				}
+				
+				view.calendarFrame.calendarProgram.refreshCalendar(model.mainFrame.deleteEndMonth, model.mainFrame.deleteEndYear);
+			}
 	  }
 	  else if (source == view.mainFrame.exit)  
 	  {
@@ -395,6 +453,47 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			  model.mainFrame.tableMonth();
 			  view.mainFrame.refreshTableMonth();
           }
+	  }
+	  else if (source == view.mainFrame.deleteDate) 
+	  {
+			
+			  	if(model.mainFrame.deleteStartDay != 0 && model.mainFrame.deleteStartMonth != 0 && model.mainFrame.deleteStartYear != 0
+			  			&& model.mainFrame.deleteEndDay != 0 && model.mainFrame.deleteEndMonth != 0 && model.mainFrame.deleteEndYear != 0){
+			  		
+			  		String start = model.mainFrame.deleteStartYear+"-"+model.mainFrame.deleteStartMonth+"-"+model.mainFrame.deleteStartDay+" 23:59:59";
+			  		String end = model.mainFrame.deleteEndYear+"-"+model.mainFrame.deleteEndMonth+"-"+model.mainFrame.deleteEndDay+" 23:59:59";
+	
+			  		if(new Date(model.mainFrame.deleteStartYear, model.mainFrame.deleteStartMonth, model.mainFrame.deleteStartDay).compareTo(new Date(model.mainFrame.deleteEndYear, model.mainFrame.deleteEndMonth, model.mainFrame.deleteEndDay)) == 1){
+			  			JOptionPane.showMessageDialog(null, "Date of start is too late");
+			  		}
+			  		else{
+			  				/*switch(model.guest){
+							case 0: if(model.baza.update(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1) == 1){
+					  					if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
+					  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
+											JOptionPane.showMessageDialog(null, "Event was edited");
+											addEvent();
+											view.mainFrame.notEditEvent();
+										}
+					  					else JOptionPane.showMessageDialog(null, "Event was not edited");
+									}
+									else JOptionPane.showMessageDialog(null, "Event was not edited");
+									break;
+							case 1: if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
+				  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
+										JOptionPane.showMessageDialog(null, "Event was edited");
+										addEvent();
+										view.mainFrame.notEditEvent();
+									}
+				  					else JOptionPane.showMessageDialog(null, "Event was not edited");
+									break;
+			  				}*/
+			  		}
+			}
+		  	else
+			{
+				JOptionPane.showMessageDialog(null, "You must fill all fields");
+			}
 	  }
 	 }
 	 
@@ -471,6 +570,16 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			else if(view.mainFrame.source == view.mainFrame.dataAlarmu){
 				if(model.mainFrame.alarmMonth == 0) model.mainFrame.alarmMonth = model.currentMonth;
 				if(model.mainFrame.alarmYear == 0) model.mainFrame.alarmYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataStartDelete){
+				if(model.mainFrame.deleteStartMonth == 0) model.mainFrame.deleteStartMonth = model.currentMonth;
+				if(model.mainFrame.deleteStartYear == 0) model.mainFrame.deleteStartYear = model.currentYear;
+				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
+			}
+			else if(view.mainFrame.source == view.mainFrame.dataEndDelete){
+				if(model.mainFrame.deleteEndMonth == 0) model.mainFrame.deleteEndMonth = model.currentMonth;
+				if(model.mainFrame.deleteEndYear == 0) model.mainFrame.deleteEndYear = model.currentYear;
 				View.calendarFrame = new CalendarFrame("Select date", 370, 300, 310, 110, View.mainFrame);
 			}
 	}

@@ -259,6 +259,20 @@ public class CalendarFrame extends JFrame {
 							View.mainFrame.lblDataAlarmu.setText(model.mainFrame.alarmDay + " - " + model.mainFrame.alarmMonth + " - " + model.mainFrame.alarmYear);
 							mainFrame.source = null;
 						}
+						else if(mainFrame.source == mainFrame.dataStartDelete){
+							model.mainFrame.deleteStartDay = Integer.parseInt(value.toString());
+							View.calendarFrame.dispose();
+							System.out.println("Data poczatku usuwania: " + model.mainFrame.deleteStartDay + " - " + model.mainFrame.deleteStartMonth + " - " + model.mainFrame.deleteStartYear);
+							View.mainFrame.lblDataStartDelete.setText(model.mainFrame.deleteStartDay + " - " + model.mainFrame.deleteStartMonth + " - " + model.mainFrame.deleteStartYear);
+							mainFrame.source = null;
+						}
+						else if(mainFrame.source == mainFrame.dataEndDelete){
+							model.mainFrame.deleteEndDay = Integer.parseInt(value.toString());
+							View.calendarFrame.dispose();
+							System.out.println("Data konca usuwania: " + model.mainFrame.deleteEndDay + " - " + model.mainFrame.deleteEndMonth + " - " + model.mainFrame.deleteEndYear);
+							View.mainFrame.lblDataEndDelete.setText(model.mainFrame.deleteEndDay + " - " + model.mainFrame.deleteEndMonth + " - " + model.mainFrame.deleteEndYear);
+							mainFrame.source = null;
+						}
 					}
 				}
 				if(selected == true)

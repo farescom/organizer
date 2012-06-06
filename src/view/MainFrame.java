@@ -32,7 +32,7 @@ public class MainFrame extends JFrame
 	public static JPanel calendar, filters, tasks, main, tab, addEvent, flowPanel, options, panelAlarm, filtersPanel;
 	public static JScrollPane nextEvent, currentEvent;
 	public static JSplitPane splitPane = new JSplitPane(JSplitPane.VERTICAL_SPLIT);
-	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent;
+	public static JButton delete, edit, buttonAddEvent, buttonNotEditEvent, deleteDate;
 	public static JComboBox przypomnienie;
 	public static JTextArea opis;
 	public static JTextField miejsce, godzina, minuta, godzinaAlarmu, minutaAlarmu, byPlace, byDescription;
@@ -40,11 +40,15 @@ public class MainFrame extends JFrame
 	public SpinnerModel spinnerModel;
 	public static String data_rozpoczecia, data_zakonczenia, data_alarmu;
 	public static JLabel lblDataRozpoczecia = new JLabel(), lblDataZakonczenia = new JLabel(), lblDataAlarmu = new JLabel();
+	public static JLabel lblDataStartDelete = new JLabel(), lblDataEndDelete = new JLabel();
 	public static JTabbedPane tabbedPane;
 	public static ImagePanel data_roz = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel data_zak = new ImagePanel(0, 16, 16, "data.png");
 	public static ImagePanel dataAlarmu = new ImagePanel(0, 16, 16, "data.png");
-	public static JCheckBox filterDate = new JCheckBox(), filterHour  = new JCheckBox(), filterPlace = new JCheckBox(), filterDescription = new JCheckBox();
+	public static ImagePanel dataStartDelete = new ImagePanel(0, 16, 16, "data.png");
+	public static ImagePanel dataEndDelete = new ImagePanel(0, 16, 16, "data.png");
+	public static JCheckBox filterDate = new JCheckBox(), filterHour  = new JCheckBox(), filterPlace = new JCheckBox();
+	public static JCheckBox filterDescription = new JCheckBox(), filterDelete = new JCheckBox();
 	public Object source = null;
 	GridBagConstraints c = new GridBagConstraints();
 	
@@ -110,15 +114,34 @@ public class MainFrame extends JFrame
 		
 		c.gridx = 0;
 		c.gridy = 2;
-		tasks = new JPanel();
+		tasks = new JPanel(new GridLayout(2, 1));
 		tasks.setBorder(BorderFactory.createTitledBorder("Tasks"));
+		
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		delete = new JButton("Delete");
 		edit = new JButton("Edit");
 		edit.setEnabled(false);
 		delete.setEnabled(false);
+		flowPanel.add(edit);
+		flowPanel.add(delete);
+		tasks.add(flowPanel);
 		
-		tasks.add(edit);
-		tasks.add(delete);
+		flowPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		/*filterDelete = new JCheckBox();
+		filterDelete.addItemListener(Controller.mainFrameEvent);
+		flowPanel.add(filterDelete);*/
+		flowPanel.add(new JLabel("Delete events from "));
+		flowPanel.add(dataStartDelete);
+		flowPanel.add(lblDataStartDelete);
+		flowPanel.add(new JLabel(" to "));
+		flowPanel.add(dataEndDelete);
+		flowPanel.add(lblDataEndDelete);
+		dataStartDelete.addMouseListener(Controller.mainFrameEvent);
+		dataEndDelete.addMouseListener(Controller.mainFrameEvent);
+		deleteDate = new JButton("Delete");
+		flowPanel.add(deleteDate);
+		deleteDate.addActionListener(Controller.mainFrameEvent);
+		tasks.add(flowPanel);
 		
 		edit.addActionListener(Controller.mainFrameEvent);
 		delete.addActionListener(Controller.mainFrameEvent);
