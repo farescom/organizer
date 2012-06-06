@@ -460,34 +460,76 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			  	if(model.mainFrame.deleteStartDay != 0 && model.mainFrame.deleteStartMonth != 0 && model.mainFrame.deleteStartYear != 0
 			  			&& model.mainFrame.deleteEndDay != 0 && model.mainFrame.deleteEndMonth != 0 && model.mainFrame.deleteEndYear != 0){
 			  		
-			  		String start = model.mainFrame.deleteStartYear+"-"+model.mainFrame.deleteStartMonth+"-"+model.mainFrame.deleteStartDay+" 23:59:59";
-			  		String end = model.mainFrame.deleteEndYear+"-"+model.mainFrame.deleteEndMonth+"-"+model.mainFrame.deleteEndDay+" 23:59:59";
+			  		Date startDate = new Date(model.mainFrame.deleteStartYear, model.mainFrame.deleteStartMonth, model.mainFrame.deleteStartDay);
+			  		Date endDate = new Date(model.mainFrame.deleteEndYear, model.mainFrame.deleteEndMonth, model.mainFrame.deleteEndDay);
+			  		
+			  		Integer rok, miesiac, dzien, godzina, minuta;
+			  		Date eventDate = new Date();
+			  		
+			  		int ile = 0;
+				    ArrayList<Zdarzenie> toDelete = new ArrayList<Zdarzenie>();
+			  		
+			  		String start = model.mainFrame.deleteStartYear+"-"+model.mainFrame.deleteStartMonth+"-"+model.mainFrame.deleteStartDay;
+			  		String end = model.mainFrame.deleteEndYear+"-"+model.mainFrame.deleteEndMonth+"-"+model.mainFrame.deleteEndDay;
 	
-			  		if(new Date(model.mainFrame.deleteStartYear, model.mainFrame.deleteStartMonth, model.mainFrame.deleteStartDay).compareTo(new Date(model.mainFrame.deleteEndYear, model.mainFrame.deleteEndMonth, model.mainFrame.deleteEndDay)) == 1){
+			  		if(startDate.compareTo(endDate) == 1){
 			  			JOptionPane.showMessageDialog(null, "Date of start is too late");
 			  		}
 			  		else{
-			  				/*switch(model.guest){
-							case 0: if(model.baza.update(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1) == 1){
-					  					if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
-					  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
-											JOptionPane.showMessageDialog(null, "Event was edited");
-											addEvent();
-											view.mainFrame.notEditEvent();
+			  			endDate.setHours(23);
+				  		endDate.setMinutes(59);
+				  		endDate.setSeconds(59);
+				  		
+			  				switch(model.guest){
+							case 0: if(model.baza.deleteAll(start, end) == 1){
+										for(int i =0; i<model.zdarzenia.size(); i++){
+											rok = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
+											miesiac = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
+											dzien = Integer.parseInt(model.zdarzenia.get(i).dzien);
+											godzina = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(11, 13));
+											minuta = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(14, 16));
+											
+											eventDate = new Date(rok, miesiac, dzien, godzina, minuta);
+											
+											if(startDate.compareTo(eventDate) != 1 && endDate.compareTo(eventDate) != -1){
+												ile++;
+												toDelete.add(model.zdarzenia.get(i));
+											}
 										}
-					  					else JOptionPane.showMessageDialog(null, "Event was not edited");
 									}
-									else JOptionPane.showMessageDialog(null, "Event was not edited");
+									else JOptionPane.showMessageDialog(null, "Events were not deleted");
 									break;
-							case 1: if(model.zdarzenia.set(model.zdarzenia.indexOf(model.mainFrame.dayEvent.get(model.mainFrame.rowSelectedDay)),
-				  							new Zdarzenie(model.zdarzenia.get(model.mainFrame.rowSelectedDay).id, opis, 1, startDateString, finishDateString, miejsce, roznica, 1)) != null){
-										JOptionPane.showMessageDialog(null, "Event was edited");
-										addEvent();
-										view.mainFrame.notEditEvent();
+							case 1: for(int i =0; i<model.zdarzenia.size(); i++){
+										rok = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(0, 4));
+										miesiac = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(5, 7));
+										dzien = Integer.parseInt(model.zdarzenia.get(i).dzien);
+										godzina = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(11, 13));
+										minuta = Integer.parseInt(model.zdarzenia.get(i).data_rozpoczecia.substring(14, 16));
+										
+										eventDate = new Date(rok, miesiac, dzien, godzina, minuta);
+										
+								  		if(startDate.compareTo(eventDate) != 1 && endDate.compareTo(eventDate) != -1){
+											ile++;
+											toDelete.add(model.zdarzenia.get(i));
+										}
 									}
-				  					else JOptionPane.showMessageDialog(null, "Event was not edited");
 									break;
-			  				}*/
+			  				}
+			  			
+			  				
+		  				for(int i=0; i<ile; i++){
+		  					model.zdarzenia.remove(toDelete.get(i));
+		  				}
+		  				
+		  				System.out.println(model.zdarzenia);
+		  				
+		  				JOptionPane.showMessageDialog(null, ile+" event was deleted");
+		  				if(view.mainFrame.tabbedPane.getSelectedIndex() == 1){
+		  					model.mainFrame.tableDay();
+			  				view.mainFrame.refreshTableDay();
+		  				}
+		  				model.mainFrame.tableMonth();
+		  				view.mainFrame.refreshTableMonth();
 			  		}
 			}
 		  	else

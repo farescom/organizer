@@ -92,7 +92,7 @@ public class PanWatek extends Thread
 			// roznica mierzona w minutach od aktualnego czasu do zdarzenia
 			long roznica = ((data_zdarzenia.getTime()/60000)-(data_teraz.getTime()/60000));
 			
-			System.out.println(roznica + ": " + model.zdarzenia.get(i).waznosc);
+			//System.out.println(roznica + ": " + model.zdarzenia.get(i).waznosc);
 			if (roznica == model.zdarzenia.get(i).waznosc)
 			{
 				// Alarm düwiekowy / Alarm kolorowy
