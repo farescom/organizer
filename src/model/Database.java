@@ -452,4 +452,16 @@ public class Database
 		    	return 0;
 		    }
 		}
+		 
+ /**
+	 * Metoda do usuwania wiadomosci znajdujacych sie w domknietym przedziale czasowym
+	 * @param data_1 pocz¹tek przedzia³u czasowego w formacie (yyyy-mm-dd)
+	 * @param data_2 koniec przedzia³u czasowego w formacie (yyyy-mm-dd)
+	 * @return wartosc 1 gdy wykonanie zapytania sie powiedzie, wartosc 0 w kazdym innym przypadku
+     */
+		 public int deleteAll(String data_1, String data_2)
+		{
+			String zapytanie = "DELETE FROM "+table+" WHERE ((data_rozpoczecia >= \""+data_1+"\") and (data_rozpoczecia <= \""+data_2+" 23:59:59\"))";
+			return query2(zapytanie);
+		}
 }
