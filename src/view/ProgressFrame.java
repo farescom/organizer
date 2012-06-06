@@ -22,6 +22,8 @@ public class ProgressFrame extends JFrame
 	
 	public static Model model;
 	
+	public ProgressFrame(){}
+	
 	/**
 	* Konstruktor klasy odpowiadajacy za utworzenie okna wyswietlaj¹cego informacje o 
 	* uruchamianym programie (w postaci procentu).

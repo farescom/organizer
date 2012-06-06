@@ -12,6 +12,8 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import view.*;
 import model.*;
@@ -19,7 +21,7 @@ import model.*;
 /**
 * Klasa odpowiadajaca za obsluge zdarzen wywolanych z poziomu ramki glownej programu (MainFrame)
 */ 
-public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener, ItemListener{
+public class MainFrameEvent extends MouseAdapter implements ActionListener, ChangeListener, MouseListener, DocumentListener, ItemListener{
 
 	 public static View view;
 	 public static Model model;
@@ -128,7 +130,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		Calendar cal = new GregorianCalendar();
 		  		int hourActual = cal.get(GregorianCalendar.HOUR_OF_DAY);
 		  		int minuteActual = cal.get(GregorianCalendar.MINUTE);
-		  		Date currentDate = new Date(model.currentYear, model.currentMonth, model.currentDay);
+		  		Date currentDate = new Date(model.currentYear, model.currentMonth, model.currentDay, hourActual, minuteActual);
 		  		
 		  	try{	
 		  		if(Integer.parseInt(hour)<0 || Integer.parseInt(hour)>23 || Integer.parseInt(minute)<0 || Integer.parseInt(minute)>59){
@@ -141,7 +143,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  			JOptionPane.showMessageDialog(null, "Date of start is too early");
 		  		}
 		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((startDate.compareTo(alarmDate) == -1) || (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) > Integer.parseInt(hour))
-		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) >= Integer.parseInt(minute)))){
+		  				|| (startDate.compareTo(alarmDate) == 0 && Integer.parseInt(hourAlarm) == Integer.parseInt(hour) && Integer.parseInt(minuteAlarm) < Integer.parseInt(minute)))){
 		  			JOptionPane.showMessageDialog(null, "Date of alarm is too late");
 		  		}
 		  		else if(view.mainFrame.panelAlarm.isVisible() == true && ((alarmDate.compareTo(currentDate) == -1) || (alarmDate.compareTo(currentDate) == 0 && Integer.parseInt(hourAlarm) < cal.get(GregorianCalendar.HOUR_OF_DAY))
@@ -151,7 +153,9 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		else{
 		  			if(view.mainFrame.buttonAddEvent.getText() == "Add Event"){
 		  				
-		  				System.out.println("add");
+		  				System.out.println(Integer.parseInt(hourAlarm));
+		  				System.out.println(cal.get(GregorianCalendar.HOUR_OF_DAY));
+		  				
 		  				
 		  				switch(model.guest){
 						case 0: if(model.baza.insert(opis, 1, startDateString, finishDateString, miejsce, roznica, 1) == 1){
@@ -505,6 +509,26 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 			model.mainFrame.tableMonth();
 			view.mainFrame.refreshTableMonth();
 		}
+		else if(e.getItemSelectable() == view.mainFrame.filterPlace){
+			if(view.mainFrame.filterPlace.isSelected() == true){
+				view.mainFrame.byPlace.setEnabled(true);
+	        }
+	        else{
+	        	view.mainFrame.byPlace.setEnabled(false);
+	        	model.mainFrame.tableMonth();
+	    		view.mainFrame.refreshTableMonth();
+	        }
+		}
+		else if(e.getItemSelectable() == view.mainFrame.filterDescription){
+			if(view.mainFrame.filterDescription.isSelected() == true){
+				view.mainFrame.byDescription.setEnabled(true);
+	        }
+	        else{
+	        	view.mainFrame.byDescription.setEnabled(false);
+	        	model.mainFrame.tableMonth();
+	    		view.mainFrame.refreshTableMonth();
+	        }
+		}
 	}
 	
 	/**
@@ -532,4 +556,20 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		model.mainFrame.startYear = 0;
 		view.mainFrame.panelAlarm.setVisible(false);
 	}
+	
+	  public void changedUpdate(DocumentEvent e) {
+		  
+		  model.mainFrame.tableMonth();
+  		  view.mainFrame.refreshTableMonth();
+	  }
+	  public void removeUpdate(DocumentEvent e) {
+		  
+		  model.mainFrame.tableMonth();
+  		  view.mainFrame.refreshTableMonth();	
+	  }
+	  public void insertUpdate(DocumentEvent e) {
+		  
+		  model.mainFrame.tableMonth();
+  		  view.mainFrame.refreshTableMonth();
+	  }
 }

@@ -44,6 +44,8 @@ public class View
   Calendar.model = _model;
   CalendarFrame.model = _model;
   
+  progressFrame = new ProgressFrame();
+  
   // WELCOME FRAME
   EventQueue.invokeLater( new Runnable()
   {  
