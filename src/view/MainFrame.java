@@ -138,7 +138,7 @@ public class MainFrame extends JFrame
 		flowPanel.add(lblDataEndDelete);
 		dataStartDelete.addMouseListener(Controller.mainFrameEvent);
 		dataEndDelete.addMouseListener(Controller.mainFrameEvent);
-		deleteDate = new JButton("Delete");
+		deleteDate = new JButton("OK");
 		flowPanel.add(deleteDate);
 		deleteDate.addActionListener(Controller.mainFrameEvent);
 		tasks.add(flowPanel);

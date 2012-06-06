@@ -113,14 +113,13 @@ public class WelcomeFrameEvent implements ActionListener{
                 		{  
                             public void run()
                             {  
-                            	int SizeX_WelcomeFrame = 720;
+                            	int SizeX_WelcomeFrame = 900;
                             	int SizeY_WelcomeFrame = 420;
                             	
                             	int SizeX_ProgressFrame = 300;
                             	int SizeY_ProgressFrame = 80;
                             	
                             	view.mainFrame = new MainFrame("Kalendarz", SizeX_WelcomeFrame, SizeY_WelcomeFrame, 300, 100);
-                            	view.mainFrame.setResizable(false);
                             	view.mainFrame.setResizable(false);
                             }  
                         });

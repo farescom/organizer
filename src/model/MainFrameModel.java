@@ -119,7 +119,6 @@ public class MainFrameModel {
 	     tableDay.getColumnModel().getColumn(0).setPreferredWidth(50);
 	     tableDay.getColumnModel().getColumn(1).setPreferredWidth(240);
 	     tableDay.getColumnModel().getColumn(2).setPreferredWidth(100);
-	     tableDay.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 	     
 	     MultiLineCellRenderer multiLineCellRenderer = new MultiLineCellRenderer();
 	     tableDay.getColumnModel().getColumn(0).setCellRenderer(multiLineCellRenderer);
