@@ -20,21 +20,11 @@ public class Organizer
     
 	public static void main(String[] args)
 	{
-<<<<<<< HEAD
-		if ((args.length > 0 && !(args[0].equals("exit"))) || args.length == 0)
-		  {
-		     model      = new Model();
-		        view       = new View(model);
-		        controller = new Controller(model, view);
-		  }
-=======
-
 		if ((args.length > 0 && !(args[0].equals("exit"))) || args.length == 0)
 		{
 		   model      = new Model();
 	       view       = new View(model);
 	       controller = new Controller(model, view);
 		}
->>>>>>> origin/master
 	}
 }
