@@ -113,7 +113,7 @@ public class WelcomeFrameEvent implements ActionListener{
                 		{  
                             public void run()
                             {  
-                            	int SizeX_WelcomeFrame = 900;
+                            	int SizeX_WelcomeFrame = 780;
                             	int SizeY_WelcomeFrame = 420;
                             	
                             	int SizeX_ProgressFrame = 300;
@@ -162,7 +162,7 @@ public class WelcomeFrameEvent implements ActionListener{
     		{  
                 public void run()
                 {  
-                	int SizeX_WelcomeFrame = 720;
+                	int SizeX_WelcomeFrame = 780;
                 	int SizeY_WelcomeFrame = 420;
                 	
                 	int SizeX_ProgressFrame = 300;

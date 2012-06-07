@@ -52,7 +52,7 @@ public class Calendar{
 		mtableCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
 		tableCalendar = new JTable(mtableCalendar);
 		stableCalendar = new JScrollPane(tableCalendar);
-		stableCalendar.setPreferredSize(new Dimension(360, 140));
+		stableCalendar.setPreferredSize(new Dimension(390, 140));
 		
 		//Register action listeners
 		buttonPrev.addActionListener(Controller.mainFrameEvent);
@@ -71,7 +71,7 @@ public class Calendar{
 		
 		//Set border
 		panelCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
-		panelCalendar.setPreferredSize(new Dimension(370, 216));
+		panelCalendar.setPreferredSize(new Dimension(400, 216));
 		
 		//Add headers
 		String[] headers = {"Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}; //All headers

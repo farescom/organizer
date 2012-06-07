@@ -523,6 +523,14 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  				
 		  				System.out.println(model.zdarzenia);
 		  				
+		  				model.mainFrame.deleteStartDay = 0;
+		  				model.mainFrame.deleteStartMonth = 0;
+		  				model.mainFrame.deleteStartYear = 0;
+			  			model.mainFrame.deleteEndDay = 0;
+			  			model.mainFrame.deleteEndMonth = 0;
+			  			model.mainFrame.deleteEndYear = 0;
+			  			View.mainFrame.lblDataStartDelete.setText("");
+			  			View.mainFrame.lblDataEndDelete.setText("");
 		  				JOptionPane.showMessageDialog(null, ile+" event was deleted");
 		  				if(view.mainFrame.tabbedPane.getSelectedIndex() == 1){
 		  					model.mainFrame.tableDay();

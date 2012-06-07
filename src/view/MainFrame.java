@@ -102,7 +102,7 @@ public class MainFrame extends JFrame
 		
 		currentEvent = new JScrollPane(model.mainFrame.tableDay);
 		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + model.months[model.checkedMonth] + " Event"));
-		currentEvent.setPreferredSize(new Dimension(370, 220));
+		currentEvent.setPreferredSize(new Dimension(400, 216));
 		currentEvent.setVisible(false);
 		addEvent(c);
 		
@@ -155,7 +155,7 @@ public class MainFrame extends JFrame
 		c.gridheight = 3;
 		
 		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
-		nextEvent.setPreferredSize(new Dimension(320, 240));
+		nextEvent.setPreferredSize(new Dimension(350, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(model.months[Model.checkedMonth] + " Event"));
 		
 		splitPane.setLeftComponent(filtersPanel);
@@ -335,7 +335,7 @@ public class MainFrame extends JFrame
  		
  		
 		addEvent.setBorder(BorderFactory.createTitledBorder("Add Event"));
-		addEvent.setPreferredSize(new Dimension(370, 300));
+		addEvent.setPreferredSize(new Dimension(400, 319));
 		addEvent.setVisible(false);
 		
 		
@@ -439,7 +439,7 @@ public class MainFrame extends JFrame
  		
  		currentEvent = new JScrollPane(model.mainFrame.tableDay);
 		currentEvent.setBorder(BorderFactory.createTitledBorder(model.checkedDay + " " + model.months[model.checkedMonth] + " Event"));
-		currentEvent.setPreferredSize(new Dimension(370, 215));
+		currentEvent.setPreferredSize(new Dimension(400, 216));
 		currentEvent.setVisible(true);
 
 		options.add(currentEvent);
@@ -454,7 +454,7 @@ public class MainFrame extends JFrame
  	public void refreshTableMonth()
  	{	
  		nextEvent = new JScrollPane(model.mainFrame.tableMonth);
-		nextEvent.setPreferredSize(new Dimension(320, 240));
+		nextEvent.setPreferredSize(new Dimension(350, 240));
 		nextEvent.setBorder(BorderFactory.createTitledBorder(model.months[Model.checkedMonth] + " Event"));
 
 		splitPane.setRightComponent(nextEvent); 
