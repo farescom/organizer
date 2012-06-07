@@ -105,6 +105,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		&& (view.mainFrame.panelAlarm.isVisible() == false || (view.mainFrame.panelAlarm.isVisible() == true
 		  				&& alarmDay != 0 && alarmMonth != 0 && alarmYear != 0 && !hourAlarm.isEmpty() && !minuteAlarm.isEmpty()))){
 		  		
+		  	try{
 		  		if(view.mainFrame.panelAlarm.isVisible() == true){
 					if(alarmMonth < 10) alarmMonthString = new String("0"+alarmMonth.toString());
 					else alarmMonthString = new String(alarmMonth.toString());
@@ -132,7 +133,7 @@ public class MainFrameEvent extends MouseAdapter implements ActionListener, Chan
 		  		int minuteActual = cal.get(GregorianCalendar.MINUTE);
 		  		Date currentDate = new Date(model.currentYear, model.currentMonth, model.currentDay, hourActual, minuteActual);
 		  		
-		  	try{	
+		  		
 		  		if(Integer.parseInt(hour)<0 || Integer.parseInt(hour)>23 || Integer.parseInt(minute)<0 || Integer.parseInt(minute)>59){
 		  			JOptionPane.showMessageDialog(null, "You typed bad hours for start");
 		  		}

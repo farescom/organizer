@@ -371,7 +371,9 @@ public class MainFrameModel {
 					if(tableMonth.isRowSelected(i))
 						tableMonth.getSelectionModel().removeSelectionInterval(i, i);
 				}
-				MainFrame.edit.setEnabled(true);
+				System.out.println(tableDay.getSelectedRowCount());
+				if(tableDay.getSelectedRowCount() == 1) MainFrame.edit.setEnabled(true);
+				else MainFrame.edit.setEnabled(false);
 				MainFrame.delete.setEnabled(true);
 				rowSelectedDay = row;
 			}
